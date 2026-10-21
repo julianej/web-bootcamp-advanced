@@ -17,27 +17,27 @@
 
 function order() {
   const words = "is2 Thi1s T4est 3a";
-  const wordArray = words.split(" ");
 
-  function order(words) {
   if (words === "") {
     return "";
   }
 
-    // .match(/\d/) finds the first digit in a string.
-    wordArray.sort((a, b) => {
-        const numberA = Number(a.match(/\d/)[0]);
-        const numberB = Number(b.match(/\d/)[0]);
+  const wordArray = words.split(" ");
 
-        return numberA - numberB;
-    });
-  }
+  // Find the number in each word and sort by it.
+  wordArray.sort((a, b) => {
+    const numberA = Number(a.match(/\d/)[0]);
+    const numberB = Number(b.match(/\d/)[0]);
 
-  return array;
+    return numberA - numberB;
+  });
+
+  return wordArray.join(" ");
 }
 
 console.log(order());
-// ["is2", "Thi1s", "T4est", "3a"]
+// "Thi1s is2 3a T4est"
+
 
 console.log(order("is2 Thi1s T4est 3a"));
 console.log(order("4of Fo1r pe6ople g3ood th5e the2"));
