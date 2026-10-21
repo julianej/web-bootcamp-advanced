@@ -5,13 +5,23 @@
 // Implement the function which takes an array containing the names of people that like an item. 
 //It must return the display text as shown in the examples:
 
-// []                                -->  "no one likes this"
-// ["Peter"]                         -->  "Peter likes this"
-// ["Jacob", "Alex"]                 -->  "Jacob and Alex like this"
+
+
+// []                                -->  "no one likes this"         // names[0] = empty
+// ["Peter"]                         -->  "Peter likes this"          // names[0] =  1
+// ["Jacob", "Alex"]                 -->  "Jacob and Alex like this"  // names[0]  + names[1]
 // ["Max", "John", "Mark"]           -->  "Max, John and Mark like this"
 // ["Alex", "Jacob", "Mark", "Max"]  -->  "Alex, Jacob and 2 others like this
 // Note: For 4 or more names, the number in “and 2 others” simply increases.
 
+
+// const names = ["Peter", "Alex", "Jacob"];
+// console.log(names[0]); // "Peter"
+
+
+// const array = [" ", "Peter", "Alex", "Jacob"];
+// console.log(array.slice(1));
+// ["Peter", "Alex", "Jacob"]
 
 
 function whoLikesIt(names) {
@@ -42,7 +52,30 @@ console.log(whoLikesIt(["Max", "John", "Mark"]));
 // "Max, John and Mark like this"
 
 console.log(whoLikesIt(["Alex", "Jacob", "Mark", "Max"]));
-// "Alex, Jacob and 2 others like this"
+// "Alex, Jacob // ..and 2 others like this"
+
+
+////////////////////////////////////////////////////////
+
+// function whoLikesIt(array) {
+//   if (array.length === 0) {
+//     return "no one likes this";
+//   } else if (array.length === 1) {
+//     return array[0] + " likes this";
+//   } else if (array.length === 2) {
+//     return array[0] + " and " + array[1] + " like this";
+//   } else if (array.length === 3) {
+//     return array[0] + ", " + array[1] + " and " + array[2] + " like this";
+//   } else {
+//     return array[0] + ", " + array[1] + " and " + (array.length - 2) + " others like this";
+//   }
+// }
+
+// console.log(whoLikesIt([]));
+// console.log(whoLikesIt(["Peter"]));
+// console.log(whoLikesIt(["Jacob", "Alex"]));
+// console.log(whoLikesIt(["Max", "John", "Mark"]));
+// console.log(whoLikesIt(["Alex", "Jacob", "Mark", "Max"]));
 
 
 
