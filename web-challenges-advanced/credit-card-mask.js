@@ -16,7 +16,7 @@
 
 
 
-// input.length >=6
+// input.length >=4
 // input.slice(-4) // "ippy"
 // 
 // replace DATA INPUT ["###45678"]
@@ -24,13 +24,13 @@
 function MaskifyChars (input) {
 
     // const maskedChars = "#".repeat(input.length -4);
+    // 1 - 4 = -3
+
     const maskedChars = "#".repeat(
     // repeat count is never negative.
         Math.max(0, input.length - 4))
     const lastFour = input.slice(-4);
-
-    // 1 - 4 = -3
-    
+  
     return maskedChars + lastFour;
 }
 

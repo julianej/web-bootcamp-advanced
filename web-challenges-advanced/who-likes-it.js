@@ -7,19 +7,24 @@
 
 
 
-// []                                -->  "no one likes this"         // names[0] = empty
-// ["Peter"]                         -->  "Peter likes this"          // names[0] =  1
-// ["Jacob", "Alex"]                 -->  "Jacob and Alex like this"  // names[0]  + names[1]
+// []                                -->  "no one likes this"              // names[0] = empty
+// ["Peter"]                         -->  "Peter likes this"               // names[0] =  1
+// ["Jacob", "Alex"]                 -->  "Jacob and Alex like this"       // names[0] + names[1]
 // ["Max", "John", "Mark"]           -->  "Max, John and Mark like this"
 // ["Alex", "Jacob", "Mark", "Max"]  -->  "Alex, Jacob and 2 others like this
 // Note: For 4 or more names, the number in “and 2 others” simply increases.
 
 
+// NAMES length
 // const names = ["Peter", "Alex", "Jacob"];
 // console.log(names[0]); // "Peter"
 
 
 // const array = [" ", "Peter", "Alex", "Jacob"];
+// const result = array.splice(0, 1);
+// console.log(result);
+// [" "]
+
 // console.log(array.slice(1));
 // ["Peter", "Alex", "Jacob"]
 
