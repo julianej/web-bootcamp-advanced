@@ -21,6 +21,7 @@
 
 function MaskifyChars(input) {
     const visible = input.substring(input.length - 4); 
+    
 //// const lastFour = input.slice(-4);
 //// input.length >=4 // replace DATA INPUT ["###4321"]
 
