@@ -16,24 +16,44 @@
 
 
 
-// input.length >=4
-// input.slice(-4) // "ippy"
-// 
-// replace DATA INPUT ["###45678"]
+// replace DATA INPUT ["###4321"]
+// input.length >=4 
 
-function MaskifyChars (input) {
+function MaskifyChars(input) {
+    const visible = input.substring(input.length - 4); 
+//// const lastFour = input.slice(-4);
+//// input.length >=4 // replace DATA INPUT ["###4321"]
 
-    // const maskedChars = "#".repeat(input.length -4);
-    // 1 - 4 = -3
+    const masked = "#".repeat(input.length - visible.length);
+//// const maskedChars = "#".repeat(Math.max(0, input.length - 4))   
+//// const maskedChars = "#".repeat(input.length -4);  -->  // repeat(count)
+//// 1 - 4 = -3
 
-    const maskedChars = "#".repeat(
-    // repeat count is never negative.
-        Math.max(0, input.length - 4))
-    const lastFour = input.slice(-4);
-  
-    return maskedChars + lastFour;
+  return masked + visible;
 }
+
 
 console.log(MaskifyChars("4556364607935616"));
 console.log(MaskifyChars("Skippy"));
 console.log(MaskifyChars("1"));
+
+
+
+////////////////////////////////////////////////////////
+
+
+// function maskify(input) {
+//   return input.replace(/.(?=.{4})/g, "#");
+// }
+
+// console.log(maskify("4556364607935616"));
+// // "############5616"
+
+// console.log(maskify("Skippy"));
+// // "##ippy"
+
+// console.log(maskify("1"));
+// // "1"
+
+// console.log(maskify(""));
+// ""
