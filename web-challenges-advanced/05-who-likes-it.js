@@ -21,12 +21,16 @@
 
 
 // const array = [" ", "Peter", "Alex", "Jacob"];
-// const result = array.splice(0, 1);
 // console.log(result);
-// [" "]
+// // [" "]
+
+// console.log(array);
+// // ["Peter", "Alex", "Jacob"]
+
 
 // console.log(array.slice(1));
 // ["Peter", "Alex", "Jacob"]
+// without modifying the original array.
 
 
 function whoLikesIt(names) {
@@ -84,7 +88,7 @@ console.log(whoLikesIt(["Alex", "Jacob", "Mark", "Max"]));
 
 
 
-/////
+////////////////////////////////////////////////////////
 
 // function whoLikesIt(array) {
 //   const count = array.length;

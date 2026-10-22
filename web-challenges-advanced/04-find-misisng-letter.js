@@ -20,7 +20,9 @@
 
 
 function findMissingLetter(array) {
-  const alphabet = "abcdefghijklmnopqrstuvwxyz";
+  const alphabet = "abcdefghijklmnopqrstuvwxyz"; 
+
+  const start = letters.indexOf(array[0]);
 
   const isUpperCase = array[0] === array[0].toUpperCase();
 
@@ -28,8 +30,7 @@ function findMissingLetter(array) {
     ? alphabet.toUpperCase()
     : alphabet;
 
-  const start = letters.indexOf(array[0]);
-
+ //  ["a", "b", "c", "d", "f"]
   const expected = letters
     .slice(start, start + array.length + 1)
     .split("");
