@@ -74,3 +74,40 @@ function parseQuantity(input: unknown): number {
 console.log(parseQuantity(25));      // 25
 console.log(parseQuantity("25"));    // 0
 console.log(parseQuantity(undefined)); // 0
+
+
+// Create at least one ticket of each tier, 
+const tickets: Ticket[] = [
+  {
+    id: 1,
+    tier: "standing",
+  },
+  {
+    id: 2,
+    tier: "seated",
+    seat: ["C", 12],
+  },
+  {
+    id: 3,
+    tier: "vip",
+    seat: ["A", 1],
+  },
+];
+
+// log their prices, and log the seat description for every ticket that has a seat
+for (const ticket of tickets) {
+  console.log(
+    `Ticket ${ticket.id} (${ticket.tier}): €${ticketPrice(ticket.tier)}`
+  );
+
+  if (ticket.seat !== undefined) {
+    console.log(describeSeat(ticket.seat));
+  }
+}
+
+// Call parseQuantity with a number, 
+// a string, and JSON.parse("3"), and log the results
+
+console.log(parseQuantity(5));             // 5
+console.log(parseQuantity("5"));           // 0
+console.log(parseQuantity(JSON.parse("3"))); // 3
