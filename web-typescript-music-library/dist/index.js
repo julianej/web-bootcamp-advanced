@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 function describeTrack(track) {
     return `${track.title} by ${track.artist}`;
 }
@@ -57,7 +55,15 @@ const review = {
     title: "Ivy",
     artist: "Frank Ocean",
     liked: true,
-    rating: 6,
+    rating: 5,
 };
-console.log(`${review.title}: ${review.rating}/6`);
+console.log(`${review.title}: ${review.rating}/5`);
+const chart = [
+    [1, "Nights"],
+    [2, "Blue Light"],
+];
+for (const [position, title] of chart) {
+    console.log(`#${position} ${title}`);
+}
+export {};
 //# sourceMappingURL=index.js.map
