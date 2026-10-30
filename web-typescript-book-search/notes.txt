@@ -1,0 +1,8 @@
+web-typescript-browser-project/
+├── index.html
+├── src/
+│   ├── types.ts      # Book and SearchResult interfaces
+│   ├── books.ts      # Type guards + API request
+│   └── main.ts       # DOM, rendering and form events
+├── tsconfig.json
+└── package.json

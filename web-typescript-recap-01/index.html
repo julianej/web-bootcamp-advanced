@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Fonts -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic"
+    />
+
+    <!-- CSS Reset -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"
+    />
+
+    <!-- Milligram CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <!-- Add the <script type="module"> for this page here. -->
+    <script type="module" src="./dist/index.js"></script>
+    <title>Books | Book Library</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <div class="row">
+          <div class="column"><p class="logo">Book.Library</p></div>
+          <div class="column">
+            <nav class="mainnav">
+              <a href="index.html" class="mainnav-link mainnav-link--active"
+                >Books</a
+              >
+              <a href="favorite.html" class="mainnav-link"
+                >Favorites <span class="mainnav-number" id="favorite-count"></span></a
+              >
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+   <main class="container">
+    <h2 id="book-count">Books displayed</h2>
+    <p id="error-message" role="alert" hidden></p>
+    <!-- ROWS -->
+    <section class="row filter-search">
+       <!-- Search -->
+      <form action="#" class="column">
+        <label for="search">
+          Search by ISBN, Title, Author or Publisher
+        </label>
+        <input type="text" id="search" />
+      </form>
+
+      <form action="#" class="column column-33">
+       <!-- Publisher -->
+        <label for="by-publisher">Filter by Publisher</label>
+        <select id="by-publisher">
+          <option value="-">All publishers</option>
+        </select>
+      </form>
+    </section>
+
+    <section class="row">
+      <div class="column">
+        <table>
+          <thead>
+            <tr>
+              <th class="first-col">&nbsp;</th>
+              <th>Title</th>
+              <th>ISBN</th>
+              <th>Author</th>
+              <th>Publisher</th>
+              <th>&nbsp;</th>
+            </tr>
+          </thead>
+            <!-- Book List -->
+          <tbody id="book-list"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  </body>
+</html>

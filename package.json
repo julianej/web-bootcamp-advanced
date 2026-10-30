@@ -13,9 +13,13 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/julianej/web-bootcamp-advanced/issues"
   },
-  "homepage": "https://github.com/julianej/web-bootcamp-advanced#readme"
+  "homepage": "https://github.com/julianej/web-bootcamp-advanced#readme",
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "typescript": "^7.0.2"
+  }
 }
