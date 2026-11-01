@@ -1,8 +1,14 @@
-web-typescript-browser-project/
+web-typescript-book-search/
 ├── index.html
 ├── src/
-│   ├── types.ts      # Book and SearchResult interfaces
-│   ├── books.ts      # Type guards + API request
-│   └── main.ts       # DOM, rendering and form events
+│   ├── types.ts
+│   ├── books.ts
+│   └── main.ts
+├── dist/
+│   ├── types.js
+│   ├── books.js
+│   └── main.js
 ├── tsconfig.json
 └── package.json
+
+how to start my live server ?

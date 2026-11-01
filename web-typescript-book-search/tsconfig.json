@@ -11,7 +11,7 @@
     "target": "esnext",
     // "types": [],
     // For nodejs:
-    // "lib": ["esnext"],
+    "lib": ["ES2020", "DOM"],
     "types": ["node"],
     // and npm install -D @types/node
 

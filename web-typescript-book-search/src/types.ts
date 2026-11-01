@@ -15,6 +15,7 @@ export interface SearchResult {
   books: Book[];
 }
 
+// OUTPUT EXAMPLE:
 // {
 //   "docs": [
 //     {

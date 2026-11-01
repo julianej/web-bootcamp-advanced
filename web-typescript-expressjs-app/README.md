@@ -1,0 +1,27 @@
+# web-typescript-expressjs-app
+
+To install dependencies:
+
+```bash
+bun install
+```
+
+To run:
+
+```bash
+bun run index.js
+```
+
+To type check:
+
+```bash
+bun check
+```
+
+```bash
+bun run index.ts
+```
+
+Run `bun fmt` to format the code.
+
+This project was created using `bun init` in bun v1.4.4. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
