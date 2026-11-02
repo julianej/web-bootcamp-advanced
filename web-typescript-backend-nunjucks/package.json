@@ -1,0 +1,32 @@
+{
+  "name": "web-typescript-backend-nunjucks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "bun --watch src/app.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chokidar": "^6.0.0",
+    "cors": "^2.8.6",
+    "express": "^5.3.0",
+    "nunjucks": "^3.2.4"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/nunjucks": "^3.2.6",
+    "prettier": "^3.9.10",
+    "prettier-plugin-jinja-template": "^2.2.0"
+  },
+  "private": true,
+  "peerDependencies": {
+    "typescript": "^7"
+  }
+}
