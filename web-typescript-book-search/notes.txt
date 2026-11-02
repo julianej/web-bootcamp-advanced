@@ -12,3 +12,5 @@ web-typescript-book-search/
 └── package.json
 
 how to start my live server ?
+npm run watch / Compiles .ts into .js
+npm start
