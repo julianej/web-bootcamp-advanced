@@ -1,0 +1,26 @@
+
+{% extends "base.njk" %}
+{% from "macros/events.njk" import eventCard %}
+
+{% block title %}Events | Event Hub{% endblock %}
+
+{% block content %}
+  <main>
+    
+    <h2>Upcoming Events</h2>
+
+    <section class="events-list">
+      {% for event in events %}
+        {{ eventCard(
+          event.name,
+          event.date,
+          event.location,
+          event.soldOut
+        ) }}
+
+      {% else %}
+        <p>No events scheduled</p>
+      {% endfor %}
+    </section>
+  </main>
+{% endblock %}

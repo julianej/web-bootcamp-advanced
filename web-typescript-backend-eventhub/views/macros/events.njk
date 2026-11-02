@@ -1,0 +1,13 @@
+
+{% macro eventCard(name, date, location, soldOut=false) %}
+  <article class="event-card">
+    <h3>{{ name }}</h3>
+
+    {% if soldOut %}
+      <span class="badge">SOLD OUT</span>
+    {% endif %}
+
+    <p>Date: {{ date }}</p>
+    <p>Location: {{ location }}</p>
+  </article>
+{% endmacro %}

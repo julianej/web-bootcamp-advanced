@@ -1,0 +1,16 @@
+
+{% extends "base.njk" %}
+
+{% block title %}Home | Event Hub{% endblock %}
+
+{% block content %}
+  <h2>Welcome to Event Hub</h2>
+
+  {% for event in events %}
+    <h3>{{ event.name }}</h3>
+    <p>{{ event.date }}</p>
+    <p>{{ event.location }}</p>
+    <p>{{ "Sold out" if event.soldOut else "Tickets available" }}</p>
+  {% endfor %}
+
+{% endblock %}
