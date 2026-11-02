@@ -1,0 +1,297 @@
+
+/* ========================================
+   RESET & GLOBAL
+======================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-black: #212529;
+  --color-grey: #6c757d;
+  --color-light: #dee2e6;
+  --font-body: "Lora", Georgia, serif;
+  --font-heading: "Open Sans", Arial, sans-serif;
+}
+
+body {
+  color: var(--color-black);
+  background: #fff;
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #0085a1;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* ========================================
+   NAVIGATION
+======================================== */
+
+nav {
+  width: 100%;
+  min-height: 70px;
+  padding: 20px 8%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-heading);
+  font-weight: 800;
+}
+
+nav > a {
+  font-size: 20px;
+}
+
+nav ul {
+  display: flex;
+  gap: 35px;
+  list-style: none;
+}
+
+nav ul a {
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ========================================
+   MAIN LAYOUT
+======================================== */
+
+main {
+  width: 100%;
+  min-height: 70vh;
+}
+
+/* ========================================
+   PAGE HEADER / HERO
+======================================== */
+
+.page-header {
+  min-height: 420px;
+  padding: 100px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: var(--color-black);
+  color: white;
+  margin-bottom: 60px;
+}
+
+.page-header h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(42px, 7vw, 76px);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 15px;
+}
+
+.page-header h2,
+.page-header span {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 300;
+}
+
+/* ========================================
+   BLOG OVERVIEW
+======================================== */
+
+.posts {
+  width: min(100% - 40px, 720px);
+  margin: 0 auto 80px;
+}
+
+.post-preview {
+  padding: 30px 0;
+}
+
+.post-preview h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(26px, 4vw, 36px);
+  line-height: 1.3;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.post-preview h3 {
+  color: var(--color-grey);
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 1.4;
+  margin-bottom: 15px;
+}
+
+.post-preview p {
+  color: var(--color-grey);
+  font-size: 15px;
+  font-style: italic;
+}
+
+.post-preview a:hover h2 {
+  color: #0085a1;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--color-light);
+}
+
+/* ========================================
+   POST DETAIL
+======================================== */
+
+.post-content {
+  width: min(100% - 40px, 720px);
+  margin: 0 auto 100px;
+}
+
+.post-content img {
+  width: 100%;
+  margin-bottom: 40px;
+  object-fit: cover;
+}
+
+.post-content p {
+  margin-bottom: 25px;
+  line-height: 1.8;
+}
+
+.post-content h2,
+.post-content h3 {
+  font-family: var(--font-heading);
+  margin: 35px 0 15px;
+}
+
+/* ========================================
+   CONTACT FORM
+======================================== */
+
+.contact-form {
+  width: min(100% - 40px, 650px);
+  margin: 0 auto 100px;
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 15px 0;
+  border: none;
+  border-bottom: 1px solid var(--color-light);
+  border-radius: 0;
+  outline: none;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 18px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-bottom-color: #0085a1;
+}
+
+.form-group textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+button {
+  padding: 16px 28px;
+  border: 1px solid var(--color-black);
+  background: var(--color-black);
+  color: white;
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  background: #0085a1;
+  border-color: #0085a1;
+}
+
+/* ========================================
+   FOOTER
+======================================== */
+
+footer {
+  padding: 45px 20px;
+  border-top: 1px solid var(--color-light);
+  text-align: center;
+  color: var(--color-grey);
+  font-family: var(--font-heading);
+  font-size: 13px;
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 600px) {
+  nav {
+    padding: 18px 20px;
+  }
+
+  nav ul {
+    gap: 15px;
+  }
+
+  nav ul a {
+    font-size: 10px;
+  }
+
+  .page-header {
+    min-height: 320px;
+    padding: 70px 20px;
+    margin-bottom: 30px;
+  }
+
+  .page-header h2,
+  .page-header span {
+    font-size: 17px;
+  }
+
+  .post-preview {
+    padding: 25px 0;
+  }
+
+  .post-preview h3 {
+    font-size: 18px;
+  }
+}
