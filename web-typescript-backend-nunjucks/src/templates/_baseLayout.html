@@ -7,12 +7,14 @@
   </head>
 
   <body>
-    <header>
-      <nav>
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-      </nav>
-    </header>
+    {% block header %}
+      <header>
+        <nav>
+          <a href="/">Home</a>
+          <a href="/about">About</a>
+        </nav>
+      </header>
+    {% endblock %}
 
     {% block body %}{% endblock %}
 
