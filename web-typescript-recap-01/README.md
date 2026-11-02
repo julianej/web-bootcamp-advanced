@@ -165,6 +165,7 @@ Open the local URL printed by `http-server` in your browser to test the applicat
 <br>
 
 ### TASK 02 - Book Listing
+```bash
 - check index.html for ids
 - <input type="text" id="search" />
 - <h2 id="book-count">0 Books displayed</h2>
@@ -174,3 +175,4 @@ Open the local URL printed by `http-server` in your browser to test the applicat
 - restart `npx http-server -c-1`
 - check console.log output
 - stop API connect `npx bookmonkey-api@4`Press Ctrl + C to stop the server.
+```
