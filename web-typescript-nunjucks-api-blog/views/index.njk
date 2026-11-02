@@ -1,0 +1,37 @@
+
+{% extends "layouts/base.njk" %}
+
+{% block title %}Home | Clean Blog{% endblock %}
+
+{% block content %}
+
+<header class="page-header">
+  <h1>Clean Blog</h1>
+  <span>A Blog Theme by Start Bootstrap</span>
+</header>
+
+<section class="posts">
+
+  {% for post in posts %}
+
+    <article class="post-preview">
+
+      <a href="/posts/{{ post.slug }}">
+        <h2>{{ post.title }}</h2>
+        <h3>{{ post.teaser }}</h3>
+      </a>
+
+      <p>
+        Posted by {{ post.author }}
+        on {{ post.date }}
+      </p>
+
+    </article>
+
+    <hr>
+
+  {% endfor %}
+
+</section>
+
+{% endblock %}

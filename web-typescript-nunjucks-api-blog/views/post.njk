@@ -1,0 +1,30 @@
+
+{% extends "layouts/base.njk" %}
+
+{% block title %}{{ post.title }} | Clean Blog{% endblock %}
+
+{% block content %}
+
+<header class="page-header">
+  <h1>{{ post.title }}</h1>
+  <h2>{{ post.teaser }}</h2>
+
+  <p>
+    Posted by {{ post.author }}
+    on {{ post.date }}
+  </p>
+</header>
+
+<article class="post-content">
+
+  {% if post.image %}
+    <img src="{{ post.image }}" alt="{{ post.title }}">
+  {% endif %}
+
+  <div>
+    {{ post.content | safe }}
+  </div>
+
+</article>
+
+{% endblock %}

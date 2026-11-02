@@ -1,0 +1,36 @@
+
+{% macro formField(label, placeholder, type="text") %}
+
+  <div class="form-floating mb-3">
+
+    {% if type == "textarea" %}
+
+      <textarea
+        class="form-control"
+        id="{{ label | lower | replace(' ', '-') }}"
+        placeholder="{{ placeholder }}"
+        style="height: 12rem"
+      ></textarea>
+
+      <label for="{{ label | lower | replace(' ', '-') }}">
+        {{ label }}
+      </label>
+
+    {% else %}
+
+      <input
+        class="form-control"
+        type="{{ type }}"
+        id="{{ label | lower | replace(' ', '-') }}"
+        placeholder="{{ placeholder }}"
+      >
+
+      <label for="{{ label | lower | replace(' ', '-') }}">
+        {{ label }}
+      </label>
+
+    {% endif %}
+
+  </div>
+
+{% endmacro %}
