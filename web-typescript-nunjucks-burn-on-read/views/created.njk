@@ -1,0 +1,10 @@
+{% extends "layouts/base.njk" %}
+
+{% block title %}Message Created{% endblock %}
+
+{% block content %}
+  <h1>Your message is ready</h1>
+  <p>Share this link. It can only be opened once.</p>
+
+  <a href="{{ link }}">{{ link }}</a>
+{% endblock %}

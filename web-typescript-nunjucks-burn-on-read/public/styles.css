@@ -1,0 +1,80 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: #f4f4f4;
+  color: #171717;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  width: 100%;
+  max-width: 620px;
+  padding: 48px;
+  background: white;
+  border: 1px solid #ddd;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 2rem;
+}
+
+p {
+  line-height: 1.6;
+  color: #666;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+textarea {
+  display: block;
+  width: 100%;
+  min-height: 180px;
+  padding: 14px;
+  border: 1px solid #ccc;
+  font: inherit;
+  resize: vertical;
+}
+
+button {
+  margin-top: 16px;
+  padding: 14px 20px;
+  border: 0;
+  background: #171717;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #444;
+}
+
+.message {
+  padding: 24px;
+  border: 1px solid #ddd;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+a {
+  color: #171717;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 28px 20px;
+  }
+}
