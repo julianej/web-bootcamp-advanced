@@ -2,10 +2,10 @@
 
 To install dependencies:
 
-bun install          # Install dependencies
+'bun install          # Install dependencies
 bun run dev          # Start development server with watch mode
 bun run start        # Start the application
-bun run typecheck    # Check TypeScript types
+bun run typecheck    # Check TypeScript types'
 
 Run `bun fmt` to format the code.
 
