@@ -218,7 +218,6 @@ The application can be tested manually in the browser.
 
 Install dependencies:
 
-<<<<<<< HEAD
 ```bash
 bun install
 ```
@@ -240,33 +239,7 @@ Run the TypeScript check:
 ```bash
 bun run check
 ```
-=======
-'bun install # Install dependencies
-'bun run dev # Start development server with watch mode'
-'bun run start # Start the application'
-'bun run typecheck # Check TypeScript types'
->>>>>>> a510d3a24a422583be1032c23114109b1da61f58
 
 ---
 
-<<<<<<< HEAD
 **Project goal:** Demonstrate server-side rendering, Express routing, TypeScript, filesystem operations, unique identifier generation, secure output escaping and one-time resource consumption.
-=======
-This project was created using `bun init` in bun v1.4.4. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
-
-1. Generate ID
-randomUUID()
-
-2. Store message
-data/messages/{id}.json
-
-3. Generate URL
-/messages/{id}
-
-4. Show URL
-created.njk
-
-5. Recipient opens URL
-req.params.id
-
->>>>>>> a510d3a24a422583be1032c23114109b1da61f58
