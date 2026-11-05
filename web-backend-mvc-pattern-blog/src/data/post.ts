@@ -1,4 +1,3 @@
-import { slugify } from "../utils/helper.js";
 
 export interface Post {
   title: string;
@@ -9,7 +8,7 @@ export interface Post {
   content: string;
 }
 
-const seedPosts: Post[] = [
+export const seedPosts: Post[] = [
   {
     title: "Black: The Absence, Not the Presence, of Color",
     image: "colorful-umbrella.jpg",
@@ -42,39 +41,39 @@ const seedPosts: Post[] = [
   },
 ];
 
-// READ
-export function loadPosts(): Post[] {
-  return seedPosts;
-}
+// // READ
+// export function loadPosts(): Post[] {
+//   return seedPosts;
+// }
 
-// CREATE
-export function createPost(post: Post): void {
-  seedPosts.push(post);
-}
+// // CREATE
+// export function createPost(post: Post): void {
+//   seedPosts.push(post);
+// }
 
-// UPDATE
-export function updatePost(
-  slug: string,
-  updatedPost: Post,
-): boolean {
-  const index = seedPosts.findIndex(
-    (post) => slugify(post.title) === slug,
-  );
+// // UPDATE
+// export function updatePost(
+//   slug: string,
+//   updatedPost: Post,
+// ): boolean {
+//   const index = seedPosts.findIndex(
+//     (post) => slugify(post.title) === slug,
+//   );
 
-  if (index === -1) return false;
+//   if (index === -1) return false;
 
-  seedPosts[index] = updatedPost;
-  return true;
-}
+//   seedPosts[index] = updatedPost;
+//   return true;
+// }
 
-// DELETE
-export function deletePost(slug: string): boolean {
-  const index = seedPosts.findIndex(
-    (post) => slugify(post.title) === slug,
-  );
+// // DELETE
+// export function deletePost(slug: string): boolean {
+//   const index = seedPosts.findIndex(
+//     (post) => slugify(post.title) === slug,
+//   );
 
-  if (index === -1) return false;
+//   if (index === -1) return false;
 
-  seedPosts.splice(index, 1);
-  return true;
-}
+//   seedPosts.splice(index, 1);
+//   return true;
+// }

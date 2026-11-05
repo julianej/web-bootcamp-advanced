@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { getPosts, getPostBySlug, getExamplePost, } from "../controllers/postController.js";
-
+import { getAdmin } from "../controllers/adminController.js";
 
 const router = Router();
 
@@ -33,6 +33,9 @@ router.get("/example-post", getExamplePost);
 router.get("/about", (_req, res) => {
   res.render("about.njk");
 });
+
+// NEW Admin page
+router.get("/admin", getAdmin);
 
 // Contact page
 router.get("/contact", (_req, res) => {

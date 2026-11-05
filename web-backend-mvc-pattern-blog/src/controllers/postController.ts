@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 
-import { loadPosts } from "../data/post.js";
+import { loadPosts } from "../models/postModels.js";
 import { slugify, formatDate } from "../utils/helper.js";
 
 const PAGE_SIZE = 2;
@@ -56,7 +56,7 @@ export function getPosts(req: Request, res: Response): void {
   });
 }
 
-export function getExamplePost(req: Request, res: Response): void {
+export function getExamplePost(_req: Request, res: Response): void {
   res.render("postExample");
 }
 
