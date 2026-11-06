@@ -60,7 +60,7 @@ export function createPost(post: Post): void {
         @author,
         @createdAt,
         @teaser,
-        @content
+        @content,
         @slug
       )
     `)
