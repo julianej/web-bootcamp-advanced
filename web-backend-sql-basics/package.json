@@ -1,0 +1,33 @@
+{
+  "name": "mvc-pattern-challenge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon",
+    "watch": "tsc --watch",
+    "start": "tsx src/app.ts",
+    "typecheck": "tsc --noEmit",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "better-sqlite3": "^13.0.3",
+    "express": "^5.2.1",
+    "nunjucks": "^3.2.4"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^9.6.0",
+    "@types/express": "^5.0.6",
+    "@types/node": "^24.10.1",
+    "@types/nunjucks": "^3.2.6",
+    "@types/sanitize-html": "^2.16.2",
+    "nodemon": "^3.1.10",
+    "tsx": "^4.23.15",
+    "typescript": "^6.0.3"
+  }
+}
