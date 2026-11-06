@@ -1,5 +1,6 @@
 // app.ts 
 // Configure Express, Nunjucks and static files
+import adminRouter from "./routes/admin.js";
 
 
 // REMOVE import express, { type Request, type Response } from "express";
@@ -60,6 +61,7 @@ app.use(express.static(path.join(projectRoot, "/public")));
 
 // Mount router
 app.use("/", router);
+app.use("/admin", adminRouter);
 
 ////// DATA POST
 // const seedPosts: Post[] = [

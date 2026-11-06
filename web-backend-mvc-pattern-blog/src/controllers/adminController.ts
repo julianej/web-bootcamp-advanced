@@ -1,3 +1,4 @@
+//controllers/adminControllers.ts
 import { loadPosts } from "../models/postModels.js";
 import type { Request, Response } from "express";
 import { slugify,formatDate } from "../utils/helper.js";
