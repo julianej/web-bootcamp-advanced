@@ -3,7 +3,7 @@
 
 import { seedPosts } from "../data/post.js";
 import type { Post } from "../data/post.js";
-import { connectDB } from "./db.js";
+import { connectDB } from "./createDatabase.js";
 
 // In-memory storage
 let posts: Post[] = [...seedPosts];
@@ -51,7 +51,8 @@ export function createPost(post: Post): void {
         author,
         createdAt,
         teaser,
-        content
+        content,
+        slug
       )
       VALUES (
         @title,
@@ -60,6 +61,7 @@ export function createPost(post: Post): void {
         @createdAt,
         @teaser,
         @content
+        @slug
       )
     `)
     .run(post);

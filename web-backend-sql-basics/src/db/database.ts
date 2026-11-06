@@ -1,4 +1,4 @@
-
+// TASK-01
 //npm install better-sqlite3
 //npm install -D @types/better-sqlite3
 
@@ -9,12 +9,13 @@ import fs from "node:fs";
 // Store the database connection
 let db: InstanceType<typeof Database> | null = null;
 
-// Connect to SQLite
+// CONNECT to SQLite
 export function connectDB() {
   if (db) {
     return db;
   }
 
+  // Define the path to the SQLite database file
   const dbPath = path.resolve(
     process.cwd(),
     "data",
@@ -46,6 +47,22 @@ export function getDB() {
 
   return db;
 }
+
+
+// TASK-03
+// Register SIGINT and SIGTERM handlers that call closeDB() before exiting
+process.on("SIGINT", () => {
+  console.log("Received SIGINT. Closing database connection...");
+  closeDB();
+  process.exit(0);
+});
+
+process.on("SIGTERM", () => {
+  console.log("Received SIGTERM. Closing database connection...");
+  closeDB();
+  process.exit(0);
+});
+
 
 // CLOSE the database connection
 export function closeDB() {

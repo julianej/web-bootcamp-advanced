@@ -1,4 +1,4 @@
-//models/db.ts
+//models/createDatabase.ts
 import Database from "better-sqlite3";
 
 let db: Database.Database | null = null;

@@ -36,6 +36,8 @@ const __dirname = path.dirname(__filename);
 const projectRoot = path.resolve(__dirname, "..");
 console.log("Project root:", projectRoot);
 console.log("Current directory:", __dirname);
+
+// OLD PUBLIC PATH
 // const assetsDir = path.join(projectRoot, "public", "assets");
 // const cssDir = path.join(projectRoot, "public", "css");
 
@@ -72,10 +74,6 @@ app.use("/", router);
 // Connect to the database
 connectDB();
 
-// TASK-04
-// Insert initial posts if the table is empty
-seedDatabase();
-
 // TASK-03
 // Register SIGINT and SIGTERM handlers
 // Gracefully close the database when the process is stopped
@@ -90,6 +88,10 @@ process.on("SIGTERM", () => {
   closeDB();
   process.exit(0);
 });
+
+// TASK-04
+// Insert initial posts if the table is empty
+seedDatabase();
 
 ////// DATA POST
 // const seedPosts: Post[] = [

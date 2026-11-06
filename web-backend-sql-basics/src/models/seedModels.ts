@@ -1,4 +1,4 @@
-import { connectDB } from "./db.js";
+import { connectDB } from "./createDatabase.js";
 import { seedPosts } from "../data/post.js";
 import { slugify } from "../utils/helper.js";
 
@@ -6,12 +6,13 @@ export function seedDatabase(): void {
   const db = connectDB();
 
   // Check whether posts already exist
-  const result = db
+  // const result = db
+    const count = db
     .prepare("SELECT COUNT(*) AS count FROM posts")
     .get() as { count: number };
 
   // Don't insert the same posts again
-  if (result.count > 0) {
+  if (count.count > 0) {
     console.log("Database already contains posts.");
     return;
   }
@@ -23,7 +24,8 @@ export function seedDatabase(): void {
       author,
       createdAt,
       teaser,
-      content
+      content,
+      slug
     )
     VALUES (
       @title,
@@ -31,7 +33,8 @@ export function seedDatabase(): void {
       @author,
       @createdAt,
       @teaser,
-      @content
+      @content,
+      @slug
     )
   `);
 
