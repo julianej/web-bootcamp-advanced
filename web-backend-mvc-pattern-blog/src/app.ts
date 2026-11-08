@@ -56,8 +56,15 @@ app.set("view engine", "njk");
 // Static files
 // app.use(express.static("public"));
 app.use(express.static(path.join(projectRoot, "/public")));
+
 // app.use("/assets", express.static(assetsDir));
 // app.use("/css", express.static(cssDir));
+
+// Parse HTML form submissions
+app.use(express.urlencoded({ extended: true }));
+
+// Parse JSON requests
+app.use(express.json());
 
 // Mount router
 app.use("/", router);

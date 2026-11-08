@@ -1,0 +1,132 @@
+
+{% extends "layouts/base.njk" %}
+
+{% block main_content %}
+
+<div class="container px-4 px-lg-5 admin-dashboard">
+
+  <!-- Header -->
+  <div class="admin-header">
+
+    <div>
+      <span class="admin-eyebrow">CONTENT MANAGEMENT</span>
+
+      {% if isEdit %}
+        <h1>Edit post</h1>
+        <p>Update your existing blog post.</p>
+      {% else %}
+        <h1>Create post</h1>
+        <p>Add a new article to your blog.</p>
+      {% endif %}
+    </div>
+
+    <a href="/admin" class="admin-back">
+      ← Back to dashboard
+    </a>
+
+  </div>
+
+  <!-- Form -->
+  <section class="admin-form-wrapper">
+
+    <form
+      action="{{ formAction }}"
+      method="POST"
+      class="admin-form"
+    >
+
+      <!-- Title -->
+      <div class="admin-form-group">
+        <label for="title">Post title</label>
+
+        <input
+          type="text"
+          id="title"
+          name="title"
+          value="{{ post.title }}"
+          placeholder="Enter post title"
+          required
+          minlength="3"
+        >
+      </div>
+
+      <!-- Image -->
+      <div class="admin-form-group">
+        <label for="image">Image filename</label>
+
+        <input
+          type="text"
+          id="image"
+          name="image"
+          value="{{ post.image }}"
+          placeholder="example-image.jpg"
+          required
+        >
+      </div>
+
+      <!-- Author -->
+      <div class="admin-form-group">
+        <label for="author">Author</label>
+
+        <input
+          type="text"
+          id="author"
+          name="author"
+          value="{{ post.author }}"
+          placeholder="Author name"
+          required
+        >
+      </div>
+
+      <!-- Teaser -->
+      <div class="admin-form-group">
+        <label for="teaser">Teaser</label>
+
+        <textarea
+          id="teaser"
+          name="teaser"
+          rows="3"
+          placeholder="Write a short introduction..."
+          required
+        >{{ post.teaser }}</textarea>
+      </div>
+
+      <!-- Content -->
+      <div class="admin-form-group">
+        <label for="content">Content</label>
+
+        <textarea
+          id="content"
+          name="content"
+          rows="12"
+          placeholder="Write your post content..."
+          required
+        >{{ post.content }}</textarea>
+      </div>
+
+      <!-- Actions -->
+      <div class="admin-form-actions">
+
+        <a href="/admin" class="admin-cancel">
+          Cancel
+        </a>
+
+        <button type="submit" class="admin-submit">
+
+          {% if isEdit %}
+            Save changes
+          {% else %}
+            Create post
+          {% endif %}
+
+        </button>
+
+      </div>
+
+    </form>
+
+  </section>
+
+</div>
+
+{% endblock main_content %}

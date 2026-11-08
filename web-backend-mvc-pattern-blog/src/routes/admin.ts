@@ -1,10 +1,30 @@
 // src/routes/admin.ts
 
-import express from "express";
-import { getAdmin } from "../controllers/adminController.js";
+import { Router } from "express";
 
-const router = express.Router();
+import {
+  getAdmin,
+  getNewPost,
+  createPost,
+  getEditPost,
+  updatePost,
+  deletePost,
+} from "../controllers/adminController.js";
 
-router.get("/admin", getAdmin);
+const adminRouter = Router();
 
-export default router;
+// READ: Display all posts
+adminRouter.get("/", getAdmin);
+
+// CREATE: Display form and submit new post
+adminRouter.get("/posts/new", getNewPost);
+adminRouter.post("/posts", createPost);
+
+// UPDATE: Display edit form and submit changes
+adminRouter.get("/posts/:slug/edit", getEditPost);
+adminRouter.post("/posts/:slug", updatePost);
+
+// DELETE: Remove post
+adminRouter.post("/posts/:slug/delete", deletePost);
+
+export default adminRouter;
