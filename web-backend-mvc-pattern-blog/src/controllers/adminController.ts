@@ -32,7 +32,7 @@ export function getAdmin(_req: Request, res: Response): void {
 
 // GET /admin/posts/new
 export function getNewPost(_req: Request,res: Response): void {
-  res.render("postForm.njk", {
+  res.render("admins/postForm.njk", {
     title: "Create Post",
     isEdit: false,
     formAction: "/admin/posts",
@@ -67,9 +67,12 @@ export function getEditPost(req: Request, res: Response): void {
   });
 }
 
+
 // POST /admin/posts
-// CREATE: Save a new post
 export function createPost(req: Request, res: Response): void {
+  console.log("CREATE POST called");
+  console.log("Form data:", req.body);
+
   const posts = loadPosts();
 
   const { title, image, author, teaser, content } = req.body;
@@ -84,6 +87,8 @@ export function createPost(req: Request, res: Response): void {
   };
 
   posts.push(newPost);
+
+  console.log("Posts after creation:", posts.length);
 
   res.redirect("/admin");
 }
