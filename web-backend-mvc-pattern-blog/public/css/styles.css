@@ -10806,3 +10806,208 @@ header.masthead .post-heading .meta a {
     font-size: 2.25rem;
   }
 }
+
+
+/* ========================================
+   ADMIN DASHBOARD
+======================================== */
+
+.admin-dashboard {
+  padding-top: 80px;
+  padding-bottom: 100px;
+  color: #171717;
+}
+
+/* Header */
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.admin-eyebrow {
+  display: block;
+  margin-bottom: 12px;
+  font-family: monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: #888;
+}
+
+.admin-header h1 {
+  margin-bottom: 8px;
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 700;
+}
+
+.admin-header p {
+  color: #777;
+}
+
+/* Overview */
+
+.admin-overview {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 64px;
+}
+
+.admin-stat {
+  padding: 24px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+}
+
+.admin-stat-label {
+  display: block;
+  margin-bottom: 16px;
+  font-family: monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: #888;
+}
+
+.admin-stat-number {
+  font-size: 36px;
+  font-weight: 700;
+}
+
+/* Section */
+
+.admin-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.admin-section-header h2 {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.admin-section-header > span {
+  font-size: 13px;
+  color: #888;
+}
+
+/* Post list */
+
+.admin-post-list {
+  border-top: 1px solid #e5e5e5;
+}
+
+.admin-post {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 24px 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.admin-post-info h3 {
+  margin-bottom: 8px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.admin-post-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: #888;
+}
+
+.admin-dot {
+  color: #ccc;
+}
+
+/* Actions */
+
+.admin-post-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.admin-post-actions form {
+  margin: 0;
+}
+
+.admin-action {
+  display: inline-block;
+  padding: 8px 14px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: transparent;
+  font-size: 13px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-edit {
+  color: #171717;
+}
+
+.admin-edit:hover {
+  background: #171717;
+  color: white;
+}
+
+.admin-delete {
+  color: #b42318;
+}
+
+.admin-delete:hover {
+  border-color: #b42318;
+  background: #b42318;
+  color: white;
+}
+
+/* Empty state */
+
+.admin-empty {
+  padding: 64px 24px;
+  border: 1px dashed #ddd;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.admin-empty h3 {
+  margin-bottom: 12px;
+}
+
+.admin-empty p {
+  margin-bottom: 24px;
+  color: #888;
+}
+
+/* Responsive */
+
+@media (max-width: 600px) {
+  .admin-dashboard {
+    padding-top: 48px;
+  }
+
+  .admin-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admin-post {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admin-post-actions {
+    width: 100%;
+  }
+}

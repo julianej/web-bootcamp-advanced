@@ -5,6 +5,7 @@ import { seedPosts } from "../data/post.js";
 import type { Post } from "../data/post.js";
 
 // In-memory storage
+// in-memory MVC implementation.
 let posts: Post[] = [...seedPosts];
 
 // READ all posts

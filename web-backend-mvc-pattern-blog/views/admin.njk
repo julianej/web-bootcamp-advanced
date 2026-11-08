@@ -1,18 +1,103 @@
 {% extends "layouts/base.njk" %}
 
 {% block main_content %}
-  <div class="container px-4 px-lg-5">
-    <div class="row gx-4 gx-lg-5 justify-content-center">
-      <div class="col-md-10 col-lg-8 col-xl-7">
-        <h1>Admin Dashboard</h1>
-        <p>Total posts: {{ totalPosts }}</p>
 
-        {% for post in posts %}
-          <h2>{{ post.title }}</h2>
-          <p>{{ post.author }}</p>
-          <p>{{ post.createdAt }}</p>
-        {% endfor %}
-      </div>
+<div class="container px-4 px-lg-5 admin-dashboard">
+
+  <!-- Dashboard Header -->
+  <div class="admin-header">
+    <div>
+      <span class="admin-eyebrow">CONTENT MANAGEMENT</span>
+      <h1>Dashboard</h1>
+      <p>Manage your blog posts and content.</p>
+    </div>
+
+    <a href="/admin/posts/new" class="btn btn-dark">
+      + Create new post
+    </a>
+  </div>
+
+  <!-- Overview -->
+  <div class="admin-overview">
+    <div class="admin-stat">
+      <span class="admin-stat-label">TOTAL POSTS</span>
+      <span class="admin-stat-number">{{ totalPosts }}</span>
     </div>
   </div>
+
+  <!-- Posts -->
+  <section class="admin-posts">
+
+    <div class="admin-section-header">
+      <h2>All posts</h2>
+      <span>{{ totalPosts }} entries</span>
+    </div>
+
+    {% if posts.length %}
+
+      <div class="admin-post-list">
+
+        {% for post in posts %}
+
+          <article class="admin-post">
+
+            <div class="admin-post-info">
+
+              <h3>{{ post.title }}</h3>
+
+              <div class="admin-post-meta">
+                <span>{{ post.author }}</span>
+                <span class="admin-dot">·</span>
+                <span>{{ post.formattedDate }}</span>
+              </div>
+
+            </div>
+
+            <div class="admin-post-actions">
+
+              <a
+                href="/admin/posts/{{ post.slug }}/edit"
+                class="admin-action admin-edit"
+              >
+                Edit
+              </a>
+
+              <form
+                action="/admin/posts/{{ post.slug }}/delete"
+                method="POST"
+                onsubmit="return confirm('Are you sure you want to delete this post?');"
+              >
+                <button
+                  type="submit"
+                  class="admin-action admin-delete"
+                >
+                  Delete
+                </button>
+              </form>
+
+            </div>
+
+          </article>
+
+        {% endfor %}
+
+      </div>
+
+    {% else %}
+
+      <div class="admin-empty">
+        <h3>No posts yet</h3>
+        <p>Create your first blog post to get started.</p>
+        <a href="/admin/posts/new" class="btn btn-dark">
+          Create your first post
+        </a>
+      </div>
+
+    {% endif %}
+
+  </section>
+
+</div>
+
 {% endblock main_content %}
+
