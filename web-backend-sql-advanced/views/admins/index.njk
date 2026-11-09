@@ -1,25 +1,71 @@
-{% extends "layouts/base.njk" %}
 
-{% block content %}
+{% extends "layouts/base.njk" %}
+{% block main_content %}
 
 <div class="container px-4 px-lg-5">
 
-  <h1>Admin Dashboard</h1>
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Admin Dashboard</h1>
 
-  {% for post in posts %}
-    <article>
-      <h2>{{ post.title }}</h2>
+    <a href="/admin/posts/new" class="btn btn-primary">
+      Create New Post
+    </a>
+  </div>
 
-      <a href="/admin/edit/{{ loop.index0 }}">
-        Edit
-      </a>
+  <p>Total posts: {{ totalPosts }}</p>
 
-      <form action="/admin/delete/{{ loop.index0 }}" method="POST">
-        <button type="submit">Delete</button>
-      </form>
-    </article>
-  {% endfor %}
+  {% if posts.length %}
 
+    {% for post in posts %}
+
+      <article class="mb-4 border-bottom pb-3">
+
+        <h2>{{ post.title }}</h2>
+
+        <p>
+          <small>
+            By {{ post.author }} |
+            {{ post.createdAt }}
+          </small>
+        </p>
+
+        <p>{{ post.teaser }}</p>
+
+        <div class="d-flex gap-2">
+
+          <a
+            href="/admin/posts/{{ post.slug }}/edit"
+            class="btn btn-secondary"
+          >
+            Edit
+          </a>
+
+          <form
+            action="/admin/posts/{{ post.slug }}/delete"
+            method="POST"
+            onsubmit="return confirm('Are you sure you want to delete this post?')"
+          >
+            <button type="submit" class="btn btn-danger">
+              Delete
+            </button>
+          </form>
+
+        </div>
+
+      </article>
+
+    {% endfor %}
+  {% else %}
+    <p>No posts found. Create your first post!</p>
+  {% endif %}
 </div>
-
 {% endblock %}
+
+
+{# /old MVC array-based routing:} #}
+{# /admin/edit/{{ loop.index0 }} #}
+{# /admin/delete/{{ loop.index0 }} #}
+
+{# /new SQL implementation} #}
+{# /admin/posts/{{ post.slug }}/edit #}
+{# /admin/posts/:slug/delete #}

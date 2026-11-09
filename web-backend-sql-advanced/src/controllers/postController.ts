@@ -1,3 +1,6 @@
+
+// Your postModels.ts becomes responsible for all SQL writes.
+
 import type { Request, Response } from "express";
 
 import { loadPosts } from "../models/postModels.js";

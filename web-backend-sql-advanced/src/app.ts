@@ -58,8 +58,7 @@ nunjucks.configure(
 
 app.set("view engine", "njk");
 
-// TASK-02
-// Middleware
+// Middleware URL-encoded form data
 app.use(express.urlencoded({ extended: true }));
 
 // Static files
@@ -70,11 +69,9 @@ app.use(express.static(path.join(projectRoot, "/public")));
 // Mount router
 app.use("/", router);
 
-// TASK-02
 // Connect to the database
 connectDB();
 
-// TASK-03
 // Register SIGINT and SIGTERM handlers
 // Gracefully close the database when the process is stopped
 process.on("SIGINT", () => {
@@ -89,7 +86,6 @@ process.on("SIGTERM", () => {
   process.exit(0);
 });
 
-// TASK-04
 // Insert initial posts if the table is empty
 seedDatabase();
 

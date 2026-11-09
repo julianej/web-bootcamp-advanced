@@ -1,0 +1,106 @@
+
+{% extends "layouts/base.njk" %}
+
+{% block page_header %}
+  <header class="masthead"
+    style="background-image: url('/assets/img/home-bg.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+      <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+          <div class="site-heading">
+            <h1>{{ title }}</h1>
+            <span class="subheading">
+              Manage your blog posts
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+{% endblock %}
+
+{% block content %}
+  <main class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8">
+
+        <form
+          action="{{ post.slug | default('') | length and '/admin/posts/' + post.slug or '/admin/posts' }}"
+          method="POST"
+        >
+
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              type="text"
+              id="title"
+              name="title"
+              placeholder="Post title"
+              value="{{ post.title | default('') }}"
+              required
+            />
+            <label for="title">Title</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              type="text"
+              id="image"
+              name="image"
+              placeholder="Image filename"
+              value="{{ post.image | default('') }}"
+              required
+            />
+            <label for="image">Image</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              type="text"
+              id="author"
+              name="author"
+              placeholder="Author"
+              value="{{ post.author | default('') }}"
+              required
+            />
+            <label for="author">Author</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <textarea
+              class="form-control"
+              id="teaser"
+              name="teaser"
+              placeholder="Teaser"
+              required
+            >{{ post.teaser | default('') }}</textarea>
+            <label for="teaser">Teaser</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <textarea
+              class="form-control"
+              id="content"
+              name="content"
+              placeholder="Content"
+              style="height: 200px"
+              required
+            >{{ post.content | default('') }}</textarea>
+            <label for="content">Content</label>
+          </div>
+
+          <button class="btn btn-primary text-uppercase" type="submit">
+            {{ "Update Post" if post else "Create Post" }}
+          </button>
+
+          <a href="/admin" class="btn btn-secondary">
+            Cancel
+          </a>
+
+        </form>
+      </div>
+    </div>
+  </main>
+{% endblock %}

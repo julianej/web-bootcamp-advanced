@@ -10806,3 +10806,257 @@ header.masthead .post-heading .meta a {
     font-size: 2.25rem;
   }
 }
+
+/* ========================================
+   ADMIN DASHBOARD
+======================================== */
+
+.admin-header {
+  background: #171717;
+  color: #fff;
+  padding: 100px 0 75px;
+}
+
+.admin-header-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.admin-eyebrow,
+.admin-label {
+  display: block;
+  font-family: monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+  opacity: .65;
+}
+
+.admin-header h1 {
+  font-size: clamp(42px, 6vw, 64px);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.admin-header p {
+  color: #aaa;
+  margin: 0;
+}
+
+/* MAIN CONTAINER */
+
+.admin-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 65px 24px 100px;
+}
+
+/* TOOLBAR */
+
+.admin-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 35px;
+}
+
+.admin-label {
+  color: #888;
+  margin-bottom: 8px;
+}
+
+.admin-toolbar h2 {
+  font-size: 27px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.post-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #eee;
+  color: #333;
+  border-radius: 50px;
+  font-family: monospace;
+  font-size: 13px;
+  padding: 4px 11px;
+  vertical-align: middle;
+}
+
+/* BUTTONS */
+
+.admin-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 16px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.admin-button-primary {
+  background: #171717;
+  color: #fff;
+}
+
+.admin-button-primary:hover {
+  background: #444;
+  color: #fff;
+}
+
+.admin-button-secondary {
+  background: #fff;
+  border-color: #ddd;
+  color: #222;
+}
+
+.admin-button-secondary:hover {
+  background: #eee;
+  color: #111;
+}
+
+.admin-button-danger {
+  background: #fff;
+  border-color: #e4caca;
+  color: #a33;
+}
+
+.admin-button-danger:hover {
+  background: #a33;
+  color: #fff;
+}
+
+/* POST LIST */
+
+.admin-post-list {
+  border-top: 1px solid #ddd;
+}
+
+.admin-post {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  padding: 30px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.admin-post-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.admin-post-meta {
+  display: flex;
+  gap: 10px;
+  color: #888;
+  font-family: monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  margin-bottom: 10px;
+}
+
+.meta-divider {
+  color: #ccc;
+}
+
+.admin-post h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.admin-post-info p {
+  color: #777;
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+.admin-slug {
+  display: inline-block;
+  color: #999;
+  font-family: monospace;
+  font-size: 11px;
+}
+
+/* ACTIONS */
+
+.admin-post-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.admin-post-actions form {
+  margin: 0;
+}
+
+/* EMPTY STATE */
+
+.admin-empty {
+  padding: 75px 20px;
+  text-align: center;
+}
+
+.admin-empty > i {
+  font-size: 30px;
+  color: #bbb;
+  margin-bottom: 20px;
+}
+
+.admin-empty h3 {
+  font-size: 22px;
+}
+
+.admin-empty p {
+  color: #888;
+  font-size: 14px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 700px) {
+  .admin-header {
+    padding: 70px 0 55px;
+  }
+
+  .admin-container {
+    padding: 40px 20px 70px;
+  }
+
+  .admin-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admin-post {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .admin-post-actions {
+    width: 100%;
+  }
+
+  .admin-post-actions form {
+    flex: 1;
+  }
+
+  .admin-post-actions button,
+  .admin-post-actions a {
+    width: 100%;
+  }
+}
