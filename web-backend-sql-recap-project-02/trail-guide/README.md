@@ -1,4 +1,4 @@
-<img width="2720" height="1664" alt="select_with_region_join_sketch_bw" src="https://github.com/user-attachments/assets/6d779e6d-fe63-49da-92be-3555dd8b9f69" />
+
 # Trail Guide – Project Structure
 
 This document describes the planned folder structure for the Trail Guide recap project.
