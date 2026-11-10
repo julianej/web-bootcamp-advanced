@@ -165,6 +165,13 @@ node check.js
 ## SETUP TYPESCRIPT
 ```bash
 npm install -D typescript tsx @types/node @types/express @types/nunjucks @types/better-sqlite3 @types/sanitize-html
+npm install -D typescript
+npm install -D @types/node
+npm install -D @types/nunjucks
+npm install -D @types/better-sqlite3
+npm install -D @types/express
+npm install -D @types/sanitize-html
+npx tsc --init
 
 ** RENAME FILES **
 mv app.js app.ts
@@ -172,3 +179,16 @@ mv server.js server.ts
 mv db/database.js db/database.ts
 mv db/init.js db/init.ts
 ```
+<<<<<<< HEAD
+=======
+
+** UPDATE PACKAGE.JSON **
+```bash
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "db:init": "node db/init.js",
+    "build": "tsc"
+  },
+  ```
+>>>>>>> feature-recap-02/typescript-setup
