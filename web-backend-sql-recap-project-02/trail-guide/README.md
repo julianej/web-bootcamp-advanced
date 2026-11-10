@@ -210,3 +210,7 @@ mv db/init.js db/init.ts
 },
 ```
 
+## SEARCH DIRECTORY
+```bash
+grep -R -n "getAllWithRegion" src
+```

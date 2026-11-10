@@ -1,0 +1,26 @@
+{% extends "layouts/base.njk" %}
+{% block title %}{{ region.name }} | Trail Guide{% endblock %}
+
+{% block content %}
+  <h1>{{ region.name }}</h1>
+  <p>{{ region.country }}</p>
+
+  {% if trails.length %}
+    <table>
+      <thead>
+        <tr><th>Name</th><th>Distance</th><th>Difficulty</th></tr>
+      </thead>
+      <tbody>
+        {% for trail in trails %}
+          <tr>
+            <td><a href="/trails/{{ trail.id }}">{{ trail.name }}</a></td>
+            <td>{{ trail.distance_km }} km</td>
+            <td>{{ trail.difficulty | capitalize }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No trails in this region yet.</p>
+  {% endif %}
+{% endblock %}

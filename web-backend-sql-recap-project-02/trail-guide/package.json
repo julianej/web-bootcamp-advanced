@@ -2,9 +2,7 @@
   "name": "trail-guide",
   "version": "1.0.0",
   "description": "",
-
   "main": "dist/server.js",
-
   "scripts": {
     "start": "node dist/server.js",
     "dev": "tsx watch src/server.ts",
@@ -12,12 +10,12 @@
     "typecheck": "tsc --noEmit",
     "build": "tsc"
   },
-  
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "@picocss/pico": "^2.1.1",
     "better-sqlite3": "^13.0.3",
     "chokidar": "^3.6.0",
     "dotenv": "^18.0.10",
