@@ -210,11 +210,3 @@ mv db/init.js db/init.ts
 },
 ```
 
-| Script | What it does |
-|---|---|
-| `start` | Runs the compiled app from `dist/` (run `npm run build` first) |
-| `dev` | Runs `src/server.ts` with `tsx` and restarts on file changes |
-| `db:init` | Creates the tables and inserts the seed data |
-| `typecheck` | Checks types without creating files |
-| `build` | Compiles `src/` to `dist/` |
-  ```
