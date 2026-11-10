@@ -26,27 +26,27 @@ Make sure you have the following installed:
 - [SQLite](https://sqlite.org/)
 
 Check your installations:
-
+- ** Node.js (Primary Setup) ** -
+  
 ```bash
-Node.js (Primary Setup)
-
 node -v
 npm -v
 npm install
 npm run dev
+```
 
-Bun (Alternative)
-
+- ** Bun (Alternative) ** -
+```bash
 bun -v
 bun install
 bun run dev
+```
 
 Bun can also execute TypeScript files directly:
-
 bun run src/app.ts
 
 Note: The project scripts, dependencies, and TypeScript configuration are primarily tested with Node.js. Bun is optional and may behave differently depending on the package or runtime APIs used.
-```
+
 
 ## Getting Started
 
