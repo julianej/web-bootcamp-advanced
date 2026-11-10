@@ -158,3 +158,14 @@ npm install chokidar
 npm run db:init
 node check.js
 ```
+
+## SETUP TYPESCRIPT
+```bash
+npm install -D typescript tsx @types/node @types/express @types/nunjucks @types/better-sqlite3 @types/sanitize-html
+
+** RENAME FILES **
+mv app.js app.ts
+mv server.js server.ts
+mv db/database.js db/database.ts
+mv db/init.js db/init.ts
+```
