@@ -196,7 +196,7 @@ mv db/database.js db/database.ts
 mv db/init.js db/init.ts
 ```
 
-** UPDATE PACKAGE.JSON **
+## UPDATE PACKAGE.JSON whenever you change FOLDER SETUP**
 ```bash
 
 ```json
