@@ -179,16 +179,26 @@ mv server.js server.ts
 mv db/database.js db/database.ts
 mv db/init.js db/init.ts
 ```
-<<<<<<< HEAD
-=======
 
 ** UPDATE PACKAGE.JSON **
 ```bash
-  "scripts": {
-    "start": "node server.js",
-    "dev": "node --watch server.js",
-    "db:init": "node db/init.js",
-    "build": "tsc"
-  },
+
+```json
+"main": "dist/server.js",
+"scripts": {
+  "start": "node dist/server.js",
+  "dev": "tsx watch src/server.ts",
+  "db:init": "tsx src/db/init.ts",
+  "typecheck": "tsc --noEmit",
+  "build": "tsc"
+},
+```
+
+| Script | What it does |
+|---|---|
+| `start` | Runs the compiled app from `dist/` (run `npm run build` first) |
+| `dev` | Runs `src/server.ts` with `tsx` and restarts on file changes |
+| `db:init` | Creates the tables and inserts the seed data |
+| `typecheck` | Checks types without creating files |
+| `build` | Compiles `src/` to `dist/` |
   ```
->>>>>>> feature-recap-02/typescript-setup
