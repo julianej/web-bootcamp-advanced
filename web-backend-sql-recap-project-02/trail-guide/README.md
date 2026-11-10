@@ -9,37 +9,41 @@ This document describes the planned folder structure for the Trail Guide recap p
 trail-guide/
 │
 ├── package.json
+├── tsconfig.json           # TypeScript config (rootDir: src, outDir: dist)
 ├── .env                    # API_KEY, PORT (not committed to Git)
-├── .gitignore
-├── app.js                  # Express app: middleware, Nunjucks, routers
-├── server.js               # Optional: app.listen(), separated from app.js
+├── .gitignore              # node_modules/, .env, *.db, dist/
 │
-├── db/
-│   ├── database.js         # SQLite connection (e.g. better-sqlite3)
-│   ├── schema.sql          # CREATE TABLE regions / trails
-│   ├── seed.sql            # Sample data
-│   └── init.js             # Execute schema + seed (npm run db:init)
+├── src/
+│   ├── app.ts              # Express app: middleware, Nunjucks, routers
+│   ├── server.ts           # Optional: app.listen(), separated from app.ts
+│   │
+│   ├── db/
+│   │   ├── database.ts     # SQLite connection (e.g. better-sqlite3)
+│   │   ├── schema.sql      # CREATE TABLE regions / trails
+│   │   ├── seed.sql        # Sample data
+│   │   └── init.ts         # Execute schema + seed (npm run db:init)
+│   │
+│   ├── models/
+│   │   ├── types.ts        # Shared types: Region, Trail, TrailInput, ...
+│   │   ├── regionModel.ts  # getAll, getById, create, update, remove
+│   │   └── trailModel.ts   # getAllWithRegion (INNER JOIN), getById, create, ...
+│   │
+│   ├── controllers/
+│   │   ├── siteController.ts   # Public website pages (HTML)
+│   │   ├── adminController.ts  # Admin forms (HTML)
+│   │   └── apiController.ts    # JSON responses
+│   │
+│   ├── routes/
+│   │   ├── siteRoutes.ts   # /, /trails, /trails/:id, /regions/:id
+│   │   ├── adminRoutes.ts  # /admin/...
+│   │   └── apiRoutes.ts    # /api/...
+│   │
+│   └── middleware/
+│       ├── requireApiKey.ts    # Checks request header (e.g. x-api-key) for POST/PUT/DELETE
+│       ├── sanitizeBody.ts     # Sanitizes HTML from form submissions
+│       └── errorHandler.ts     # 404 and error handling
 │
-├── models/
-│   ├── regionModel.js      # getAll, getById, create, update, delete
-│   └── trailModel.js       # getAllWithRegion (INNER JOIN), getById, create, ...
-│
-├── controllers/
-│   ├── siteController.js   # Public website pages (HTML)
-│   ├── adminController.js  # Admin forms (HTML)
-│   └── apiController.js    # JSON responses
-│
-├── routes/
-│   ├── siteRoutes.js       # /, /trails, /trails/:id, /regions/:id
-│   ├── adminRoutes.js      # /admin/...
-│   └── apiRoutes.js        # /api/...
-│
-├── middleware/
-│   ├── requireApiKey.js    # Checks request header (e.g. x-api-key) for POST/PUT/DELETE
-│   ├── sanitizeBody.js     # Sanitizes HTML from form submissions
-│   └── errorHandler.js     # 404 and error handling
-│
-├── views/
+├── views/                  # Not compiled, stays outside src/
 │   ├── layouts/
 │   │   └── base.njk        # <head> with pico.css CDN, header, nav, footer
 │   │
@@ -57,8 +61,20 @@ trail-guide/
 │   └── errors/
 │       └── 404.njk
 │
-└── public/                 # Static files (only if needed)
+├── public/                 # Static files (only if needed)
+│
+└── dist/                   # Compiled JavaScript (npm run build, not committed to Git)
 ```
+
+## Scripts
+
+| Command | What it does |
+|---|---|
+| `npm run dev` | Runs `src/server.ts` with `tsx` and restarts on changes |
+| `npm run db:init` | Runs `src/db/init.ts` (schema + seed) |
+| `npm run typecheck` | Type-checks without emitting files |
+| `npm run build` | Compiles `src/` to `dist/` |
+| `npm start` | Runs the compiled `dist/server.js` |
 
 ## Architecture
 
@@ -66,7 +82,7 @@ The application follows the MVC (Model-View-Controller) pattern.
 
 | Layer | Responsibility |
 |---|---|
-| Models | Database queries and CRUD operations |
+| Models | Database queries, CRUD operations and shared types |
 | Views | Nunjucks templates and HTML |
 | Controllers | Application logic and HTTP responses |
 | Routes | URL definitions and controller mapping |
@@ -180,7 +196,7 @@ mv db/database.js db/database.ts
 mv db/init.js db/init.ts
 ```
 
-** UPDATE PACKAGE.JSON **
+## UPDATE PACKAGE.JSON whenever you change FOLDER SETUP**
 ```bash
 
 ```json
@@ -194,11 +210,3 @@ mv db/init.js db/init.ts
 },
 ```
 
-| Script | What it does |
-|---|---|
-| `start` | Runs the compiled app from `dist/` (run `npm run build` first) |
-| `dev` | Runs `src/server.ts` with `tsx` and restarts on file changes |
-| `db:init` | Creates the tables and inserts the seed data |
-| `typecheck` | Checks types without creating files |
-| `build` | Compiles `src/` to `dist/` |
-  ```
