@@ -152,3 +152,9 @@ touch views/layouts/base.njk
 
 npm install chokidar
 ```
+
+## SETUP & TEST DATABASE
+```bash
+npm run db:init
+node check.js
+```
