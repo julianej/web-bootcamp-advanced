@@ -1,0 +1,28 @@
+{% macro trailCard(trail) %}
+  <article class="trail-card">
+    <a href="/trail/{{ trail.slug }}">
+
+      <div class="trail-card__image">
+        <img src="{{ trail.image }}" alt="{{ trail.name }}">
+      </div>
+
+      <div class="trail-card__content">
+        <p class="eyebrow">{{ trail.region_name }}, {{ trail.country }}</p>
+
+        <h3>{{ trail.name }}</h3>
+
+        <p class="trail-card__explanation"> {{ trail.description | truncate(150, true, '...') }}</p>
+        <a href="/trail/{{ trail.slug }}" class="trail-card__details">
+          View trail details →
+        </a>
+        <div class="trail-card__meta">
+          <span>{{ trail.distance_km }} km</span>
+          <span>{{ trail.elevation_m }} m elevation</span>
+          <span class="trail-card__difficulty trail-card__difficulty--{{ trail.difficulty }} ">
+          {{ trail.difficulty }}
+        </span>
+        </div>
+      </div>
+    </a>
+  </article>
+{% endmacro %}

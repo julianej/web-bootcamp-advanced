@@ -7,31 +7,72 @@
 
   {% include "templates/components/hero.njk" %}
 
+  <!-- ABOUT-->
+  {% include "templates/components/about.njk" %}
+
   <!-- TRAILS -->
   <section class="trails-section" id="trails">
 
     <div class="container">
 
       <div class="section-heading">
-        <p class="eyebrow">02 — DISCOVER</p>
+        <p class="eyebrow">03 — DISCOVER</p>
         <h2>FIND YOUR TRAIL.</h2>
       </div>
 
-      <p>Homepage trail count: {{ trails.length }}</p>
+      <p class="trails-count">
+        <span class="trails-count__number">{{ trails.length }}</span>
+        <span class="trails-count__label">Trails to explore</span>
+      </p>
 
       {% if trails and trails.length > 0 %}
 
         <div class="trails-grid">
 
-          {% for trail in trails %}
-            {% include "templates/components/trailcard.njk" %}
+            {% from "templates/macros/trailcard.njk" import trailCard %}
+
+            {% for trail in trails %}
+              {{ trailCard(trail) }}
+            {% endfor %}
+
+          </div>
+
+      {% else %}
+
+        <p>No trails available yet.</p>
+
+      {% endif %}
+
+    </div>
+
+  </section>
+  <!-- REGIONS-->
+  
+  <!-- REGIONS -->
+  <section class="regions-section" id="regions">
+
+    <div class="container">
+
+      <div class="section-heading">
+        <p class="eyebrow">04 — EXPLORE</p>
+        <h2>EXPLORE REGIONS.</h2>
+      </div>
+
+      {% if regions and regions.length > 0 %}
+
+        <div class="regions-grid">
+
+          {% from "templates/macros/regionCard.njk" import regionCard %}
+
+          {% for region in regions %}
+            {{ regionCard(region) }}
           {% endfor %}
 
         </div>
 
       {% else %}
 
-        <p>No trails available yet.</p>
+        <p>No regions available yet.</p>
 
       {% endif %}
 

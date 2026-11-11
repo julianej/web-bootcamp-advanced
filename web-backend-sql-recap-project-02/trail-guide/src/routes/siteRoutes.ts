@@ -1,11 +1,24 @@
 import { Router } from 'express';
-import * as site from '../controllers/siteController.js';
+
+import {
+  getHomePage,
+  getTrailDetail,
+  getTrails,
+  getRegions,
+  regionDetail,
+} from '../controllers/siteController.js';
 
 const router = Router();
 
-router.get('/', site.home);
-router.get('/trails', site.trailList);
-router.get('/trails/:id', site.trailDetail);
-router.get('/regions/:id', site.regionDetail);
+// HOME
+router.get(['/', '/home'], getHomePage);
+
+// TRAILS
+router.get('/trails', getTrails);
+router.get('/trail/:slug', getTrailDetail);
+
+// REGIONS
+router.get('/regions', getRegions);
+router.get('/region/:slug', regionDetail);
 
 export default router;

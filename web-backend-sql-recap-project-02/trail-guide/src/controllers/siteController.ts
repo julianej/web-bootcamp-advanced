@@ -1,91 +1,120 @@
 
 import type { Request, Response } from 'express';
 
-import * as regionModel from '../models/regionModel.js';
 import * as trailModel from '../models/trailModel.js';
+import * as regionModel from '../models/regionModel.js';
+
+import { formatDate } from '../utils/formatDate.js';
 
 // ========================================
-// HELPERS
-// ========================================
-
-// Convert and validate URL parameters
-function parseId(value: string | string[] | undefined): number | null {
-  if (typeof value !== 'string') {
-    return null;
-  }
-
-  const id = Number(value);
-
-  return Number.isInteger(id) && id > 0 ? id : null;
-}
-
-// Render 404 page
-function notFound(res: Response): void {
-  res.status(404).render('errors/404');
-}
-
-// ========================================
-// HOME
+// GET HOME PAGE
 // GET /
 // ========================================
 
-export function home(_req: Request, res: Response): void {
-  const trails = trailModel.getAllWithRegion();
+export function getHomePage(
+  _req: Request,
+  res: Response
+): void {
 
-  console.log('Homepage trails:', trails);
+  const trails = trailModel.getAllTrails();
+  const regions = regionModel.getAllRegions();
 
   res.render('site/home.njk', {
     title: 'Trail Guide',
+    trails,
+    regions,
+  });
+}
+
+// ========================================
+// GET TRAIL DETAIL
+// GET /trails/:slug
+// ========================================
+
+export function getTrailDetail(
+  req: Request<{ slug: string }>,
+  res: Response
+): void {
+  const { slug } = req.params;
+
+  // GET TRAIL BY SLUG
+  const trail = trailModel.getTrailBySlug(slug);
+
+  // HANDLE 404
+  if (!trail) {
+    res.status(404).render('errors/404.njk', {
+      title: '404 — Trail Not Found'
+    });
+    return;
+  }
+
+  // GET ALL REGIONS
+  const regions = regionModel.getAllRegions();
+
+  // RENDER TRAIL DETAIL
+  res.render('site/trail.njk', {
+    title: trail.name,
+    trail,
+    regions,
+    formattedDate: formatDate(trail.created_at),
+  });
+}
+
+// ========================================
+// GET ALL TRAILS
+// GET /trails
+// ========================================
+
+export function getTrails(
+  _req: Request,
+  res: Response
+): void {
+  const trails = trailModel.getAllTrails();
+
+  res.render('site/trails.njk', {
+    title: 'Explore Trails',
     trails,
   });
 }
 
 // ========================================
-// TRAIL LIST
-// GET /trails
+// GET ALL REGIONS
+// GET /regions
 // ========================================
 
-export function trailList(_req: Request, res: Response): void {
-  const trails = trailModel.getAllWithRegion();
-  console.log(trails);
-  res.render('site/trails', { trails });
+// GET ALL REGIONS
+export function getRegions(
+  _req: Request,
+  res: Response
+): void {
+  const regions = regionModel.getAllRegions();
+
+  res.render('site/regions.njk', {
+    title: 'Explore Regions',
+    regions,
+  });
 }
 
-// ========================================
-// TRAIL DETAIL
-// GET /trails/:id
-// ========================================
+// GET REGION DETAIL
+export function regionDetail(
+  req: Request<{ slug: string }>,
+  res: Response
+): void {
+  const { slug } = req.params;
 
-export function trailDetail(req: Request, res: Response): void {
-  const id = parseId(req.params.id);
-  const trail = id === null ? undefined : trailModel.getById(id);
-
-  if (!trail) {
-    notFound(res);
-    return;
-  }
-
-  res.render('site/trail', { trail });
-}
-
-// ========================================
-// REGION DETAIL
-// GET /regions/:id
-// ========================================
-
-export function regionDetail(req: Request, res: Response): void {
-  const id = parseId(req.params.id);
-  const region = id === null ? undefined : regionModel.getById(id);
+  const region = regionModel.getRegionBySlug(slug);
 
   if (!region) {
-    notFound(res);
+    res.status(404).render('errors/404.njk');
     return;
   }
 
   const trails = trailModel.getByRegion(region.id);
 
-  res.render('site/region', {
+  res.render('site/region.njk', {
+    title: region.name,
     region,
     trails,
   });
 }
+
