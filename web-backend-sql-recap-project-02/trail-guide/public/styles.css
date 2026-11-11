@@ -498,6 +498,10 @@ p {
     height: 44px;
   }
 
+  .trail-list__image img {
+    object-fit: contain;
+  }
+
 @media (max-width: 650px) {
   .trail-list__header,
   .trail-list__item {

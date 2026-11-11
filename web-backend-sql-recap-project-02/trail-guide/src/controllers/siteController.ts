@@ -56,7 +56,7 @@ export function getTrailDetail(
     title: trail.name,
     trail,
     regions,
-    formattedDate: formatDate(trail.created_at),
+    formattedDate: formatDate(trail.createdAt),
   });
 }
 

@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS trails (
   elevation_m INTEGER NOT NULL,
   difficulty TEXT NOT NULL,
   image TEXT,
-  created_at INTEGER NOT NULL
+  created_at INTEGER NOT NULL,
 
   FOREIGN KEY (region_id) REFERENCES regions(id)
 );
