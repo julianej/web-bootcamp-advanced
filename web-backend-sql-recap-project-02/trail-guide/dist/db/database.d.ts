@@ -1,4 +1,5 @@
 import Database from 'better-sqlite3';
-declare const db: Database.Database;
-export default db;
+export declare function connectDB(): Promise<void>;
+export declare function getDB(): Database.Database;
+export declare function closeDB(): void;
 //# sourceMappingURL=database.d.ts.map

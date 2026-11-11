@@ -197,6 +197,9 @@ mv db/init.js db/init.ts
 ```
 
 ## UPDATE PACKAGE.JSON whenever you change FOLDER SETUP**
+- npm install --include=dev
+- verify with: npm ls @types/node express dotenv better-sqlite3 
+
 ```bash
 
 ```json
@@ -208,6 +211,13 @@ mv db/init.js db/init.ts
   "typecheck": "tsc --noEmit",
   "build": "tsc"
 },
+```
+
+## TEST LOG FILE
+```bash
+rm -rf node_modules
+npm ci --include=dev
+npm run build
 ```
 
 ## SEARCH DIRECTORY

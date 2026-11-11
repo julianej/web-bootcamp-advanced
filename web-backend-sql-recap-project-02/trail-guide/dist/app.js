@@ -19,10 +19,11 @@ const __dirname = path.dirname(__filename);
 // ========================================
 // TEMPLATES // Nunjucks configuration
 // ========================================
+// root directoy src/app.ts. and trail-guide/views 
 nunjucks.configure(path.join(__dirname, '../views'), {
     autoescape: true,
     express: app,
-    watch: process.env.NODE_ENV !== 'production',
+    watch: true,
 });
 app.set('view engine', 'njk');
 // ========================================

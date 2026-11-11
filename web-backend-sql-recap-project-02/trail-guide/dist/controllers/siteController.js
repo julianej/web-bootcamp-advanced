@@ -1,6 +1,9 @@
 import * as regionModel from '../models/regionModel.js';
 import * as trailModel from '../models/trailModel.js';
-// URL params are strings, so convert and validate them first
+// ========================================
+// HELPERS
+// ========================================
+// Convert and validate URL parameters
 function parseId(value) {
     if (typeof value !== 'string') {
         return null;
@@ -8,7 +11,14 @@ function parseId(value) {
     const id = Number(value);
     return Number.isInteger(id) && id > 0 ? id : null;
 }
+// Render 404 page
+function notFound(res) {
+    res.status(404).render('errors/404');
+}
+// ========================================
 // HOME
+// GET /
+// ========================================
 export function home(_req, res) {
     const trails = trailModel.getAllWithRegion();
     console.log('Homepage trails:', trails);
@@ -17,18 +27,21 @@ export function home(_req, res) {
         trails,
     });
 }
+// ========================================
 // TRAIL LIST
+// GET /trails
+// ========================================
 export function trailList(_req, res) {
-    res.render('site/trails', {
-        trails: trailModel.getAllWithRegion(),
-    });
+    const trails = trailModel.getAllWithRegion();
+    console.log(trails);
+    res.render('site/trails', { trails });
 }
+// ========================================
 // TRAIL DETAIL
+// GET /trails/:id
+// ========================================
 export function trailDetail(req, res) {
     const id = parseId(req.params.id);
-    function notFound(res) {
-        res.status(404).render('errors/404');
-    }
     const trail = id === null ? undefined : trailModel.getById(id);
     if (!trail) {
         notFound(res);
@@ -36,20 +49,21 @@ export function trailDetail(req, res) {
     }
     res.render('site/trail', { trail });
 }
+// ========================================
 // REGION DETAIL
+// GET /regions/:id
+// ========================================
 export function regionDetail(req, res) {
     const id = parseId(req.params.id);
-    function notFound(res) {
-        res.status(404).render('errors/404');
-    }
     const region = id === null ? undefined : regionModel.getById(id);
     if (!region) {
         notFound(res);
         return;
     }
+    const trails = trailModel.getByRegion(region.id);
     res.render('site/region', {
         region,
-        trails: trailModel.getByRegion(region.id),
+        trails,
     });
 }
 //# sourceMappingURL=siteController.js.map
