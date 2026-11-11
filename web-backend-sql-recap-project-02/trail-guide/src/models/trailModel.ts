@@ -148,8 +148,11 @@ export function update(
 // DELETE: REMOVE TRAIL
 // ========================================
 
-export function remove(id: number): number {
-  return getDB()
-    .prepare('DELETE FROM trails WHERE id = ?')
-    .run(id).changes;
+export function deleteTrail(slug: string): void {
+  const db = getDB();
+
+  db.prepare(`
+    DELETE FROM trails
+    WHERE slug = ?
+  `).run(slug);
 }

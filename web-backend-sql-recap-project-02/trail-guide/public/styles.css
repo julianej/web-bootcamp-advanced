@@ -936,3 +936,168 @@ p {
     padding: 24px;
   }
 }
+
+
+/* ========================================
+   ADMIN DASHBOARD
+======================================== */
+
+.admin-section {
+  padding: 100px 0 140px;
+  min-height: 80vh;
+}
+
+.admin-section .section-heading {
+  margin-bottom: 48px;
+}
+
+.admin-section .section-heading h1 {
+  margin: 12px 0;
+}
+
+.admin-section .section-heading > p:last-child {
+  color: #777;
+  font-size: 14px;
+}
+
+/* ADMIN ACTIONS */
+
+
+
+/* TABLE WRAPPER */
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #e5e5df;
+  background: #fff;
+}
+
+/* TABLE */
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 14px;
+}
+
+.admin-table thead {
+  background: #f5f5f0;
+}
+
+.admin-table th {
+  padding: 17px 20px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #777;
+  white-space: nowrap;
+  border-bottom: 1px solid #e5e5df;
+}
+
+.admin-table td {
+  padding: 19px 20px;
+  border-bottom: 1px solid #eeeeea;
+  color: #333;
+  white-space: nowrap;
+}
+
+.admin-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.admin-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.admin-table tbody tr:hover {
+  background: #fafaf7;
+}
+
+.admin-table td strong {
+  font-weight: 600;
+  color: #202c24;
+}
+
+/* TABLE ACTIONS */
+
+.table-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.table-actions form {
+  margin: 0;
+}
+
+.button--small {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 13px;
+  border: 1px solid #deded7;
+  background: transparent;
+  color: #333;
+  font-size: 12px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.button--small:hover {
+  background: #202c24;
+  border-color: #202c24;
+  color: #fff;
+}
+
+.button--danger {
+  color: #a34b40;
+  border-color: #ead6d2;
+}
+
+.button--danger:hover {
+  background: #a34b40;
+  border-color: #a34b40;
+  color: #fff;
+}
+
+/* EMPTY STATE */
+
+.admin-section .table-wrapper + p,
+.admin-section .container > p {
+  padding: 32px;
+  background: #f5f5f0;
+  color: #777;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+  .admin-section {
+    padding: 70px 0 100px;
+  }
+
+  .admin-section .section-heading {
+    margin-bottom: 32px;
+  }
+
+  .admin-actions {
+    justify-content: flex-start;
+  }
+
+  .table-wrapper {
+    margin-right: -20px;
+    width: calc(100% + 40px);
+  }
+
+  .admin-table th,
+  .admin-table td {
+    padding: 14px 16px;
+  }
+}

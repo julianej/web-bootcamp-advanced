@@ -16,7 +16,7 @@ export function getHomePage(
   res: Response
 ): void {
 
-  const trails = trailModel.getAllTrails();
+  const trails = trailModel.getAllTrails().slice(0, 3);
   const regions = regionModel.getAllRegions();
 
   res.render('site/home.njk', {
