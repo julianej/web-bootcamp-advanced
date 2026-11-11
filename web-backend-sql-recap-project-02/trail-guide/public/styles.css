@@ -246,6 +246,98 @@ p {
   margin-bottom: 16px;
 }
 
+
+
+/* ========================================
+   ABOUT SECTION
+======================================== */
+
+.about {
+  position: relative;
+  padding: clamp(5rem, 10vw, 10rem) 5%;
+  background: #242522;
+  color: #F0EDE3;
+  overflow: hidden;
+}
+
+.about__text {
+  width: min(100%);
+  margin-left: auto;
+  position: relative;
+  text-align: center;
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+/* Decorative eyebrow */
+.about__text::before {
+  content: "02 / THE TRAIL GUIDE STORY";
+  display: block;
+  margin-bottom: 3rem;
+  color: #B7A98A;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+}
+
+/* Paragraphs */
+.about__text p {
+  margin: 0 0 2rem;
+  font-size: clamp(1.15rem, 2.2vw, 1.65rem);
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: -0.025em;
+  color: #D5D2C7;
+}
+
+/* First paragraph emphasis */
+.about__text p:first-of-type {
+  font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+  line-height: 1.3;
+  font-weight: 500;
+  color: #F0EDE3;
+  letter-spacing: -0.045em;
+  margin-bottom: 3rem;
+}
+
+/* Last paragraph */
+.about__text p:last-child {
+  margin-bottom: 0;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(240, 237, 227, 0.2);
+  color: #B7A98A;
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 768px) {
+  .about {
+    padding: 5rem 6%;
+  }
+
+  .about__text {
+    margin-left: 0;
+  }
+
+  .about__text::before {
+    margin-bottom: 2rem;
+  }
+
+  .about__text p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .about__text p:first-of-type {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+  }
+}
+
+
 /* 9. TRAILS */
 
 
@@ -318,10 +410,6 @@ p {
   margin-bottom: 24px;
 }
 
-.about p {
-  max-width: 600px;
-  margin-bottom: 32px;
-}
 
 /* 11. FOOTER */
 
