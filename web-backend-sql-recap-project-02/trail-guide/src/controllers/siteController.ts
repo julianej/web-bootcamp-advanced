@@ -1,5 +1,6 @@
 import type { Request, Response } from 'express';
 import * as trailModel from '../models/trailModel.js';
+import { formatDate } from '../utils/formatDate.js';
 
 // ========================================
 // GET HOME PAGE
@@ -38,7 +39,8 @@ export function getTrailDetail(
 
   res.render('site/trail.njk', {
     title: trail.name,
-    trail
+    trail,
+    formattedDate: formatDate(trail.created_at),
   });
 }
 
@@ -64,3 +66,11 @@ export function regionDetail(req: Request, res: Response): void {
   });
 }
 
+export function getTrails(_req: Request, res: Response): void {
+  const trails = trailModel.getAllTrails();
+
+  res.render('site/trails.njk', {
+    title: 'Explore Trails',
+    trails,
+  });
+}

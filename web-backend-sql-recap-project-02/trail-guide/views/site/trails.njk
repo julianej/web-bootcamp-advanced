@@ -1,28 +1,87 @@
-{% extends "layouts/base.njk" %}
-{% block title %}All trails | Trail Guide{% endblock %}
 
-{% block content %}
-  <h1>All trails</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Region</th>
-        <th>Distance</th>
-        <th>Ascent</th>
-        <th>Difficulty</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for trail in trails %}
-        <tr>
-          <td><a href="/trails/{{ trail.id }}">{{ trail.name }}</a></td>
-          <td><a href="/regions/{{ trail.region_id }}">{{ trail.region_name }}</a>, {{ trail.country }}</td>
-          <td>{{ trail.distance_km }} km</td>
-          <td>{{ trail.elevation_m }} m</td>
-          <td>{{ trail.difficulty | capitalize }}</td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+{% extends "templates/layouts/base.njk" %}
+
+{% block main__content %}
+
+<section class="trail-detail">
+
+  <!-- HEADER -->
+  <header class="trail-detail__header">
+
+    <a href="/trails" class="trail-detail__back">
+      ← Back to trails
+    </a>
+
+    <p class="trail-detail__region">
+      {{ trail.region_name }}, {{ trail.country }}
+    </p>
+
+    <h1 class="trail-detail__title">
+      {{ trail.name }}
+    </h1>
+
+    <span class="trail-card__difficulty trail-card__difficulty--{{ trail.difficulty }}">
+      {{ trail.difficulty }}
+    </span>
+
+  </header>
+
+
+  <!-- IMAGE -->
+  <div class="trail-detail__image">
+    <img
+      src="{{ trail.image }}"
+      alt="{{ trail.name }}"
+    >
+  </div>
+
+
+  <!-- DETAILS -->
+  <div class="trail-detail__content">
+
+    <div class="trail-detail__stats">
+
+      <div class="trail-detail__stat">
+        <span class="trail-detail__label">DISTANCE</span>
+        <strong>{{ trail.distance_km }} km</strong>
+      </div>
+
+      <div class="trail-detail__stat">
+        <span class="trail-detail__label">ELEVATION</span>
+        <strong>{{ trail.elevation_m }} m</strong>
+      </div>
+
+      <div class="trail-detail__stat">
+        <span class="trail-detail__label">DIFFICULTY</span>
+        <strong>{{ trail.difficulty }}</strong>
+      </div>
+
+    </div>
+
+
+    <!-- DESCRIPTION -->
+    <div class="trail-detail__description">
+
+      <p class="trail-detail__eyebrow">
+        ABOUT THIS TRAIL
+      </p>
+
+      <p>{{ trail.description }}</p>
+
+    </div>
+
+
+    <!-- CREATED DATE -->
+    <footer class="trail-detail__footer">
+      <span>ADDED TO TRAIL GUIDE</span>
+
+      <time datetime="{{ trail.created_at }}">
+        {{ trail.created_at | date }}
+      </time>
+    </footer>
+
+  </div>
+
+</section>
+
 {% endblock %}

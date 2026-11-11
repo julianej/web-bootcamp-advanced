@@ -66,6 +66,7 @@ ul {
 
 main {
   width: 100%;
+  text-align: center;
   padding-inline: var(--spacing-page);
 }
 
@@ -104,6 +105,12 @@ p {
   color: var(--color-accent);
   font-size: 0.75rem;
   font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.error {
+  color: #A63D35;
   letter-spacing: 0.15em;
   text-transform: uppercase;
 }
@@ -147,6 +154,10 @@ p {
 
 .navigation__links a:hover {
   color: var(--color-accent);
+}
+
+.trail-detail {
+    background: var(--color-surface);
 }
 
 /* 6. HERO */
@@ -254,7 +265,8 @@ p {
 
 .about {
   position: relative;
-  padding: clamp(5rem, 10vw, 10rem) 5%;
+  padding-top: 0rem;
+  padding-bottom: clamp(4rem, 8vw, 7rem);
   background: #242522;
   color: #F0EDE3;
   overflow: hidden;
@@ -371,6 +383,34 @@ p {
   background: var(--color-bg);
 }
 
+.trails-count {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  color: #777;
+}
+
+.trails-count__number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 8px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.trails-count__label {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
 .trails-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -382,10 +422,19 @@ p {
   background: var(--color-surface);
 }
 
+.trail-card__explanation {
+  min-height: 200px;
+}
+
 .trail-card img {
   aspect-ratio: 4 / 3;
   transition: transform 0.4s ease;
 }
+
+.trail-card__details {
+  padding: 2rem 0;
+}
+
 
 .trail-card:hover img {
   transform: scale(1.04);
@@ -398,6 +447,209 @@ p {
 .trail-card h3 {
   margin-bottom: 12px;
 }
+
+
+/* ========================================
+   TRAIL DETAIL CONTENT
+======================================== */
+
+.trail-detail__content {
+    width: 100%;
+    /* max-width: 1100px; */
+    margin: 0 auto;
+    padding: 64px 32px 100px;
+    box-sizing: border-box;
+}
+
+.trail-detail__image {
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.trail-detail__image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ========================================
+   STATS
+======================================== */
+
+.trail-detail__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid #deded8;
+  border-bottom: 1px solid #deded8;
+  margin-bottom: 72px;
+}
+
+.trail-detail__stat {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 28px 32px;
+  border-right: 1px solid #deded8;
+}
+
+.trail-detail__stat:first-child {
+  padding-left: 0;
+}
+
+.trail-detail__stat:last-child {
+  border-right: none;
+}
+
+.trail-detail__label {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: #77776f;
+  text-transform: uppercase;
+}
+.trail-detail__region {
+    text-align: center;
+}
+
+.trail-detail__back {
+    color: #a7a789;
+}
+
+.trail-detail__title {
+  color: #a7a789;
+  text-align: center;
+}
+
+.trail-detail__stat strong {
+  font-family: inherit;
+    font-size: clamp(22px, 3vw, 5rem);
+    font-weight: bold;
+    line-height: 1.2;
+    color: #a7a789;
+}
+
+
+/* ========================================
+   DESCRIPTION
+======================================== */
+
+.trail-detail__description {
+  max-width: 760px;
+  margin: 0 auto 80px;
+}
+
+.trail-detail__eyebrow {
+  margin-bottom: 24px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: #77776f;
+  text-transform: uppercase;
+}
+
+.trail-detail__description > p:last-child {
+  margin: 0;
+  font-size: clamp(17px, 2vw, 20px);
+  line-height: 1.85;
+  font-weight: 400;
+}
+
+
+/* ========================================
+   FOOTER / CREATED DATE
+======================================== */
+
+.trail-detail__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 24px 0;
+  border-top: 1px solid #deded8;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: #77776f;
+}
+
+.trail-detail__footer time {
+  font-size: 12px;
+  letter-spacing: 0;
+}
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 768px) {
+
+  .trail-detail__content {
+    padding: 44px 24px 72px;
+  }
+
+  .trail-detail__stats {
+    margin-bottom: 52px;
+  }
+
+  .trail-detail__stat {
+    padding: 24px 16px;
+    gap: 12px;
+  }
+
+  .trail-detail__description {
+    margin-bottom: 56px;
+  }
+
+}
+
+@media (max-width: 520px) {
+
+  .trail-detail__content {
+    padding: 32px 20px 56px;
+  }
+
+  .trail-detail__stats {
+    grid-template-columns: 1fr;
+    margin-bottom: 48px;
+  }
+
+  .trail-detail__stat,
+  .trail-detail__stat:first-child {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 0;
+    border-right: none;
+    border-bottom: 1px solid #deded8;
+  }
+
+  .trail-detail__stat:last-child {
+    border-bottom: none;
+  }
+
+  .trail-detail__stat strong {
+    font-size: 20px;
+  }
+
+  .trail-detail__description {
+    margin-bottom: 48px;
+  }
+
+  .trail-detail__footer {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+}
+
 
 /* 10. ABOUT */
 
@@ -431,7 +683,7 @@ p {
   z-index: 9;
   opacity: 0.1;
   width: 100%;
-  height: 600px;
+  height: 400px;
 }
 
 .footer__logo {
@@ -446,7 +698,7 @@ p {
 }
 
 .footer h2 { 
-    font-size: 10rem;
+  font-size: clamp(2rem, 10vw, 10rem);
 }
 
 .footer p {
