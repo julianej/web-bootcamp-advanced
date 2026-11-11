@@ -5,10 +5,12 @@ PRAGMA foreign_keys = ON;
 DROP TABLE IF EXISTS trails;
 DROP TABLE IF EXISTS regions;
 
-CREATE TABLE regions (
+CREATE TABLE IF NOT EXISTS regions (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  name TEXT NOT NULL UNIQUE,
-  country TEXT NOT NULL
+  name TEXT NOT NULL,
+  country TEXT NOT NULL,
+  slug TEXT NOT NULL UNIQUE,
+  description TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS trails (
@@ -21,7 +23,7 @@ CREATE TABLE IF NOT EXISTS trails (
   elevation_m INTEGER NOT NULL,
   difficulty TEXT NOT NULL,
   image TEXT,
-  created_at INTEGER NOT NULL,
+  created_at INTEGER NOT NULL
 
   FOREIGN KEY (region_id) REFERENCES regions(id)
 );

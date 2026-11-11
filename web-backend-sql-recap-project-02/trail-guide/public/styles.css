@@ -156,6 +156,12 @@ p {
   color: var(--color-accent);
 }
 
+.back-link {
+  position: absolute;
+  top: 14%;
+  left: 3%;
+}
+
 .trail-detail {
     background: var(--color-surface);
 }
@@ -285,9 +291,9 @@ p {
 .about__text::before {
   content: "02 / THE TRAIL GUIDE STORY";
   display: block;
+  font-weight: 400;
   margin-bottom: 3rem;
-  color: #B7A98A;
-  font-family: "IBM Plex Mono", monospace;
+  color: var(--color-accent);
   font-size: 0.75rem;
   letter-spacing: 0.12em;
 }
@@ -474,6 +480,33 @@ p {
   height: 100%;
   object-fit: cover;
   object-position: center;
+}
+.trail-list__header {
+  border-bottom: 1px solid var(--color-muted);
+}
+
+.trail-list__header,
+.trail-list__item {
+  display: grid;
+  grid-template-columns: 70px 2fr 1fr 1fr 1fr 30px;
+  align-items: center;
+  gap: 1rem;
+}
+
+  .trail-list__image {
+    width: 56px;
+    height: 44px;
+  }
+
+@media (max-width: 650px) {
+  .trail-list__header,
+  .trail-list__item {
+    grid-template-columns:
+      minmax(0, 1fr)
+      65px
+      85px;
+    gap: 12px;
+  }
 }
 
 /* ========================================
@@ -748,6 +781,7 @@ p {
     gap: 20px;
   }
 
+
   .trails-grid {
     grid-template-columns: 1fr;
   }
@@ -755,5 +789,146 @@ p {
   .hero {
     min-height: 450px;
     padding-block: 64px;
+  }
+}
+
+
+
+/* ========================================
+   REGIONS
+======================================== */
+
+.regions-section {
+  padding: 120px 0;
+  min-height: 70vh;
+}
+
+.regions-section .section-heading {
+  margin-bottom: 64px;
+}
+
+.regions-section .section-heading h1 {
+  font-size: clamp(3rem, 7vw, 6rem);
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+  margin: 16px 0;
+}
+
+/* GRID */
+
+.regions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* CARD */
+
+.region-card {
+  position: relative;
+  min-height: 240px;
+  /* border: 1px solid #deded9; */
+  background: var(--color-surface);
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.region-card a {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 240px;
+  padding: 28px;
+  color:var(--color-text);
+  text-decoration: none;
+}
+
+.region-card h2 {
+  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  margin: 0;
+}
+
+.region-card p {
+  margin: 12px 0 auto;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #777;
+}
+
+.region-card span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 48px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  transition: transform 0.3s ease;
+}
+
+.region-card:hover {
+  background: var(--color-muted);
+  border-color: var(--color-bg);
+  transform: translateY(-4px);
+}
+
+.region-card:hover h2,
+.region-card:hover span {
+  color: #fff;
+}
+
+.region-card:hover p {
+  color: #aaa;
+}
+
+.region-card:hover span {
+  transform: translateX(5px);
+}
+
+/* EMPTY STATE */
+
+.regions-section .empty-state {
+  padding: 48px 0;
+  border-top: 1px solid #deded9;
+  color: #777;
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 900px) {
+  .regions-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .regions-section {
+    padding: 80px 0;
+  }
+
+  .regions-section .section-heading {
+    margin-bottom: 40px;
+  }
+
+  .regions-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .region-card,
+  .region-card a {
+    min-height: 190px;
+  }
+
+  .region-card a {
+    padding: 24px;
   }
 }

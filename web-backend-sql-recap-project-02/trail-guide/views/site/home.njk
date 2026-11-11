@@ -46,5 +46,38 @@
     </div>
 
   </section>
+  <!-- REGIONS-->
+  
+  <!-- REGIONS -->
+  <section class="regions-section" id="regions">
+
+    <div class="container">
+
+      <div class="section-heading">
+        <p class="eyebrow">04 — EXPLORE</p>
+        <h2>EXPLORE REGIONS.</h2>
+      </div>
+
+      {% if regions and regions.length > 0 %}
+
+        <div class="regions-grid">
+
+          {% from "templates/macros/regionCard.njk" import regionCard %}
+
+          {% for region in regions %}
+            {{ regionCard(region) }}
+          {% endfor %}
+
+        </div>
+
+      {% else %}
+
+        <p>No regions available yet.</p>
+
+      {% endif %}
+
+    </div>
+
+  </section>
 
 {% endblock %}

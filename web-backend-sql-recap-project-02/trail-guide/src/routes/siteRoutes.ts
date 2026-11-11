@@ -4,6 +4,7 @@ import {
   getHomePage,
   getTrailDetail,
   getTrails,
+  getRegions,
   regionDetail,
 } from '../controllers/siteController.js';
 
@@ -17,6 +18,7 @@ router.get('/trails', getTrails);
 router.get('/trail/:slug', getTrailDetail);
 
 // REGIONS
-router.get('/regions/:id', regionDetail);
+router.get('/regions', getRegions);
+router.get('/region/:slug', regionDetail);
 
 export default router;

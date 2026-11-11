@@ -2,17 +2,13 @@
 {% extends "templates/layouts/base.njk" %}
 
 {% block main_content %}
-
-<section class="trail-detail">
-
-  <!-- HEADER -->
-  <header class="trail-detail__header">
-
-    <a href="/home" class="trail-detail__back">
+    <a href="/home" class="back-link">
       ← Back to trails
     </a>
-
-    <p class="trail-detail__region">
+<section class="trail-detail">
+  <!-- HEADER -->
+  <header class="trail-detail__header">
+    <p class="trail-detail__region eyebrow">
       {{ trail.region_name }}, {{ trail.country }}
     </p>
 
@@ -81,6 +77,68 @@
         </time>
 
     </footer>
+
+  </div>
+</section>
+
+<section class="regions-section">
+
+  <div class="container">
+    <header class="section-heading">
+      <h1>{{ region.name }}</h1>
+      <p>{{ region.country }}</p>
+    </header>
+
+    {% if trails.length %}
+
+      <div class="trail-list">
+
+        <div class="trail-list__header">
+          <span>View</span>
+          <span>Trail</span>
+          <span>Elevation</span>
+          <span>Distance</span>
+          <span>Difficulty</span>
+          <span></span>
+        </div>
+
+        {% for trail in trails %}
+
+          <a href="/trail/{{ trail.slug }}" class="trail-list__item">
+
+            <span class="trail-list__image">
+              <img src="{{ trail.image }}" alt="{{ trail.name }}">
+            </span>
+
+            <span class="trail-list__name">
+              {{ trail.name }}
+            </span>
+
+            <span class="trail-list__elevation">
+              {{ trail.elevation_m }} m
+            </span>
+
+            <span class="trail-list__distance">
+              {{ trail.distance_km }} km
+            </span>
+
+            <span class="trail-list__difficulty trail-list__difficulty--{{ trail.difficulty }}">
+              {{ trail.difficulty | capitalize }}
+            </span>
+
+            <span class="trail-list__arrow">↗</span>
+
+          </a>
+
+        {% endfor %}
+
+      </div>
+
+    {% else %}
+
+      <p class="empty-state">No trails available yet.</p>
+
+    {% endif %}
 
   </div>
 

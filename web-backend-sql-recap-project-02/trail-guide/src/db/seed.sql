@@ -4,9 +4,25 @@
 -- ========================================
 
 
-INSERT INTO regions (name, country) VALUES
-  ('Bavarian Alps', 'Germany'),
-  ('Scottish Highlands', 'United Kingdom');
+INSERT INTO regions (name, country, slug, description) VALUES
+  (
+    'Bavarian Alps',
+    'Germany',
+    'bavarian-alps',
+    'Explore the dramatic alpine landscape of Bavaria.'
+  ),
+  (
+    'Scottish Highlands',
+    'United Kingdom',
+    'scottish-highlands',
+    'Discover rugged mountains and beautiful landscapes.'
+  ),
+  (
+    'Berlin Hills',
+    'Germany',
+    'berlin-hills',
+    'Explore the hills and green landscapes around Berlin.'
+  );
 
 
 -- ========================================
