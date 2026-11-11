@@ -1,5 +1,10 @@
-import db from '../db/database.js';
+
+import { getDB } from '../db/database.js';
 import type { Trail, TrailInput } from './types.js';
+
+// ========================================
+// REUSABLE SQL QUERY
+// ========================================
 
 const SELECT_WITH_REGION = `
   SELECT
@@ -18,24 +23,48 @@ const SELECT_WITH_REGION = `
   INNER JOIN regions r ON r.id = t.region_id
 `;
 
+// ========================================
+// READ: GET ALL TRAILS
+// ========================================
+
 export function getAllWithRegion(): Trail[] {
-  return db
-    .prepare<[], Trail>(`${SELECT_WITH_REGION} ORDER BY r.name, t.name`)
+  return getDB()
+    .prepare<[], Trail>(
+      `${SELECT_WITH_REGION} ORDER BY r.name, t.name`
+    )
     .all();
 }
 
+// ========================================
+// READ: GET TRAIL BY ID
+// ========================================
+
 export function getById(id: number): Trail | undefined {
-  return db.prepare<[number], Trail>(`${SELECT_WITH_REGION} WHERE t.id = ?`).get(id);
+  return getDB()
+    .prepare<[number], Trail>(
+      `${SELECT_WITH_REGION} WHERE t.id = ?`
+    )
+    .get(id);
 }
 
+// ========================================
+// READ: GET TRAILS BY REGION
+// ========================================
+
 export function getByRegion(regionId: number): Trail[] {
-  return db
-    .prepare<[number], Trail>(`${SELECT_WITH_REGION} WHERE r.id = ? ORDER BY t.name`)
+  return getDB()
+    .prepare<[number], Trail>(
+      `${SELECT_WITH_REGION} WHERE r.id = ? ORDER BY t.name`
+    )
     .all(regionId);
 }
 
+// ========================================
+// CREATE: INSERT NEW TRAIL
+// ========================================
+
 export function create(input: TrailInput): Trail | undefined {
-  const result = db
+  const result = getDB()
     .prepare(
       `INSERT INTO trails (
         region_id,
@@ -61,31 +90,46 @@ export function create(input: TrailInput): Trail | undefined {
   return getById(Number(result.lastInsertRowid));
 }
 
-export function update(id: number, input: TrailInput): Trail | undefined {
-  db.prepare(
-    `UPDATE trails
-     SET region_id = ?,
-         name = ?,
-         description = ?,
-         distance_km = ?,
-         elevation_m = ?,
-         difficulty = ?,
-         image = ?
-     WHERE id = ?`
-  ).run(
-    input.region_id,
-    input.name,
-    input.description,
-    input.distance_km,
-    input.elevation_m,
-    input.difficulty,
-    input.image,
-    id
-  );
+// ========================================
+// UPDATE: MODIFY EXISTING TRAIL
+// ========================================
+
+export function update(
+  id: number,
+  input: TrailInput
+): Trail | undefined {
+  getDB()
+    .prepare(
+      `UPDATE trails
+       SET region_id = ?,
+           name = ?,
+           description = ?,
+           distance_km = ?,
+           elevation_m = ?,
+           difficulty = ?,
+           image = ?
+       WHERE id = ?`
+    )
+    .run(
+      input.region_id,
+      input.name,
+      input.description,
+      input.distance_km,
+      input.elevation_m,
+      input.difficulty,
+      input.image,
+      id
+    );
 
   return getById(id);
 }
 
+// ========================================
+// DELETE: REMOVE TRAIL
+// ========================================
+
 export function remove(id: number): number {
-  return db.prepare('DELETE FROM trails WHERE id = ?').run(id).changes;
+  return getDB()
+    .prepare('DELETE FROM trails WHERE id = ?')
+    .run(id).changes;
 }

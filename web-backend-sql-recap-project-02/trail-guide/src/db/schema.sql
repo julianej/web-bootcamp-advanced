@@ -1,4 +1,6 @@
 PRAGMA foreign_keys = ON;
+-- // FOREIGN KEY (region_id) REFERENCES regions(id)
+-- // This establishes a relationship between trails.region_id and regions.id.
 
 DROP TABLE IF EXISTS trails;
 DROP TABLE IF EXISTS regions;
