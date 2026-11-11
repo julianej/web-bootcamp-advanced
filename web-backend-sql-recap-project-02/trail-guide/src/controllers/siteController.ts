@@ -49,6 +49,7 @@ export function getTrailDetail(
   }
 
   // GET ALL REGIONS
+  const regionId = Number(req.params.id);
   const regions = regionModel.getAllRegions();
 
   // RENDER TRAIL DETAIL
@@ -56,7 +57,7 @@ export function getTrailDetail(
     title: trail.name,
     trail,
     regions,
-    formattedDate: formatDate(trail.createdAt),
+    formattedDate: formatDate(trail.created_at),
   });
 }
 

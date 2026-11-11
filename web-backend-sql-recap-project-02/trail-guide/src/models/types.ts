@@ -21,7 +21,7 @@ export interface Trail {
   elevation_m: number;
   difficulty: Difficulty;
   image: string | null;
-  created_at: string;
+  created_at: number;
 }
 
 // TRAIL + REGION (INNER JOIN) COUNTRY
