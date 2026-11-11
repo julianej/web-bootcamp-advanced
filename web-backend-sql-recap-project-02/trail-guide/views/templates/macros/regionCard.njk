@@ -1,0 +1,13 @@
+{% macro regionCard(region) %}
+
+  <article class="region-card">
+
+    <a href="/region/{{ region.slug }}">
+      <h2>{{ region.name }}</h2>
+      <p>{{ region.country }}</p>
+      <span>Explore region →</span>
+    </a>
+
+  </article>
+
+{% endmacro %}

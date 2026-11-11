@@ -1,85 +1,105 @@
 
 import { getDB } from '../db/database.js';
-import type { Trail, TrailInput } from './types.js';
+import type { TrailInput, TrailWithRegion } from './types.js';
 
 // ========================================
 // REUSABLE SQL QUERY
 // ========================================
 
-const SELECT_WITH_REGION = `
+const SELECT_TRAILS_WITH_REGION = `
   SELECT
-    t.id,
-    t.name,
-    t.description,
-    t.distance_km,
-    t.elevation_m,
-    t.difficulty,
-    t.image,
-    t.created_at,
-    r.id AS region_id,
-    r.name AS region_name,
-    r.country AS country
-  FROM trails t
-  INNER JOIN regions r ON r.id = t.region_id
+    trails.*,
+    regions.name AS region_name,
+    regions.country AS region_country
+  FROM trails
+  INNER JOIN regions
+    ON trails.region_id = regions.id
 `;
 
 // ========================================
 // READ: GET ALL TRAILS
 // ========================================
 
-export function getAllWithRegion(): Trail[] {
+export function getAllTrails(): TrailWithRegion[] {
   return getDB()
-    .prepare<[], Trail>(
-      `${SELECT_WITH_REGION} ORDER BY r.name, t.name`
-    )
-    .all();
+    .prepare(`
+      ${SELECT_TRAILS_WITH_REGION}
+      ORDER BY trails.created_at DESC
+    `)
+    .all() as TrailWithRegion[];
 }
 
 // ========================================
 // READ: GET TRAIL BY ID
 // ========================================
 
-export function getById(id: number): Trail | undefined {
+export function getById(id: number): TrailWithRegion | undefined {
   return getDB()
-    .prepare<[number], Trail>(
-      `${SELECT_WITH_REGION} WHERE t.id = ?`
-    )
-    .get(id);
+    .prepare(`
+      ${SELECT_TRAILS_WITH_REGION}
+      WHERE trails.id = ?
+    `)
+    .get(id) as TrailWithRegion | undefined;
+}
+
+// ========================================
+// READ: GET TRAIL BY SLUG
+// ========================================
+
+export function getTrailBySlug(
+  slug: string
+): TrailWithRegion | undefined {
+  return getDB()
+    .prepare(`
+      ${SELECT_TRAILS_WITH_REGION}
+      WHERE trails.slug = ?
+    `)
+    .get(slug) as TrailWithRegion | undefined;
 }
 
 // ========================================
 // READ: GET TRAILS BY REGION
 // ========================================
 
-export function getByRegion(regionId: number): Trail[] {
+export function getByRegion(regionId: number): TrailWithRegion[] {
   return getDB()
-    .prepare<[number], Trail>(
-      `${SELECT_WITH_REGION} WHERE r.id = ? ORDER BY t.name`
-    )
-    .all(regionId);
+    .prepare(`
+      ${SELECT_TRAILS_WITH_REGION}
+      WHERE regions.id = ?
+      ORDER BY trails.name
+    `)
+    .all(regionId) as TrailWithRegion[];
 }
 
 // ========================================
 // CREATE: INSERT NEW TRAIL
 // ========================================
 
-export function create(input: TrailInput): Trail | undefined {
+export function create(input: TrailInput): TrailWithRegion | undefined {
+  const slug = input.name
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+
   const result = getDB()
-    .prepare(
-      `INSERT INTO trails (
+    .prepare(`
+      INSERT INTO trails (
         region_id,
         name,
+        slug,
         description,
         distance_km,
         elevation_m,
         difficulty,
         image
       )
-      VALUES (?, ?, ?, ?, ?, ?, ?)`
-    )
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    `)
     .run(
       input.region_id,
       input.name,
+      slug,
       input.description,
       input.distance_km,
       input.elevation_m,
@@ -97,19 +117,19 @@ export function create(input: TrailInput): Trail | undefined {
 export function update(
   id: number,
   input: TrailInput
-): Trail | undefined {
+): TrailWithRegion | undefined {
   getDB()
-    .prepare(
-      `UPDATE trails
-       SET region_id = ?,
-           name = ?,
-           description = ?,
-           distance_km = ?,
-           elevation_m = ?,
-           difficulty = ?,
-           image = ?
-       WHERE id = ?`
-    )
+    .prepare(`
+      UPDATE trails
+      SET region_id = ?,
+          name = ?,
+          description = ?,
+          distance_km = ?,
+          elevation_m = ?,
+          difficulty = ?,
+          image = ?
+      WHERE id = ?
+    `)
     .run(
       input.region_id,
       input.name,

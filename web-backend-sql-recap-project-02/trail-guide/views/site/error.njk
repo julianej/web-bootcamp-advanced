@@ -1,0 +1,13 @@
+{% extends "templates/layouts/base.njk" %}
+
+{% block title %}Error | Trail Guide{% endblock %}
+
+{% block main_content %}
+<section class="error-section">
+  <div class="container">
+    <h1>Something went wrong.</h1>
+    <p>{{ message }}</p>
+    <a href="/">Back to homepage</a>
+  </div>
+</section>
+{% endblock %}

@@ -1,3 +1,4 @@
+
 // src/app.ts
 // Configure Express, Nunjucks and static files
 
@@ -12,6 +13,10 @@ import { fileURLToPath } from 'node:url';
 import express from 'express';
 import nunjucks from 'nunjucks';
 
+// Middleware
+import { sanitizeBody } from './middleware/sanitizeBody.js';
+import { errorHandler } from './middleware/errorHandler.js';
+
 // Routers
 import siteRoutes from './routes/siteRoutes.js';
 
@@ -25,9 +30,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // ========================================
-// TEMPLATES // Nunjucks configuration
+// TEMPLATES: Nunjucks configuration
 // ========================================
-// root directoy src/app.ts. and trail-guide/views 
+
 nunjucks.configure(path.join(__dirname, '../views'), {
   autoescape: true,
   express: app,
@@ -43,12 +48,21 @@ app.set('view engine', 'njk');
 // Parse HTML form bodies
 app.use(express.urlencoded({ extended: false }));
 
-// Parse JSON bodies (API)
+// Parse JSON bodies
 app.use(express.json());
+
+// Custom middleware
+app.use(sanitizeBody);
 
 // Serve static files
 app.use(express.static(path.join(__dirname, '../public')));
-app.use('/css', express.static(path.join(__dirname, '..', 'node_modules', '@picocss', 'pico', 'css')));
+
+app.use(
+  '/css',
+  express.static(
+    path.join(__dirname, '..', 'node_modules', '@picocss', 'pico', 'css')
+  )
+);
 
 // ========================================
 // ROUTES
@@ -67,6 +81,12 @@ app.use('/', siteRoutes);
 app.use((_req, res) => {
   res.status(404).render('errors/404');
 });
+
+// ========================================
+// GLOBAL ERROR HANDLER
+// ========================================
+
+app.use(errorHandler);
 
 // ========================================
 // EXPORT
