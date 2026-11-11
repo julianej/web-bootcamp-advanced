@@ -49,7 +49,6 @@ export function getTrailDetail(
   }
 
   // GET ALL REGIONS
-  const regionId = Number(req.params.id);
   const regions = regionModel.getAllRegions();
 
   // RENDER TRAIL DETAIL
