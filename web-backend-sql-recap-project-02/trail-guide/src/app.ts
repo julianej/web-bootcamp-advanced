@@ -1,8 +1,7 @@
-
 // src/app.ts
 // Configure Express, Nunjucks and static files
 
-// Load environment variables
+// Load environment variables first
 import 'dotenv/config';
 
 // Node.js modules
@@ -12,6 +11,9 @@ import { fileURLToPath } from 'node:url';
 // Dependencies
 import express from 'express';
 import nunjucks from 'nunjucks';
+
+// Routers
+import siteRoutes from './routes/siteRoutes.js';
 
 const app = express();
 
@@ -25,11 +27,11 @@ const __dirname = path.dirname(__filename);
 // ========================================
 // TEMPLATES // Nunjucks configuration
 // ========================================
-
+// root directoy src/app.ts. and trail-guide/views 
 nunjucks.configure(path.join(__dirname, '../views'), {
   autoescape: true,
   express: app,
-  watch: process.env.NODE_ENV !== 'production',
+  watch: true,
 });
 
 app.set('view engine', 'njk');
@@ -46,18 +48,15 @@ app.use(express.json());
 
 // Serve static files
 app.use(express.static(path.join(__dirname, '../public')));
+app.use('/css', express.static(path.join(__dirname, '..', 'node_modules', '@picocss', 'pico', 'css')));
 
 // ========================================
 // ROUTES
 // ========================================
 
-// Temporary test route
-app.get('/', (_req, res) => {
-  res.send('ok');
-});
+app.use('/', siteRoutes);
 
-// Routers will be mounted here later:
-// app.use('/', siteRoutes);
+// Mounted later:
 // app.use('/admin', adminRoutes);
 // app.use('/api', apiRoutes);
 
@@ -66,7 +65,7 @@ app.get('/', (_req, res) => {
 // ========================================
 
 app.use((_req, res) => {
-  res.status(404).send('Not found');
+  res.status(404).render('errors/404');
 });
 
 // ========================================

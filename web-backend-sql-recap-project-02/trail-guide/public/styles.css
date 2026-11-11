@@ -1,0 +1,394 @@
+
+/* =========================================
+   TRAIL GUIDE
+   Global styles
+========================================= */
+
+/* 1. VARIABLES */
+
+:root {
+  --color-bg: #20231f;
+  --color-surface: #2b302a;
+  --color-text: #f2efe5;
+  --color-muted: #a6aa9e;
+  --color-accent: #d5a65b;
+  --color-border: #41463e;
+
+  --font-body: Arial, Helvetica, sans-serif;
+
+  --container-width: 85%;
+
+  --spacing-section: 100px;
+  --spacing-page: 48px;
+}
+
+/* 2. RESET */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+
+img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+/* 3. GLOBAL LAYOUT */
+
+.container {
+  width: min(100% - 48px, var(--container-width));
+  margin-inline: auto;
+}
+
+main {
+  width: 100%;
+  padding-inline: var(--spacing-page);
+}
+
+section {
+  padding-block: var(--spacing-section);
+}
+
+/* 4. TYPOGRAPHY */
+
+h1,
+h2,
+h3 {
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+
+h1 {
+  font-size: clamp(3rem, 8vw, 7rem);
+}
+
+h2 {
+  font-size: clamp(2rem, 5vw, 4rem);
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+p {
+  color: var(--color-muted);
+}
+
+.eyebrow {
+  margin-bottom: 20px;
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* 5. NAVIGATION */
+
+.site-header {
+  padding: 24px var(--spacing-page);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* max-width: var(--container-width); */
+  margin-inline: auto;
+  width: 95%
+}
+
+.navigation__logo {
+  font-size: 5.4rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+}
+
+.navigation__logo span {
+  color: var(--color-accent);
+}
+
+.navigation__links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.navigation__links a {
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+
+.navigation__links a:hover {
+  color: var(--color-accent);
+}
+
+/* 6. HERO */
+
+.hero {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  min-height: 700px;
+  padding: 100px 0;
+  background: var(--color-surface);
+}
+
+.hero__img {
+    position: relative;
+    left: 0%;
+    width: 100%;
+    z-index: 9;
+    /* opacity: 0.5; */
+    top: -5rem;
+    opacity: 1;
+    z-index: 99;
+    animation: heroFade 2s ease 3s forwards;
+}
+
+@keyframes heroFade {
+  to {
+    opacity: 0.1;
+    z-index: 0;
+  }
+}
+
+/* HERO */
+
+.hero__content {
+  width: 100%;
+  margin-inline: auto;
+  position: absolute;
+  top: 20rem;
+  text-align: center;
+}
+
+.hero__title {
+  max-width: 850px;
+  margin-bottom: 24px;
+  opacity: 0;
+  z-index: 99;
+  animation: titleFade 2s ease 3s forwards;
+}
+
+@keyframes titleFade {
+  to {
+    opacity: 1;
+  }
+}
+
+.hero__description {
+  max-width: 540px;
+  margin: 0 auto;
+  margin-bottom: 32px;
+  font-size: 1.1rem;
+}
+
+/* 7. BUTTONS */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 26px;
+  background: var(--color-accent);
+  color: var(--color-bg);
+  font-size: 0.85rem;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.button:hover {
+  background: transparent;
+  color: var(--color-accent);
+  outline: 1px solid var(--color-accent);
+}
+
+.button--outline {
+  background: transparent;
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+}
+
+/* 8. SECTION HEADINGS */
+
+.section-heading {
+  margin-bottom: 48px;  
+  text-align: center;
+}
+
+
+.section-heading .eyebrow {
+  margin-bottom: 16px;
+}
+
+/* 9. TRAILS */
+
+.trails-section {
+  background: var(--color-bg);
+}
+
+.trails-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.trail-card {
+  overflow: hidden;
+  background: var(--color-surface);
+}
+
+.trail-card img {
+  aspect-ratio: 4 / 3;
+  transition: transform 0.4s ease;
+}
+
+.trail-card:hover img {
+  transform: scale(1.04);
+}
+
+.trail-card__content {
+  padding: 24px;
+}
+
+.trail-card h3 {
+  margin-bottom: 12px;
+}
+
+/* 10. ABOUT */
+
+.about {
+  background: var(--color-surface);
+}
+
+.about h2 {
+  max-width: 650px;
+  margin-bottom: 24px;
+}
+
+.about p {
+  max-width: 600px;
+  margin-bottom: 32px;
+}
+
+/* 11. FOOTER */
+
+.site-footer {
+  padding: 48px var(--spacing-page);
+  border-top: 1px solid var(--color-border);
+}
+
+.footer {
+  text-align: center;
+  max-width: 95%;
+  margin-inline: auto;
+  padding: 5rem;
+  background: var(--color-surface);
+}
+
+.footer__image {
+  position: relative;
+  z-index: 9;
+  opacity: 0.1;
+  width: 100%;
+  height: 600px;
+}
+
+.footer__logo {
+  display: inline-block;
+  margin-bottom: 12px;
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+.footer__logo span {
+  color: var(--color-accent);
+}
+
+.footer h2 { 
+    font-size: 10rem;
+}
+
+.footer p {
+  margin-bottom: 24px;
+}
+
+.footer small {
+  color: var(--color-muted);
+}
+
+/* 12. RESPONSIVE */
+
+@media (max-width: 900px) {
+  :root {
+    --spacing-page: 32px;
+    --spacing-section: 72px;
+  }
+
+  .trails-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero {
+    min-height: 520px;
+  }
+}
+
+@media (max-width: 600px) {
+  :root {
+    --spacing-page: 20px;
+    --spacing-section: 56px;
+  }
+
+  /* RESPONSIVE */
+  .hero__content {
+    padding: 64px 20px;
+  }
+
+  .navigation {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .navigation__links {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .trails-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    min-height: 450px;
+    padding-block: 64px;
+  }
+}

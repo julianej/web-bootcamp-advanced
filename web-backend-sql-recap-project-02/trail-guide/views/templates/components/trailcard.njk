@@ -1,0 +1,21 @@
+
+<article class="trail-card">
+  <a href="/trails/{{ trail.slug }}">
+    <div class="trail-card__image">
+      <img src="{{ trail.image }}" alt="{{ trail.title }}">
+      <span class="trail-card__difficulty">
+        {{ trail.difficulty }}
+      </span>
+    </div>
+
+    <div class="trail-card__content">
+      <p class="eyebrow">{{ trail.location }}</p>
+      <h3>{{ trail.title }}</h3>
+
+      <div class="trail-card__meta">
+        <span>{{ trail.distance }} km</span>
+        <span>{{ trail.duration }}</span>
+      </div>
+    </div>
+  </a>
+</article>

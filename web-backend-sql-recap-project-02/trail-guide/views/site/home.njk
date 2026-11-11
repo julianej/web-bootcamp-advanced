@@ -1,0 +1,42 @@
+
+{% extends "templates/layouts/base.njk" %}
+
+{% block title %}Trail Guide — Discover Your Next Trail{% endblock %}
+
+{% block main_content %}
+
+  {% include "templates/components/hero.njk" %}
+
+  <!-- TRAILS -->
+  <section class="trails-section" id="trails">
+
+    <div class="container">
+
+      <div class="section-heading">
+        <p class="eyebrow">02 — DISCOVER</p>
+        <h2>FIND YOUR TRAIL.</h2>
+      </div>
+
+      <p>Homepage trail count: {{ trails.length }}</p>
+
+      {% if trails and trails.length > 0 %}
+
+        <div class="trails-grid">
+
+          {% for trail in trails %}
+            {% include "templates/components/trailcard.njk" %}
+          {% endfor %}
+
+        </div>
+
+      {% else %}
+
+        <p>No trails available yet.</p>
+
+      {% endif %}
+
+    </div>
+
+  </section>
+
+{% endblock %}

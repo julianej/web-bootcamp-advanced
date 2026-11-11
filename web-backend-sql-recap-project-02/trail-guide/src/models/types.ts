@@ -13,23 +13,24 @@ export type RegionInput = Omit<Region, 'id'>;
 // A trail row as returned by the INNER JOIN (includes region data)
 export interface Trail {
   id: number;
+  region_id: number;
   name: string;
-  description: string | null;
+  description: string;
   distance_km: number;
   elevation_m: number;
-  difficulty: Difficulty;
+  difficulty: string;
+  image: string | null;
   created_at: string;
-  region_id: number;
   region_name: string;
   country: string;
 }
 
-// What create/update need: no id, no created_at, no joined region fields
 export interface TrailInput {
   region_id: number;
   name: string;
-  description: string | null;
+  description: string;
   distance_km: number;
   elevation_m: number;
-  difficulty: Difficulty;
+  difficulty: string;
+  image: string | null;
 }
