@@ -1,14 +1,11 @@
 // server.js only calls listen. 
 // It’s optional, but it keeps the app easy to test.
-import app from './app.js';
-
-// COMMON.JS SYNTAX
-// const app = require('./app');
-
-// src/server.ts
 
 import 'dotenv/config';
+
+import app from './app.js';
 import { connectDB, closeDB } from './db/database.js';
+import { initDB } from './db/init.js';
 
 const PORT = Number(process.env.PORT) || 3000;
 
@@ -18,10 +15,13 @@ const PORT = Number(process.env.PORT) || 3000;
 
 async function startServer() {
   try {
-    // 1. Connect to SQLite before accepting requests
+    // 1. Connect to SQLite
     await connectDB();
 
-    // 2. Start Express
+    // 2. Initialize schema, migrations and seed data
+    initDB();
+
+    // 3. Start Express
     const server = app.listen(PORT, () => {
       console.log(`Trail Guide running at http://localhost:${PORT}`);
     });
@@ -30,7 +30,12 @@ async function startServer() {
     // GRACEFUL SHUTDOWN
     // ========================================
 
+    let isShuttingDown = false;
+
     const shutdown = () => {
+      if (isShuttingDown) return;
+      isShuttingDown = true;
+
       console.log('\nShutting down server...');
 
       server.close(() => {
