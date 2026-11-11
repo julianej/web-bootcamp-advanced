@@ -10,14 +10,14 @@ router.get('/', adminController.getAdminPage);
 
 // CREATE TRAIL
 router.get('/trails/new', adminController.getNewTrailPage);
-router.post('/trails', adminController.createTrail);
+router.post('/trails', adminController.addTrail);
 
 // UPDATE TRAIL
 router.get('/', adminController.getAdminPage);
 
 // CREATE
 router.get('/trails/new', adminController.getNewTrailPage);
-router.post('/trails', adminController.createTrail);
+router.post('/trails', adminController.addTrail);
 
 // EDIT / UPDATE
 router.get('/trails/:id/edit', adminController.getEditTrailPage);

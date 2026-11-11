@@ -14,6 +14,7 @@
 
     <header class="section-heading">
       <h1>{{ title }}</h1>
+      <h2>- {{ trail.name}} -</h2>
     </header>
 
     <form
@@ -22,102 +23,101 @@
       class="admin-form"
     >
 
-      <!-- NAME -->
-      <div class="form-group">
-        <label for="name">Trail name</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value="{{ trail.name if trail else '' }}"
-          required
-        >
-      </div>
+ 
+<!-- ROW 1: NAME + REGION -->
+<div class="form-row">
+  <div class="form-group">
+    <label for="name">Trail name</label>
+    <input
+      type="text"
+      id="name"
+      name="name"
+      value="{{ trail.name if trail else '' }}"
+      placeholder="Eibsee Loop"
+      required
+    >
+  </div>
 
-      <!-- REGION -->
-      <div class="form-group">
-        <label for="region_id">Region</label>
+  <div class="form-group">
+    <label for="region_id">Region</label>
+    <select id="region_id" name="region_id" required>
+      <option value="">Select region</option>
+      {% for region in regions %}
+        <option value="{{ region.id }}"
+          {% if trail and trail.region_id == region.id %}selected{% endif %}>
+          {{ region.name }}, {{ region.country }}
+        </option>
+      {% endfor %}
+    </select>
+  </div>
 
-        <select id="region_id" name="region_id" required>
-          <option value="">Select a region</option>
 
-          {% for region in regions %}
-            <option
-              value="{{ region.id }}"
-              {% if trail and trail.region_id == region.id %}selected{% endif %}
-            >
-              {{ region.name }}, {{ region.country }}
-            </option>
-          {% endfor %}
-        </select>
-      </div>
+<!-- ROW 2: DISTANCE + DIFFICULTY + ELEVATION -->
+<div class="form-row">
+  <div class="form-group">
+    <label for="distance_km">Distance (km)</label>
+    <input
+      type="number"
+      id="distance_km"
+      name="distance_km"
+      step="0.1"
+      min="0"
+      value="{{ trail.distance_km if trail else '' }}"
+      required
+    >
+  </div>
 
-      <!-- DESCRIPTION -->
-      <div class="form-group">
-        <label for="description">Description</label>
-        <textarea
-          id="description"
-          name="description"
-          required
-        >{{ trail.description if trail else '' }}</textarea>
-      </div>
+  <div class="form-group">
+    <label for="difficulty">Difficulty</label>
+    <select id="difficulty" name="difficulty" required>
+      <option value="">Select difficulty</option>
+      {% for difficulty in difficulties %}
+        <option value="{{ difficulty }}"
+          {% if trail and trail.difficulty == difficulty %}selected{% endif %}>
+          {{ difficulty }}
+        </option>
+      {% endfor %}
+    </select>
+  </div>
 
-      <!-- DISTANCE -->
-      <div class="form-group">
-        <label for="distance_km">Distance (km)</label>
-        <input
-          type="number"
-          id="distance_km"
-          name="distance_km"
-          step="0.1"
-          min="0"
-          value="{{ trail.distance_km if trail else '' }}"
-          required
-        >
-      </div>
+  <div class="form-group">
+    <label for="elevation_m">Elevation (m)</label>
+    <input
+      type="number"
+      id="elevation_m"
+      name="elevation_m"
+      min="0"
+      value="{{ trail.elevation_m if trail else '' }}"
+      required
+    >
+  </div>
+</div>
+</div>
+<!-- ROW 3: DESCRIPTION -->
+<div class="form-group">
+  <label for="description">Description</label>
+  <textarea
+    id="description"
+    name="description"
+    rows="7"
+    required
+  >{{ trail.description if trail else '' }}</textarea>
+</div>
 
-      <!-- ELEVATION -->
-      <div class="form-group">
-        <label for="elevation_m">Elevation (m)</label>
-        <input
-          type="number"
-          id="elevation_m"
-          name="elevation_m"
-          min="0"
-          value="{{ trail.elevation_m if trail else '' }}"
-          required
-        >
-      </div>
+<!-- ROW 4: IMAGE -->
+<div class="form-group">
+  <label for="image">Image URL</label>
+  <input
+    type="url"
+    id="image"
+    name="image"
+    value="{{ trail.image if trail else '' }}"
+    placeholder="https://example.com/image.jpg"
+    required
+  >
+</div>
 
-      <!-- DIFFICULTY -->
-      <div class="form-group">
-        <label for="difficulty">Difficulty</label>
 
-        <select id="difficulty" name="difficulty" required>
-          <option value="">Select difficulty</option>
-
-          {% for difficulty in difficulties %}
-            <option
-              value="{{ difficulty }}"
-              {% if trail and trail.difficulty == difficulty %}selected{% endif %}
-            >
-              {{ difficulty }}
-            </option>
-          {% endfor %}
-        </select>
-      </div>
-
-      <!-- IMAGE -->
-      <div class="form-group">
-        <label for="image">Image URL</label>
-        <input
-          type="text"
-          id="image"
-          name="image"
-          value="{{ trail.image if trail else '' }}"
-          required
-        >
-      </div>
 
       <button type="submit" class="button">
         {% if trail %}Update Trail{% else %}Create Trail{% endif %}

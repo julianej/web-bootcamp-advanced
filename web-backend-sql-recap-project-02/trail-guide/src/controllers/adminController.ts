@@ -4,6 +4,9 @@ import type { Request, Response } from 'express';
 import * as trailModel from '../models/trailModel.js';
 import * as regionModel from '../models/regionModel.js';
 
+import { sanitizeDescription } from '../utils/sanitizeHtml.js';
+import { validateImageUrl } from '../utils/validateImgUrl.js';
+ 
 // ========================================
 // FORM OPTIONS
 // ========================================
@@ -53,11 +56,17 @@ export function getNewTrailPage(
 // POST /admin/trails
 // ========================================
 
-export function createTrail(
+export function addTrail(
   req: Request,
   res: Response
 ): void {
-  const trail = trailModel.create(req.body);
+  const trailData = {
+    ...req.body,
+    description: sanitizeDescription(req.body.description ?? ''),
+    image: validateImageUrl(req.body.image ?? ''),
+  };
+
+  const trail = trailModel.create(trailData);
 
   if (!trail) {
     res.status(500).send('Could not create trail.');
@@ -78,27 +87,23 @@ export function getEditTrailPage(
 ): void {
   const id = Number(req.params.id);
 
-  if (!Number.isInteger(id) || id <= 0) {
-    res.status(400).send('Invalid trail ID.');
-    return;
-  }
-
   const trail = trailModel.getTrailById(id);
-
-  if (!trail) {
-    res.status(404).send('Trail not found.');
-    return;
-  }
-
   const regions = regionModel.getAllRegions();
 
-  res.render('admin/form.html', {
+  if (!trail) {
+    res.status(404).render('errors/404');
+    return;
+  }
+
+  res.render('admin/form', {
     title: 'Edit Trail',
-    regions,
-    difficulties,
     trail,
+    regions,
+    difficulties: ['easy', 'moderate', 'hard'],
+    isEdit: true,
   });
 }
+
 
 // ========================================
 // UPDATE TRAIL
