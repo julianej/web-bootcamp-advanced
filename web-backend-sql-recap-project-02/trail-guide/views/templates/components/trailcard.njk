@@ -3,19 +3,21 @@
   <a href="/trails/{{ trail.slug }}">
     <div class="trail-card__image">
       <img src="{{ trail.image }}" alt="{{ trail.title }}">
-      <span class="trail-card__difficulty">
-        {{ trail.difficulty }}
-      </span>
     </div>
 
     <div class="trail-card__content">
       <p class="eyebrow">{{ trail.location }}</p>
       <h3>{{ trail.title }}</h3>
 
+       <p class="trail-card__description">
+        {{ trail.description }}
+       </p>
+
       <div class="trail-card__meta">
-        <span>{{ trail.distance }} km</span>
-        <span>{{ trail.duration }}</span>
-      </div>
+       <span>{{ trail.distance_km }} km</span>
+       <span>{{ trail.elevation_m }} m elevation</span>
+        <span class="trail-card__difficulty trail-card__difficulty--{{ trail.difficulty }}">{{ trail.difficulty }}</span>
+       <span class="trail-card__action">Explore trail →</span>
     </div>
   </a>
 </article>

@@ -1,71 +1,45 @@
-
 import type { Request, Response } from 'express';
-
-import * as regionModel from '../models/regionModel.js';
 import * as trailModel from '../models/trailModel.js';
 
 // ========================================
-// HELPERS
-// ========================================
-
-// Convert and validate URL parameters
-function parseId(value: string | string[] | undefined): number | null {
-  if (typeof value !== 'string') {
-    return null;
-  }
-
-  const id = Number(value);
-
-  return Number.isInteger(id) && id > 0 ? id : null;
-}
-
-// Render 404 page
-function notFound(res: Response): void {
-  res.status(404).render('errors/404');
-}
-
-// ========================================
-// HOME
+// GET HOME PAGE
 // GET /
 // ========================================
 
-export function home(_req: Request, res: Response): void {
-  const trails = trailModel.getAllWithRegion();
-
-  console.log('Homepage trails:', trails);
+export function getHomePage(
+  _req: Request,
+  res: Response
+): void {
+  const trails = trailModel.getAllTrails();
 
   res.render('site/home.njk', {
     title: 'Trail Guide',
-    trails,
+    trails
   });
 }
 
 // ========================================
-// TRAIL LIST
-// GET /trails
+// GET TRAIL DETAIL
+// GET /trails/:slug
 // ========================================
 
-export function trailList(_req: Request, res: Response): void {
-  const trails = trailModel.getAllWithRegion();
-  console.log(trails);
-  res.render('site/trails', { trails });
-}
+export function getTrailDetail(
+  req: Request<{ slug: string }>,
+  res: Response
+): void {
+  const { slug } = req.params;
 
-// ========================================
-// TRAIL DETAIL
-// GET /trails/:id
-// ========================================
-
-export function trailDetail(req: Request, res: Response): void {
-  const id = parseId(req.params.id);
-  const trail = id === null ? undefined : trailModel.getById(id);
+  const trail = trailModel.getTrailBySlug(slug);
 
   if (!trail) {
-    notFound(res);
+    res.status(404).render('errors/404.njk');
     return;
   }
 
-  res.render('site/trail', { trail });
+  res.render('site/trail.njk', {
+    title: trail.name,
+    trail
+  });
 }
 
 // ========================================
@@ -89,3 +63,4 @@ export function regionDetail(req: Request, res: Response): void {
     trails,
   });
 }
+

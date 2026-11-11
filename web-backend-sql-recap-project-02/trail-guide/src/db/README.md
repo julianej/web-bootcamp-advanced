@@ -53,3 +53,9 @@ sqlite> SELECT id, name, image
 3|Ben Nevis Mountain Track|/img/trail-03.png
 sqlite> 
 ```
+
+## or, if you update SEED.SQL rerun
+```ts
+rm src/db/trailguide.db
+npm run dev
+```
