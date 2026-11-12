@@ -43,3 +43,14 @@ export interface TrailWithRegion extends Trail {
 }
 
 export type TrailInput = Omit<Trail, 'id' | 'slug' | 'created_at'>;
+
+// TRAILINPUT becomes
+// export interface TrailInput {
+//   region_id: number;
+//   name: string;
+//   description: string;
+//   distance_km: number;
+//   elevation_m: number;
+//   difficulty: Difficulty;
+//   image: string | null;
+// }

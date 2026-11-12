@@ -32,19 +32,6 @@ export function getAllTrails(): TrailWithRegion[] {
 }
 
 // ========================================
-// READ: GET TRAIL BY ID
-// ========================================
-
-export function getTrailById(id: number): TrailWithRegion | undefined {
-  return getDB()
-    .prepare(`
-      ${SELECT_TRAILS_WITH_REGION}
-      WHERE trails.id = ?
-    `)
-    .get(id) as TrailWithRegion | undefined;
-}
-
-// ========================================
 // READ: GET TRAIL BY SLUG
 // ========================================
 
@@ -59,6 +46,18 @@ export function getTrailBySlug(
     .get(slug) as TrailWithRegion | undefined;
 }
 
+// ========================================
+// READ: GET TRAIL BY ID
+// ========================================
+
+export function getTrailById(id: number): TrailWithRegion | undefined {
+  return getDB()
+    .prepare(`
+      ${SELECT_TRAILS_WITH_REGION}
+      WHERE trails.id = ?
+    `)
+    .get(id) as TrailWithRegion | undefined;
+}
 
 // ========================================
 // READ: GET TRAILS BY REGION

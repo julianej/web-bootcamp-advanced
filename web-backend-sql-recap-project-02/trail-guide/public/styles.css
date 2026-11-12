@@ -173,7 +173,7 @@ p {
   text-align: center;
   align-items: center;
   min-height: 700px;
-  padding: 100px 0;
+  padding: 0;
   background: var(--color-surface);
 }
 
@@ -183,7 +183,7 @@ p {
     width: 100%;
     z-index: 9;
     /* opacity: 0.5; */
-    top: -5rem;
+    top: 0rem;
     opacity: 1;
     z-index: 99;
     animation: heroFade 2s ease 3s forwards;
@@ -271,8 +271,7 @@ p {
 
 .about {
   position: relative;
-  padding-top: 0rem;
-  padding-bottom: clamp(4rem, 8vw, 7rem);
+  padding: clamp(4rem, 8vw, 7rem);
   background: #242522;
   color: #F0EDE3;
   overflow: hidden;
@@ -649,6 +648,16 @@ p {
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+}
+
+.related-trails__empty {
+  text-align: center;
+}
+
+.related-trails__empty img {
+  width: 100%;
+  text-align: center;
+  height: 200px;
 }
 
 .related-trails .trail-card {

@@ -24,3 +24,14 @@ export function getRegionBySlug(
     `)
     .get(slug) as Region | undefined;
 }
+
+// GET REGION BY ID
+export function getRegionById(id: number): Region | undefined {
+  const db = getDB();
+
+  return db.prepare(`
+    SELECT *
+    FROM regions
+    WHERE id = ?
+  `).get(id) as Region | undefined;
+}
