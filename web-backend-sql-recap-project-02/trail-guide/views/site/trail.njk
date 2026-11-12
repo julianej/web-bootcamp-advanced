@@ -2,8 +2,8 @@
 {% extends "templates/layouts/base.njk" %}
 
 {% block main_content %}
-    <a href="/home" class="back-link">
-      ← Back to trails
+    <a href="/trails" class="back-link">
+      ← Back to Trails
     </a>
 <section class="trail-detail">
   <!-- HEADER -->
@@ -81,52 +81,48 @@
   </div>
 </section>
 
-<section class="regions-section">
+<!-- RELATED TRAILS -->
+<section class="related-trails">
 
   <div class="container">
+
     <header class="section-heading">
-      <h1>{{ region.name }}</h1>
-      <p>{{ region.country }}</p>
+      <p class="eyebrow">EXPLORE THE REGION</p>
+      <h2>More trails in {{ trail.region_name }}</h2>
     </header>
 
-    {% if trails.length %}
+    {% if relatedTrails.length %}
 
-      <div class="trail-list">
+      <div class="trail-grid">
 
-        <div class="trail-list__header">
-          <span>View</span>
-          <span>Trail</span>
-          <span>Elevation</span>
-          <span>Distance</span>
-          <span>Difficulty</span>
-          <span></span>
-        </div>
+        {% for trail in relatedTrails %}
 
-        {% for trail in trails %}
+          <a href="/trail/{{ trail.slug }}" class="trail-card">
 
-          <a href="/trail/{{ trail.slug }}" class="trail-list__item">
+            <div class="trail-card__image">
+              {% if trail.image %}
+                <img src="{{ trail.image }}" alt="{{ trail.name }}">
+              {% else %}
+                <div class="trail-card__image-placeholder">
+                  No image available
+                </div>
+              {% endif %}
+            </div>
 
-            <span class="trail-list__image">
-              <img src="{{ trail.image }}" alt="{{ trail.name }}">
-            </span>
+            <div class="trail-card__content">
 
-            <span class="trail-list__name">
-              {{ trail.name }}
-            </span>
+              <span class="trail-card__difficulty trail-card__difficulty--{{ trail.difficulty }}">
+                {{ trail.difficulty | capitalize }}
+              </span>
 
-            <span class="trail-list__elevation">
-              {{ trail.elevation_m }} m
-            </span>
+              <h3>{{ trail.name }}</h3>
 
-            <span class="trail-list__distance">
-              {{ trail.distance_km }} km
-            </span>
+              <div class="trail-card__meta">
+                <span>{{ trail.distance_km }} km</span>
+                <span>{{ trail.elevation_m }} m elevation</span>
+              </div>
 
-            <span class="trail-list__difficulty trail-list__difficulty--{{ trail.difficulty }}">
-              {{ trail.difficulty | capitalize }}
-            </span>
-
-            <span class="trail-list__arrow">↗</span>
+            </div>
 
           </a>
 
@@ -136,12 +132,19 @@
 
     {% else %}
 
-      <p class="empty-state">No trails available yet.</p>
+      <div class="related-trails__empty">
+        <img
+            src="/img/no-trail-{{ trail.region_country | lower | replace(' ', '-') }}.png"
+            alt="No trail image available"
+          />
+        <p>No other trails in this region yet.</p>
+      </div>
 
     {% endif %}
 
   </div>
 
 </section>
+
 
 {% endblock %}

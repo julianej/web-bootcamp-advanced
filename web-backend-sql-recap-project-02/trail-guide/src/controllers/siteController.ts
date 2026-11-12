@@ -6,25 +6,68 @@ import * as regionModel from '../models/regionModel.js';
 
 import { formatDate } from '../utils/formatDate.js';
 
+
 // ========================================
 // GET HOME PAGE
 // GET /
 // ========================================
-
 export function getHomePage(
   _req: Request,
   res: Response
 ): void {
 
-  const trails = trailModel.getAllTrails();
+  const trails = trailModel.getAllTrails().slice(0, 3);
   const regions = regionModel.getAllRegions();
 
   res.render('site/home.njk', {
     title: 'Trail Guide',
     trails,
     regions,
+    showFilters: true
   });
 }
+
+// ========================================
+// GET ALL TRAILS / SEARCH
+// GET /trails
+// ========================================
+
+export function getTrailsPage(req: Request, res: Response): void {
+  // type guards before passing query parameters to your model
+    const q = typeof req.query.q === 'string'
+    ? req.query.q
+    : '';
+
+  const region = typeof req.query.region === 'string'
+    ? req.query.region
+    : '';
+
+  const difficulty = typeof req.query.difficulty === 'string'
+    ? req.query.difficulty
+    : '';
+  // const q = String(req.query.q ?? '');
+  // const region = String(req.query.region ?? '');
+  // const difficulty = String(req.query.difficulty ?? '');
+
+  const trails = trailModel.searchTrails({
+    q,
+    region,
+    difficulty,
+  });
+
+  const regions = regionModel.getAllRegions();
+
+  res.render('site/trails.njk', {
+    title: 'Explore Trails',
+    trails,
+    regions,
+    q,
+    region,
+    difficulty,
+    currentPage: 'trails',
+  });
+}
+
 
 // ========================================
 // GET TRAIL DETAIL
@@ -35,6 +78,7 @@ export function getTrailDetail(
   req: Request<{ slug: string }>,
   res: Response
 ): void {
+
   const { slug } = req.params;
 
   // GET TRAIL BY SLUG
@@ -51,11 +95,17 @@ export function getTrailDetail(
   // GET ALL REGIONS
   const regions = regionModel.getAllRegions();
 
+  const relatedTrails = trailModel
+    .getByRegion(trail.region_id)
+    .filter((item) => item.id !== trail.id);
+
   // RENDER TRAIL DETAIL
   res.render('site/trail.njk', {
     title: trail.name,
     trail,
+    relatedTrails,
     regions,
+    showFilters: true,
     formattedDate: formatDate(trail.created_at),
   });
 }
@@ -66,16 +116,41 @@ export function getTrailDetail(
 // ========================================
 
 export function getTrails(
-  _req: Request,
+  req: Request,
   res: Response
 ): void {
-  const trails = trailModel.getAllTrails();
+  const q = typeof req.query.q === 'string'
+    ? req.query.q
+    : '';
+
+  const region = typeof req.query.region === 'string'
+    ? req.query.region
+    : '';
+
+  const difficulty = typeof req.query.difficulty === 'string'
+    ? req.query.difficulty
+    : '';
+
+  const trails = trailModel.searchTrails({
+    q,
+    region,
+    difficulty,
+  });
+
+  const regions = regionModel.getAllRegions();
 
   res.render('site/trails.njk', {
     title: 'Explore Trails',
     trails,
+    regions,
+    q,
+    region,
+    difficulty,
+    currentPage: 'trails',
+    showFilters: true,
   });
 }
+
 
 // ========================================
 // GET ALL REGIONS
@@ -115,6 +190,7 @@ export function regionDetail(
     title: region.name,
     region,
     trails,
+    showFilters: true
   });
 }
 

@@ -116,7 +116,7 @@ p {
 }
 
 /* 5. NAVIGATION */
-
+/* 
 .site-header {
   padding: 24px var(--spacing-page);
   border-bottom: 1px solid var(--color-border);
@@ -127,8 +127,14 @@ p {
   align-items: center;
   justify-content: space-between;
   /* max-width: var(--container-width); */
-  margin-inline: auto;
+  /* margin-inline: auto;
+  z-index: 10;
   width: 95%
+}
+
+.navigation__search {
+  flex: 0 0 100%;
+  width: 100%;
 }
 
 .navigation__logo {
@@ -155,16 +161,378 @@ p {
 .navigation__links a:hover {
   color: var(--color-accent);
 }
+  */
 
 .back-link {
   position: absolute;
-  top: 14%;
+  top: 16%;
   left: 3%;
+} 
+
+
+/* SEARCH */
+
+/* ========================================
+   NAVIGATION
+======================================== */
+
+.navigation {
+  position: relative;
+  z-index: 10;
+  width: 100%;
 }
 
-.trail-detail {
-    background: var(--color-surface);
+.navigation__main {
+  min-height: 88px;
+  padding: 0 3%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
 }
+
+/* LOGO */
+
+.navigation__logo {
+  font-size: 7.2rem;
+  font-weight: 600;
+  letter-spacing: -0.06em;
+  text-decoration: none;
+  color: var(--color-text);
+  white-space: nowrap;
+}
+
+.navigation__logo span {
+  color: var(--color-accent);
+}
+
+/* LINKS */
+
+.navigation__links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.navigation__links a {
+  color: #a2a18d;
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: color 0.25s ease;
+}
+
+.navigation__links a:hover {
+  color: #99936f;
+}
+
+.navigation__links .navigation__cta {
+  color: #99936f;
+  font-weight: 600;
+}
+
+/* ========================================
+   ACCORDION TOGGLE
+======================================== */
+
+.navigation__toggle {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  border: 1px solid var(--color-accent);
+  border-radius: 3px;
+  background: transparent;
+  color: var(--color-accent);
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.navigation__toggle:hover {
+  background: #eeede7;
+  border-color: #aaa99d;
+}
+
+.navigation__toggle-label {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* PLUS ICON */
+
+.navigation__toggle-icon {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+
+.navigation__toggle-icon::before,
+.navigation__toggle-icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 1px;
+  background: currentColor;
+  transform: translate(-50%, -50%);
+  transition: transform 0.35s ease;
+}
+
+.navigation__toggle-icon::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+/* ACTIVE STATE */
+
+.navigation.is-filters-open .navigation__toggle {
+  background: #171717;
+  border-color: #171717;
+  color: #fff;
+}
+
+.navigation.is-filters-open .navigation__toggle-icon::after {
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+/* ========================================
+   ACCORDION PANEL
+======================================== */
+
+.navigation__filters {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.navigation__filters-inner {
+  min-height: 0;
+  overflow: hidden;
+  padding: 0 5%;
+  opacity: 0;
+  transition:
+    opacity 0.3s ease,
+    padding 0.45s ease;
+}
+
+.navigation.is-filters-open .navigation__filters {
+  grid-template-rows: 1fr;
+}
+
+.navigation.is-filters-open .navigation__filters-inner {
+  padding-top: 28px;
+  padding-bottom: 32px;
+  opacity: 1;
+}
+
+
+/* ========================================
+   TRAIL FILTERS
+======================================== */
+
+.trail-filters {
+  display: grid;
+  grid-template-columns: minmax(220px, 1.8fr) 1fr 1fr auto;
+  align-items: end;
+  gap: 20px;
+  width: 100%;
+}
+
+.trail-filters select {
+  color: #24241f;
+  background: #fff;
+}
+
+/* Selected actual value */
+.trail-filters select:valid {
+  color: var(--color-text);
+}
+
+/* ========================================
+   FIELDS
+======================================== */
+
+.trail-filters__search,
+.trail-filters__field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.trail-filters label {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #77776d;
+}
+
+/* INPUTS */
+
+.trail-filters input,
+.trail-filters select {
+  width: 100%;
+  height: 52px;
+  padding: 0 16px;
+  border: 1px solid #d9d8d0;
+  border-radius: 2px;
+  outline: none;
+  background: transparent;
+  color: #24241f;
+  font-family: inherit;
+  font-size: 0.85rem;
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.trail-filters select,
+.trail-filters input::placeholder {
+  color: #a4a39a;
+}
+
+.trail-filters input:focus,
+.trail-filters select:focus {
+  border-color: #777765;
+  background: transparent;
+  box-shadow: 0 0 0 3px rgb(119 119 101 / 10%);
+}
+
+/* SEARCH INPUT */
+
+.trail-filters input[type="search"] {
+  appearance: none;
+  -webkit-appearance: none;
+    color: #a4a39a;
+}
+
+.trail-filters input[type="search"]::-webkit-search-cancel-button {
+  cursor: pointer;
+}
+
+/* SELECT */
+
+.trail-filters select {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  padding-right: 38px;
+
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none' stroke='%2377776d' stroke-width='1.4'%3E%3Cpath d='m2 4 4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+}
+
+/* ========================================
+   ACTIONS
+======================================== */
+
+.trail-filters__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+/* SUBMIT */
+
+.trail-filters__submit {
+  height: 52px;
+  padding: 0 24px;
+  border: 1px solid #20201c;
+  border-radius: 2px;
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.trail-filters__submit:hover {
+  background: transparent;
+  color: var(--color-bg);
+  background-color: var(--color-accent);
+  border: 1px solid #20201c;
+}
+
+.trail-filters__submit:active {
+  transform: translateY(1px);
+}
+
+/* RESET */
+
+.trail-filters__reset {
+  color: #77776d;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.65rem;
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.trail-filters__reset:hover {
+  color: #20201c;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 900px) {
+  .trail-filters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 16px;
+  }
+
+  .trail-filters__actions {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 520px) {
+  .trail-filters {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .trail-filters__actions {
+    grid-column: auto;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .trail-filters__submit {
+    width: 100%;
+  }
+
+  .trail-filters__reset {
+    text-align: center;
+  }
+}
+
+
+
 
 /* 6. HERO */
 
@@ -173,7 +541,7 @@ p {
   text-align: center;
   align-items: center;
   min-height: 700px;
-  padding: 100px 0;
+  padding: 0;
   background: var(--color-surface);
 }
 
@@ -183,7 +551,7 @@ p {
     width: 100%;
     z-index: 9;
     /* opacity: 0.5; */
-    top: -5rem;
+    top: 0rem;
     opacity: 1;
     z-index: 99;
     animation: heroFade 2s ease 3s forwards;
@@ -200,7 +568,7 @@ p {
   width: 100%;
   margin-inline: auto;
   position: absolute;
-  top: 20rem;
+  top: 40%;
   text-align: center;
 }
 
@@ -271,8 +639,7 @@ p {
 
 .about {
   position: relative;
-  padding-top: 0rem;
-  padding-bottom: clamp(4rem, 8vw, 7rem);
+  padding: clamp(4rem, 8vw, 7rem);
   background: #242522;
   color: #F0EDE3;
   overflow: hidden;
@@ -417,10 +784,33 @@ p {
   letter-spacing: 0.1em;
 }
 
-.trails-grid {
+/* .trails-grid {
+  padding-top: 2rem;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 24px;
+} */
+
+.trails-page h1 {
+  color: var(--color-muted);
+}
+
+/* TRAIL GRID */
+.trails-grid {
+  padding-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+/* Only one card */
+.trails-grid:has(> .trail-card:only-child) {
+  grid-template-columns: minmax(280px, 420px);
+}
+
+/* Optional: keep the single card aligned left */
+.trails-grid:has(> .trail-card:only-child) {
+  justify-content: center;
 }
 
 .trail-card {
@@ -458,10 +848,14 @@ p {
 /* ========================================
    TRAIL DETAIL CONTENT
 ======================================== */
+.trail-detail__header {
+    background-color: var(--color-surface);
+    padding-top: 2rem;
+}
 
 .trail-detail__content {
     width: 100%;
-    /* max-width: 1100px; */
+    background-color: var(--color-surface);
     margin: 0 auto;
     padding: 64px 32px 100px;
     box-sizing: border-box;
@@ -618,6 +1012,230 @@ p {
 .trail-detail__footer time {
   font-size: 12px;
   letter-spacing: 0;
+}
+
+
+/* ========================================
+   RELATED TRAILS
+======================================== */
+
+.related-trails {
+  text-align: center;
+  padding: 100px 0;
+}
+
+.related-trails .container {
+  width: min(1200px, calc(100% - 48px));
+  margin-inline: auto;
+}
+
+
+/* SECTION HEADING */
+
+.related-trails .section-heading {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.related-trails .eyebrow {
+  margin-bottom: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.related-trails__empty {
+  text-align: center;
+}
+
+.related-trails__empty img {
+  width: 100%;
+  text-align: center;
+  height: 200px;
+}
+
+.related-trails .trail-card {
+  flex-direction: row;
+  width: 100%;
+  height: 161px;
+}
+
+
+
+.related-trails .trail-grid {
+  display: flex;
+  /* grid-template-columns: repeat(3, minmax(0, 1fr)); */
+  gap: 24px;
+}
+
+
+/* TRAIL CARD */
+
+.trail-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  /* background: #fff; */
+  color: inherit;
+  text-decoration: none;
+  /* border: 1px solid #e7e7e3; */
+  transition:
+    transform 250ms ease,
+    box-shadow 250ms ease;
+}
+
+.trail-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.07);
+}
+
+
+/* IMAGE */
+
+.trail-card__image {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #e5e5df;
+}
+
+.trail-card__image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 500ms ease;
+}
+
+.trail-card:hover .trail-card__image img {
+  transform: scale(1.04);
+}
+
+.trail-card__image-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: #777;
+  font-size: 13px;
+}
+
+
+/* CONTENT */
+
+.trail-card__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+  padding: 24px;
+}
+
+.trail-card__content h3 {
+  margin: 14px 0 20px;
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  /* color: #171717; */
+}
+
+
+/* DIFFICULTY */
+
+.trail-card__difficulty {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 9px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 2px;
+}
+
+/* META */
+
+.trail-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin-top: auto;
+  padding-top: 16px;
+  width: 100%;
+  border-top: 1px solid #ededeb;
+  color: #777;
+  font-size: 12px;
+}
+
+
+/* EMPTY STATE */
+
+.related-trails .container > p {
+  padding: 32px;
+  border: 1px solid #e7e7e3;
+  color: #777;
+  font-size: 14px;
+}
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 900px) {
+  .trail-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .related-trails {
+    padding: 72px 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .related-trails {
+    padding: 56px 0;
+  }
+
+  .related-trails .container {
+    width: calc(100% - 32px);
+  }
+
+  .trail-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .trail-card {
+    display: grid;
+    grid-template-columns: 120px minmax(0, 1fr);
+  }
+
+  .trail-card__image {
+    height: 100%;
+    min-height: 160px;
+    aspect-ratio: auto;
+  }
+
+  .trail-card__content {
+    padding: 16px;
+  }
+
+  .trail-card__content h3 {
+    font-size: 17px;
+    margin: 10px 0 14px;
+  }
+
+  .trail-card__meta {
+    flex-direction: column;
+    gap: 5px;
+    font-size: 11px;
+  }
 }
 
 
@@ -936,3 +1554,374 @@ p {
     padding: 24px;
   }
 }
+
+
+/* ========================================
+   ADMIN DASHBOARD
+======================================== */
+
+.admin-section {
+  padding: 100px 0 140px;
+  min-height: 80vh;
+}
+
+.admin-section .section-heading {
+  margin-bottom: 48px;
+}
+
+.admin-section .section-heading h1 {
+  margin: 12px 0;
+}
+
+.admin-section .section-heading > p:last-child {
+  color: #777;
+  font-size: 14px;
+}
+
+/* ADMIN ACTIONS */
+
+
+
+/* TABLE WRAPPER */
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #e5e5df;
+  background: #fff;
+}
+
+/* TABLE */
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 14px;
+}
+
+.admin-table thead {
+  background: #f5f5f0;
+}
+
+.admin-table th {
+  padding: 17px 20px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #777;
+  white-space: nowrap;
+  border-bottom: 1px solid #e5e5df;
+}
+
+.admin-table td {
+  padding: 19px 20px;
+  border-bottom: 1px solid #eeeeea;
+  color: #333;
+  white-space: nowrap;
+}
+
+.admin-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.admin-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.admin-table tbody tr:hover {
+  background: #fafaf7;
+}
+
+.admin-table td strong {
+  font-weight: 600;
+  color: #202c24;
+}
+
+/* TABLE ACTIONS */
+
+.table-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.table-actions form {
+  margin: 0;
+}
+
+.button--small {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 13px;
+  border: 1px solid #deded7;
+  background: transparent;
+  color: #333;
+  font-size: 12px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.button--small:hover {
+  background: #202c24;
+  border-color: #202c24;
+  color: #fff;
+}
+
+.button--danger {
+  color: #a34b40;
+  border-color: #ead6d2;
+}
+
+.button--danger:hover {
+  background: #a34b40;
+  border-color: #a34b40;
+  color: #fff;
+}
+
+/* EMPTY STATE */
+
+.admin-section .table-wrapper + p,
+.admin-section .container > p {
+  padding: 32px;
+  background: #f5f5f0;
+  color: #777;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+  .admin-section {
+    padding: 70px 0 100px;
+  }
+
+  .admin-section .section-heading {
+    margin-bottom: 32px;
+  }
+
+  .admin-actions {
+    justify-content: flex-start;
+  }
+
+  .table-wrapper {
+    margin-right: -20px;
+    width: calc(100% + 40px);
+  }
+
+  .admin-table th,
+  .admin-table td {
+    padding: 14px 16px;
+  }
+}
+
+/* ========================================
+   ADMIN FORM
+======================================== */
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 3rem auto 6rem;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  background: #2b302a;
+  border-radius: 16px;
+}
+
+/* ========================================
+   LABELS
+======================================== */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+.form-group label {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #666;
+}
+
+/* ========================================
+   INPUTS
+======================================== */
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.9rem 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: transparent;
+  color: #e5e7eb;;
+  font-family: inherit;
+  font-size: 0.95rem;
+  outline: none;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.form-group input,
+.form-group select {
+  min-height: 52px;
+}
+
+.form-group input:hover,
+.form-group select:hover,
+.form-group textarea:hover {
+  background: transparent;
+  border-color: #c5c9d0;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  background: #fff;
+  border-color: #222;
+  box-shadow: 0 0 0 3px rgb(0 0 0 / 6%);
+}
+
+/* ========================================
+   SELECT
+======================================== */
+
+.form-group select {
+  appearance: none;
+  cursor: pointer;
+  padding-right: 2.8rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+}
+
+/* ========================================
+   TEXTAREA
+======================================== */
+
+.form-group textarea {
+  min-height: 180px;
+  line-height: 1.7;
+  resize: vertical;
+}
+
+/* ========================================
+   PLACEHOLDERS
+======================================== */
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #a1a1aa;
+  opacity: 1;
+}
+
+/* ========================================
+   FORM ACTIONS
+======================================== */
+
+.admin-form__actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #eee;
+}
+
+/* ========================================
+   FORM ROWS
+======================================== */
+
+.form-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  width: 100%;
+}
+
+/* Row 1: Name + Region */
+.form-row--main .form-group:first-child {
+  flex: 1.3;
+}
+
+.form-row--main .form-group:last-child {
+  flex: 1;
+}
+
+/* Row 2: Distance + Difficulty + Elevation */
+.form-row--details .form-group {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Prevent inputs from overflowing their columns */
+.form-row .form-group {
+  min-width: 0;
+}
+
+.form-row .form-group input,
+.form-row .form-group select {
+  width: 100%;
+}
+
+/* Mobile: stack fields */
+@media (max-width: 640px) {
+  .form-row {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .form-row .form-group {
+    width: 100%;
+    flex: none;
+  }
+}
+
+/* ========================================
+   ERROR MESSAGE
+======================================== */
+
+.form-error {
+  padding: 1rem;
+  color: #b42318;
+  background: #fef3f2;
+  border: 1px solid #fecdca;
+  border-radius: 8px;
+}
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 640px) {
+  .admin-form {
+    padding: 1.25rem;
+    margin-top: 2rem;
+  }
+
+  .admin-form__actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .admin-form__actions .button {
+    width: 100%;
+    text-align: center;
+  }
+}
+

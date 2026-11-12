@@ -1,5 +1,14 @@
 
-# Trail Guide – Project Structure
+# Trail Guide – Project
+
+<img width="3530" height="1862" alt="Bildschirmfoto 2026-11-12 um 21 19 33" src="https://github.com/user-attachments/assets/06b66cdb-4896-4ec8-a037-11bf884312ca" />
+
+<img width="3528" height="1772" alt="Bildschirmfoto 2026-11-12 um 21 21 16" src="https://github.com/user-attachments/assets/5a5db3c7-abf6-4e72-9eb0-e88ead27a620" />
+
+<img width="3518" height="1842" alt="Bildschirmfoto 2026-11-12 um 21 22 09" src="https://github.com/user-attachments/assets/e751a1be-b404-4c6d-84ca-a6cff3b10840" />
+
+<img width="3446" height="1852" alt="Bildschirmfoto 2026-11-12 um 21 23 07" src="https://github.com/user-attachments/assets/493fd4c6-c0df-4c03-b8b6-030ed075cab5" />
+
 
 This document describes the planned folder structure for the Trail Guide recap project.
 
@@ -64,7 +73,17 @@ trail-guide/
 ├── public/                 # Static files (only if needed)
 │
 └── dist/                   # Compiled JavaScript (npm run build, not committed to Git)
-```
+``
+
+## Main Features
+
+1. **Public Website:** Browse trails, view individual trail details and explore regions.
+2. **Admin Area:** Create, read, update and delete trails and regions through HTML forms.
+3. **Public API:** Provide JSON endpoints for external applications.
+4. **Database:** Use SQLite with a one-to-many relationship between regions and trails.
+5. **Security:** Protect API write endpoints with an API key and sanitize user-submitted HTML.
+6. **Styling:** Use pico.css via CDN and semantic HTML without custom utility classes.
+`
 
 ## Scripts
 
@@ -117,14 +136,6 @@ HTTP Request
      └── JSON response (API)
 ```
 
-## Main Features
-
-1. **Public Website:** Browse trails, view individual trail details and explore regions.
-2. **Admin Area:** Create, read, update and delete trails and regions through HTML forms.
-3. **Public API:** Provide JSON endpoints for external applications.
-4. **Database:** Use SQLite with a one-to-many relationship between regions and trails.
-5. **Security:** Protect API write endpoints with an API key and sanitize user-submitted HTML.
-6. **Styling:** Use pico.css via CDN and semantic HTML without custom utility classes.
 
 ## Database Relationship
 

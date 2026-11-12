@@ -1,0 +1,90 @@
+
+{% extends "templates/layouts/base.njk" %}
+
+{% block title %}Admin Dashboard | Trail Guide{% endblock %}
+
+{% block main_content %}
+
+<section class="admin-section">
+  <div class="container">
+
+    <header class="section-heading">
+      <p class="eyebrow">Administration</p>
+      <h1>Manage Trails</h1>
+      <p>{{ trails.length }} trails in your database</p>
+    <div class="admin-actions">
+      <a href="/admin/trails/new" class="button">
+       ADD NEW TRAIL <span>↗</span>
+        </a>
+    </div>
+    </header>
+
+
+    {% if trails.length %}
+
+      <div class="table-wrapper">
+        <table class="admin-table">
+
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Difficulty</th>
+              <th>Distance</th>
+              <th>Elevation</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for trail in trails %}
+              <tr>
+                <td>
+                  <strong>{{ trail.name }}</strong>
+                </td>
+
+                <td>{{ trail.difficulty }}</td>
+
+                <td>{{ trail.distance_km }} km</td>
+
+                <td>{{ trail.elevation_m }} m</td>
+
+                <td class="table-actions">
+
+                  <a
+                    href="/admin/trails/{{ trail.id }}/edit"
+                    class="button button--small"
+                  >
+                    Edit
+                  </a>
+
+                 <form
+                    action="/admin/trails/{{ trail.slug }}/delete"
+                    method="POST"
+                    onsubmit="return confirm('Delete this trail?')"
+                    >
+                    <button
+                        type="submit"
+                        class="button button--small button--danger"
+                    >
+                        Delete
+                    </button>
+                    </form>
+
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+
+        </table>
+      </div>
+
+    {% else %}
+
+      <p>No trails found.</p>
+
+    {% endif %}
+
+  </div>
+</section>
+
+{% endblock %}

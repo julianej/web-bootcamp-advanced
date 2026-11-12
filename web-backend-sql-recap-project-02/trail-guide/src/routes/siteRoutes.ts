@@ -2,8 +2,8 @@ import { Router } from 'express';
 
 import {
   getHomePage,
-  getTrailDetail,
   getTrails,
+  getTrailDetail,
   getRegions,
   regionDetail,
 } from '../controllers/siteController.js';
@@ -15,6 +15,7 @@ router.get(['/', '/home'], getHomePage);
 
 // TRAILS
 router.get('/trails', getTrails);
+
 router.get('/trail/:slug', getTrailDetail);
 
 // REGIONS

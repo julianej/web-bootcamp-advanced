@@ -1,16 +1,46 @@
 
-<nav class="navigation">
-  <a href="/" class="navigation__logo">TRAILGUIDE<span>.</span></a>
+{% from "../macros/searchFilter.njk" import searchFilter %}
 
-  <div class="navigation__links">
-    <a href="#trails">Explore Trails</a>
-     <a href="#regions">Explore Regions</a>
-    <a href="#about">About</a>
-    <a href="#contact" class="navigation__cta">Get in touch ↗</a>
+{% set pathPrefix = '' if currentPage == 'home' else '/' %}
+
+<nav class="navigation">
+
+  <div class="navigation__main">
+
+    <a href="/" class="navigation__logo">
+      TRAILGUIDE<span>.</span>
+    </a>
+
+    <div class="navigation__links">
+      <a href="{{ pathPrefix }}#trails">Explore Trails</a>
+      <a href="{{ pathPrefix }}#regions">Explore Regions</a>
+      <a href="{{ pathPrefix }}#about">About</a>
+      <a href="{{ pathPrefix }}#contact" class="navigation__cta">
+        Get in touch ↗
+      </a>
+    </div>
+
+    {% if showFilters %}
+      <button
+        class="navigation__toggle"
+        type="button"
+        aria-label="Toggle trail filters"
+        aria-expanded="false"
+        aria-controls="navigation-filters"
+      >
+        <span>Search Trail</span>
+      </button>
+
+    {% endif %}
+
   </div>
 
-  <button class="navigation__toggle" aria-label="Toggle navigation">
-    <span></span>
-    <span></span>
-  </button>
+  {% if showFilters %}
+    <div class="navigation__filters" id="navigation-filters">
+      <div class="navigation__filters-inner">
+        {{ searchFilter(q, regions, region, difficulty) }}
+      </div>
+    </div>
+  {% endif %}
+
 </nav>
