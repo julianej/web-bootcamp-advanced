@@ -35,6 +35,7 @@ export function getTrailDetail(
   req: Request<{ slug: string }>,
   res: Response
 ): void {
+  
   const { slug } = req.params;
 
   // GET TRAIL BY SLUG
@@ -49,13 +50,18 @@ export function getTrailDetail(
   }
 
   // GET ALL REGIONS
-  const regions = regionModel.getAllRegions();
+  // const regions = regionModel.getAllRegions();
+
+  const relatedTrails = trailModel
+    .getByRegion(trail.region_id)
+    .filter((item) => item.id !== trail.id);
 
   // RENDER TRAIL DETAIL
   res.render('site/trail.njk', {
     title: trail.name,
     trail,
-    regions,
+    relatedTrails,
+    // regions,
     formattedDate: formatDate(trail.created_at),
   });
 }
@@ -71,11 +77,15 @@ export function getTrails(
 ): void {
   const trails = trailModel.getAllTrails();
 
+  console.log('Trails loaded:', trails.length);
+  console.log(trails);
+
   res.render('site/trails.njk', {
     title: 'Explore Trails',
     trails,
   });
 }
+
 
 // ========================================
 // GET ALL REGIONS
