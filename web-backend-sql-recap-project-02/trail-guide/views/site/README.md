@@ -1,6 +1,7 @@
-## TRAIL
 
-![Uploading Bildschirmfoto 2026-11-12 um 21.40.02.png…]()
+## TRAIL
+<img width="3532" height="1878" alt="Bildschirmfoto 2026-11-12 um 21 40 02" src="https://github.com/user-attachments/assets/3fdbd3ee-bc91-4dd4-9516-cb6f07141575" />
+<img width="3530" height="1776" alt="Bildschirmfoto 2026-11-12 um 21 41 50" src="https://github.com/user-attachments/assets/0e733ccb-0b96-4a0e-9de6-0278f3b57a04" />
 
 ## REGIONS
 <img width="3534" height="1880" alt="Bildschirmfoto 2026-11-12 um 21 36 02" src="https://github.com/user-attachments/assets/e2acdb99-4f04-4089-95ed-278785eef8f4" />
