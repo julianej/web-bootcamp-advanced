@@ -2,8 +2,8 @@ import { Router } from 'express';
 
 import {
   getHomePage,
+  getTrailsPage,
   getTrailDetail,
-  getTrails,
   getRegions,
   regionDetail,
 } from '../controllers/siteController.js';
@@ -14,7 +14,8 @@ const router = Router();
 router.get(['/', '/home'], getHomePage);
 
 // TRAILS
-router.get('/trails', getTrails);
+router.get('/trails', getTrailsPage);
+
 router.get('/trail/:slug', getTrailDetail);
 
 // REGIONS

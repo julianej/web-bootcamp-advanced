@@ -116,7 +116,7 @@ p {
 }
 
 /* 5. NAVIGATION */
-
+/* 
 .site-header {
   padding: 24px var(--spacing-page);
   border-bottom: 1px solid var(--color-border);
@@ -127,8 +127,14 @@ p {
   align-items: center;
   justify-content: space-between;
   /* max-width: var(--container-width); */
-  margin-inline: auto;
+  /* margin-inline: auto;
+  z-index: 10;
   width: 95%
+}
+
+.navigation__search {
+  flex: 0 0 100%;
+  width: 100%;
 }
 
 .navigation__logo {
@@ -155,16 +161,378 @@ p {
 .navigation__links a:hover {
   color: var(--color-accent);
 }
+  */
 
 .back-link {
   position: absolute;
-  top: 14%;
+  top: 16%;
   left: 3%;
+} 
+
+
+/* SEARCH */
+
+/* ========================================
+   NAVIGATION
+======================================== */
+
+.navigation {
+  position: relative;
+  z-index: 10;
+  width: 100%;
 }
 
-.trail-detail {
-    background: var(--color-surface);
+.navigation__main {
+  min-height: 88px;
+  padding: 0 3%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
 }
+
+/* LOGO */
+
+.navigation__logo {
+  font-size: 7.2rem;
+  font-weight: 600;
+  letter-spacing: -0.06em;
+  text-decoration: none;
+  color: var(--color-text);
+  white-space: nowrap;
+}
+
+.navigation__logo span {
+  color: var(--color-accent);
+}
+
+/* LINKS */
+
+.navigation__links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.navigation__links a {
+  color: #a2a18d;
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: color 0.25s ease;
+}
+
+.navigation__links a:hover {
+  color: #99936f;
+}
+
+.navigation__links .navigation__cta {
+  color: #99936f;
+  font-weight: 600;
+}
+
+/* ========================================
+   ACCORDION TOGGLE
+======================================== */
+
+.navigation__toggle {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  border: 1px solid var(--color-accent);
+  border-radius: 3px;
+  background: transparent;
+  color: var(--color-accent);
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.navigation__toggle:hover {
+  background: #eeede7;
+  border-color: #aaa99d;
+}
+
+.navigation__toggle-label {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* PLUS ICON */
+
+.navigation__toggle-icon {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+
+.navigation__toggle-icon::before,
+.navigation__toggle-icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 1px;
+  background: currentColor;
+  transform: translate(-50%, -50%);
+  transition: transform 0.35s ease;
+}
+
+.navigation__toggle-icon::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+/* ACTIVE STATE */
+
+.navigation.is-filters-open .navigation__toggle {
+  background: #171717;
+  border-color: #171717;
+  color: #fff;
+}
+
+.navigation.is-filters-open .navigation__toggle-icon::after {
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+/* ========================================
+   ACCORDION PANEL
+======================================== */
+
+.navigation__filters {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.navigation__filters-inner {
+  min-height: 0;
+  overflow: hidden;
+  padding: 0 5%;
+  opacity: 0;
+  transition:
+    opacity 0.3s ease,
+    padding 0.45s ease;
+}
+
+.navigation.is-filters-open .navigation__filters {
+  grid-template-rows: 1fr;
+}
+
+.navigation.is-filters-open .navigation__filters-inner {
+  padding-top: 28px;
+  padding-bottom: 32px;
+  opacity: 1;
+}
+
+
+/* ========================================
+   TRAIL FILTERS
+======================================== */
+
+.trail-filters {
+  display: grid;
+  grid-template-columns: minmax(220px, 1.8fr) 1fr 1fr auto;
+  align-items: end;
+  gap: 20px;
+  width: 100%;
+}
+
+.trail-filters select {
+  color: #24241f;
+  background: #fff;
+}
+
+/* Selected actual value */
+.trail-filters select:valid {
+  color: var(--color-text);
+}
+
+/* ========================================
+   FIELDS
+======================================== */
+
+.trail-filters__search,
+.trail-filters__field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.trail-filters label {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #77776d;
+}
+
+/* INPUTS */
+
+.trail-filters input,
+.trail-filters select {
+  width: 100%;
+  height: 52px;
+  padding: 0 16px;
+  border: 1px solid #d9d8d0;
+  border-radius: 2px;
+  outline: none;
+  background: transparent;
+  color: #24241f;
+  font-family: inherit;
+  font-size: 0.85rem;
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.trail-filters select,
+.trail-filters input::placeholder {
+  color: #a4a39a;
+}
+
+.trail-filters input:focus,
+.trail-filters select:focus {
+  border-color: #777765;
+  background: transparent;
+  box-shadow: 0 0 0 3px rgb(119 119 101 / 10%);
+}
+
+/* SEARCH INPUT */
+
+.trail-filters input[type="search"] {
+  appearance: none;
+  -webkit-appearance: none;
+    color: #a4a39a;
+}
+
+.trail-filters input[type="search"]::-webkit-search-cancel-button {
+  cursor: pointer;
+}
+
+/* SELECT */
+
+.trail-filters select {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  padding-right: 38px;
+
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none' stroke='%2377776d' stroke-width='1.4'%3E%3Cpath d='m2 4 4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+}
+
+/* ========================================
+   ACTIONS
+======================================== */
+
+.trail-filters__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+/* SUBMIT */
+
+.trail-filters__submit {
+  height: 52px;
+  padding: 0 24px;
+  border: 1px solid #20201c;
+  border-radius: 2px;
+  background: #20201c;
+  color: #fff;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.trail-filters__submit:hover {
+  background: transparent;
+  color: var(--color-bg);
+  background-color: var(--color-accent);
+  border: 1px solid #20201c;
+}
+
+.trail-filters__submit:active {
+  transform: translateY(1px);
+}
+
+/* RESET */
+
+.trail-filters__reset {
+  color: #77776d;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.65rem;
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.trail-filters__reset:hover {
+  color: #20201c;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 900px) {
+  .trail-filters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 16px;
+  }
+
+  .trail-filters__actions {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 520px) {
+  .trail-filters {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .trail-filters__actions {
+    grid-column: auto;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .trail-filters__submit {
+    width: 100%;
+  }
+
+  .trail-filters__reset {
+    text-align: center;
+  }
+}
+
+
+
 
 /* 6. HERO */
 
@@ -200,7 +568,7 @@ p {
   width: 100%;
   margin-inline: auto;
   position: absolute;
-  top: 20rem;
+  top: 40%;
   text-align: center;
 }
 
@@ -417,6 +785,7 @@ p {
 }
 
 .trails-grid {
+  padding-top: 2rem;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 24px;
@@ -457,10 +826,14 @@ p {
 /* ========================================
    TRAIL DETAIL CONTENT
 ======================================== */
+.trail-detail__header {
+    background-color: var(--color-surface);
+    padding-top: 2rem;
+}
 
 .trail-detail__content {
     width: 100%;
-    /* max-width: 1100px; */
+    background-color: var(--color-surface);
     margin: 0 auto;
     padding: 64px 32px 100px;
     box-sizing: border-box;
@@ -1529,3 +1902,4 @@ p {
     text-align: center;
   }
 }
+

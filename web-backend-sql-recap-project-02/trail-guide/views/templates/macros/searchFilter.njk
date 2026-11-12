@@ -1,0 +1,60 @@
+
+{% macro searchFilter(q = '', regions = [], region = '', difficulty = '') %}
+
+<form action="/trails" method="GET" class="trail-filters">
+
+  <div class="trail-filters__search">
+    <label for="trail-search">Search trails</label>
+    <input
+      type="search"
+      id="trail-search"
+      name="q"
+      placeholder="Find your next adventure..."
+      value="{{ q }}"
+    >
+  </div>
+
+  <div class="trail-filters__field">
+    <label for="trail-region">Region</label>
+    <select id="trail-region" name="region">
+      <option value="" {% if not region %}selected{% endif %}>
+        Explore by region
+      </option>
+
+      {% for item in regions %}
+        <option
+          value="{{ item.slug }}"
+          {% if region == item.slug %}selected{% endif %}
+        >
+          {{ item.name }}
+        </option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="trail-filters__field">
+    <label for="trail-difficulty">Difficulty</label>
+    <select id="trail-difficulty" name="difficulty">
+      <option value="" {% if not difficulty %}selected{% endif %}>
+        Choose difficulty
+      </option>
+      <option value="easy" {% if difficulty == 'easy' %}selected{% endif %}>
+        Easy
+      </option>
+      <option value="moderate" {% if difficulty == 'moderate' %}selected{% endif %}>
+        Moderate
+      </option>
+      <option value="hard" {% if difficulty == 'hard' %}selected{% endif %}>
+        Hard
+      </option>
+    </select>
+  </div>
+    <button type="submit" class="trail-filters__submit">
+    Trails ↗
+    </button>
+        <a href="/trails" class="trail-filters__reset">
+        <span>↺</span> Reset
+      </a>
+</form>
+
+{% endmacro %}
