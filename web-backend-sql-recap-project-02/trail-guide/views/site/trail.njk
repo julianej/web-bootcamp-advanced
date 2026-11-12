@@ -80,6 +80,7 @@
 
   </div>
 </section>
+
 <!-- RELATED TRAILS -->
 <section class="related-trails">
 
@@ -131,7 +132,13 @@
 
     {% else %}
 
-      <p>No other trails in this region yet.</p>
+      <div class="related-trails__empty">
+        <img
+            src="/img/no-trail-{{ trail.region_country | lower | replace(' ', '-') }}.png"
+            alt="No trail image available"
+          />
+        <p>No other trails in this region yet.</p>
+      </div>
 
     {% endif %}
 
