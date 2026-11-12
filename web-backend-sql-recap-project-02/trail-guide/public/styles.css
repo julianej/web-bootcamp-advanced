@@ -450,8 +450,8 @@ p {
   padding: 0 24px;
   border: 1px solid #20201c;
   border-radius: 2px;
-  background: #20201c;
-  color: #fff;
+  background-color: var(--color-accent);
+  color: var(--color-bg);
   font-family: "IBM Plex Mono", monospace;
   font-size: 0.7rem;
   letter-spacing: 0.04em;
@@ -784,11 +784,33 @@ p {
   letter-spacing: 0.1em;
 }
 
-.trails-grid {
+/* .trails-grid {
   padding-top: 2rem;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 24px;
+} */
+
+.trails-page h1 {
+  color: var(--color-muted);
+}
+
+/* TRAIL GRID */
+.trails-grid {
+  padding-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+/* Only one card */
+.trails-grid:has(> .trail-card:only-child) {
+  grid-template-columns: minmax(280px, 420px);
+}
+
+/* Optional: keep the single card aligned left */
+.trails-grid:has(> .trail-card:only-child) {
+  justify-content: center;
 }
 
 .trail-card {
@@ -1039,7 +1061,7 @@ p {
   height: 161px;
 }
 
-/* TRAIL GRID */
+
 
 .related-trails .trail-grid {
   display: flex;

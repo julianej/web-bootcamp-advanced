@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 import {
   getHomePage,
-  getTrailsPage,
+  getTrails,
   getTrailDetail,
   getRegions,
   regionDetail,
@@ -14,7 +14,7 @@ const router = Router();
 router.get(['/', '/home'], getHomePage);
 
 // TRAILS
-router.get('/trails', getTrailsPage);
+router.get('/trails', getTrails);
 
 router.get('/trail/:slug', getTrailDetail);
 

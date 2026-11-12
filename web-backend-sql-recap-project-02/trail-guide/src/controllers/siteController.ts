@@ -33,9 +33,21 @@ export function getHomePage(
 // ========================================
 
 export function getTrailsPage(req: Request, res: Response): void {
-  const q = String(req.query.q ?? '');
-  const region = String(req.query.region ?? '');
-  const difficulty = String(req.query.difficulty ?? '');
+  // type guards before passing query parameters to your model
+    const q = typeof req.query.q === 'string'
+    ? req.query.q
+    : '';
+
+  const region = typeof req.query.region === 'string'
+    ? req.query.region
+    : '';
+
+  const difficulty = typeof req.query.difficulty === 'string'
+    ? req.query.difficulty
+    : '';
+  // const q = String(req.query.q ?? '');
+  // const region = String(req.query.region ?? '');
+  // const difficulty = String(req.query.difficulty ?? '');
 
   const trails = trailModel.searchTrails({
     q,
@@ -104,18 +116,38 @@ export function getTrailDetail(
 // ========================================
 
 export function getTrails(
-  _req: Request,
+  req: Request,
   res: Response
 ): void {
-  const trails = trailModel.getAllTrails();
+  const q = typeof req.query.q === 'string'
+    ? req.query.q
+    : '';
 
-  console.log('Trails loaded:', trails.length);
-  console.log(trails);
+  const region = typeof req.query.region === 'string'
+    ? req.query.region
+    : '';
+
+  const difficulty = typeof req.query.difficulty === 'string'
+    ? req.query.difficulty
+    : '';
+
+  const trails = trailModel.searchTrails({
+    q,
+    region,
+    difficulty,
+  });
+
+  const regions = regionModel.getAllRegions();
 
   res.render('site/trails.njk', {
     title: 'Explore Trails',
     trails,
-    showFilters: true
+    regions,
+    q,
+    region,
+    difficulty,
+    currentPage: 'trails',
+    showFilters: true,
   });
 }
 
