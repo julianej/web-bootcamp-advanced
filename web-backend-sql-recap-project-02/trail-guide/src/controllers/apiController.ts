@@ -67,10 +67,6 @@ export function getRegionTrails(
 }
 
 
-interface IdParams {
-  id: string;
-}
-
 // ========================================
 // POST /api/trails
 // CREATE TRAIL
