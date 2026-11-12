@@ -11,3 +11,7 @@
 <img width="3528" height="1862" alt="Bildschirmfoto 2026-11-12 um 21 35 01" src="https://github.com/user-attachments/assets/7f6569bf-c91a-49c3-965b-f52d93157fcf" />
 <img width="3528" height="1876" alt="Bildschirmfoto 2026-11-12 um 21 36 36" src="https://github.com/user-attachments/assets/b4642442-7562-4b49-8a4f-942ddacd1696" />
 
+## TRAILS
+<img width="3466" height="1868" alt="Bildschirmfoto 2026-11-12 um 21 42 45" src="https://github.com/user-attachments/assets/8d94fd23-7946-494a-a58e-1ee0b175082a" />
+
+
