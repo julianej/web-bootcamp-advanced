@@ -6,11 +6,11 @@ import * as regionModel from '../models/regionModel.js';
 
 import { formatDate } from '../utils/formatDate.js';
 
+
 // ========================================
 // GET HOME PAGE
 // GET /
 // ========================================
-
 export function getHomePage(
   _req: Request,
   res: Response
@@ -23,8 +23,39 @@ export function getHomePage(
     title: 'Trail Guide',
     trails,
     regions,
+    showFilters: true
   });
 }
+
+// ========================================
+// GET ALL TRAILS / SEARCH
+// GET /trails
+// ========================================
+
+export function getTrailsPage(req: Request, res: Response): void {
+  const q = String(req.query.q ?? '');
+  const region = String(req.query.region ?? '');
+  const difficulty = String(req.query.difficulty ?? '');
+
+  const trails = trailModel.searchTrails({
+    q,
+    region,
+    difficulty,
+  });
+
+  const regions = regionModel.getAllRegions();
+
+  res.render('site/trails.njk', {
+    title: 'Explore Trails',
+    trails,
+    regions,
+    q,
+    region,
+    difficulty,
+    currentPage: 'trails',
+  });
+}
+
 
 // ========================================
 // GET TRAIL DETAIL
@@ -35,7 +66,7 @@ export function getTrailDetail(
   req: Request<{ slug: string }>,
   res: Response
 ): void {
-  
+
   const { slug } = req.params;
 
   // GET TRAIL BY SLUG
@@ -50,7 +81,7 @@ export function getTrailDetail(
   }
 
   // GET ALL REGIONS
-  // const regions = regionModel.getAllRegions();
+  const regions = regionModel.getAllRegions();
 
   const relatedTrails = trailModel
     .getByRegion(trail.region_id)
@@ -61,7 +92,8 @@ export function getTrailDetail(
     title: trail.name,
     trail,
     relatedTrails,
-    // regions,
+    regions,
+    showFilters: true,
     formattedDate: formatDate(trail.created_at),
   });
 }
@@ -83,6 +115,7 @@ export function getTrails(
   res.render('site/trails.njk', {
     title: 'Explore Trails',
     trails,
+    showFilters: true
   });
 }
 
@@ -125,6 +158,7 @@ export function regionDetail(
     title: region.name,
     region,
     trails,
+    showFilters: true
   });
 }
 

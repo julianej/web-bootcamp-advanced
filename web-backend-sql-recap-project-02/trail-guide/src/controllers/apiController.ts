@@ -6,15 +6,22 @@ import * as regionModel from '../models/regionModel.js';
 import * as trailModel from '../models/trailModel.js';
 
 import { validateTrailInput } from '../utils/validateInput.js';
-import type { TrailInput } from '../models/types.js';
+import type { TrailInput, Difficulty } from '../models/types.js';
 
 
 // GET /api/trails
-export function getTrails(
-  _req: Request,
-  res: Response
-): void {
-  const trails = trailModel.getAllTrails();
+export function getTrails(req: Request, res: Response): void {
+  const { region, difficulty, q } = req.query;
+
+  const trails = trailModel.getAllTrails({
+    ...(typeof region === 'string' && { region }),
+
+    ...(typeof difficulty === 'string' && {
+      difficulty: difficulty as Difficulty,
+    }),
+
+    ...(typeof q === 'string' && { q }),
+  });
 
   res.json(trails);
 }
