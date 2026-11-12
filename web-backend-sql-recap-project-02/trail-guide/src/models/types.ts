@@ -24,6 +24,18 @@ export interface Trail {
   created_at: number;
 }
 
+// TEST DATA
+export interface SeedTrail {
+  region: string;
+  name: string;
+  slug: string;
+  description: string;
+  distance: number;
+  elevation: number;
+  difficulty: Difficulty;
+  image: string;
+}
+
 // TRAIL + REGION (INNER JOIN) COUNTRY
 export interface TrailWithRegion extends Trail {
   region_name: string;

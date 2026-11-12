@@ -19,6 +19,8 @@ import { errorHandler } from './middleware/errorHandler.js';
 
 // Routers
 import siteRoutes from './routes/siteRoutes.js';
+import adminRoutes from './routes/adminRoutes.js';
+import apiRoutes from './routes/apiRoutes.js';
 
 const app = express();
 
@@ -71,8 +73,8 @@ app.use(
 app.use('/', siteRoutes);
 
 // Mounted later:
-// app.use('/admin', adminRoutes);
-// app.use('/api', apiRoutes);
+app.use('/admin', adminRoutes);
+app.use('/api', apiRoutes);
 
 // ========================================
 // 404 FALLBACK

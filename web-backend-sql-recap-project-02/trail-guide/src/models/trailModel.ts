@@ -1,6 +1,8 @@
 
 import { getDB } from '../db/database.js';
 import type { TrailInput, TrailWithRegion } from './types.js';
+import { createSlug } from '../utils/createSlug.js';
+
 
 // ========================================
 // REUSABLE SQL QUERY
@@ -33,7 +35,7 @@ export function getAllTrails(): TrailWithRegion[] {
 // READ: GET TRAIL BY ID
 // ========================================
 
-export function getById(id: number): TrailWithRegion | undefined {
+export function getTrailById(id: number): TrailWithRegion | undefined {
   return getDB()
     .prepare(`
       ${SELECT_TRAILS_WITH_REGION}
@@ -57,6 +59,7 @@ export function getTrailBySlug(
     .get(slug) as TrailWithRegion | undefined;
 }
 
+
 // ========================================
 // READ: GET TRAILS BY REGION
 // ========================================
@@ -76,11 +79,7 @@ export function getByRegion(regionId: number): TrailWithRegion[] {
 // ========================================
 
 export function create(input: TrailInput): TrailWithRegion | undefined {
-  const slug = input.name
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-|-$/g, '');
+  const slug = createSlug(input.name);
 
   const result = getDB()
     .prepare(`
@@ -107,7 +106,7 @@ export function create(input: TrailInput): TrailWithRegion | undefined {
       input.image
     );
 
-  return getById(Number(result.lastInsertRowid));
+  return getTrailById(Number(result.lastInsertRowid));
 }
 
 // ========================================
@@ -118,11 +117,14 @@ export function update(
   id: number,
   input: TrailInput
 ): TrailWithRegion | undefined {
+  const slug = createSlug(input.name);
+
   getDB()
     .prepare(`
       UPDATE trails
       SET region_id = ?,
           name = ?,
+          slug = ?,
           description = ?,
           distance_km = ?,
           elevation_m = ?,
@@ -133,6 +135,7 @@ export function update(
     .run(
       input.region_id,
       input.name,
+      slug,
       input.description,
       input.distance_km,
       input.elevation_m,
@@ -141,15 +144,18 @@ export function update(
       id
     );
 
-  return getById(id);
+  return getTrailById(id);
 }
 
 // ========================================
 // DELETE: REMOVE TRAIL
 // ========================================
 
-export function remove(id: number): number {
-  return getDB()
-    .prepare('DELETE FROM trails WHERE id = ?')
-    .run(id).changes;
+export function deleteTrail(slug: string): void {
+  const db = getDB();
+
+  db.prepare(`
+    DELETE FROM trails
+    WHERE slug = ?
+  `).run(slug);
 }
