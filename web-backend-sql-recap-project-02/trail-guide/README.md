@@ -4,6 +4,9 @@
 
 <img width="3530" height="1862" alt="Bildschirmfoto 2026-11-12 um 21 19 33" src="https://github.com/user-attachments/assets/06b66cdb-4896-4ec8-a037-11bf884312ca" />
 
+<img width="3528" height="1772" alt="Bildschirmfoto 2026-11-12 um 21 21 16" src="https://github.com/user-attachments/assets/5a5db3c7-abf6-4e72-9eb0-e88ead27a620" />
+
+
 This document describes the planned folder structure for the Trail Guide recap project.
 
 ## Folder Structure
