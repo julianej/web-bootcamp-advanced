@@ -52,11 +52,12 @@ export type BookResponse = {
 };
 
 // ---------------------------------------------------------
-// Convert database row into API response
+// PURE: Convert database row into API response
 
 // addedAt: string; "2024-11-07T00:00:00.000Z"
 // const date = new Date(book.addedAt);
 // addedAt: row.added_at,
+
 
 function toBookResponse(row: BookRow): BookResponse {
   return {
@@ -70,7 +71,7 @@ function toBookResponse(row: BookRow): BookResponse {
 console.log("BOOK-ROWS", toBookResponse(bookRows[0]));
 
 // ---------------------------------------------------------
-// Filter available books and convert them
+// PURE: Filter available books and convert them
 function getAvailableBooks(rows: BookRow[]): BookResponse[] {
   return rows
     .filter((row) => row.is_available === 1)
@@ -89,13 +90,14 @@ console.log("BOOK-AVAILABLE",getAvailableBooks(bookRows));
 // descending order: largest timestamp (newest) first.
 
 
-// .toSorted() → creates a sorted copy.
+// IMPURE: .toSorted() → creates a sorted copy.
 // function sortNewestFirst(rows: BookRow[]): BookResponse[] {
 //     return rows
 //      .toSorted((a, b) => b.added_at - a.added_at);
 // }
+// console.log("BOOK-NEWEST-NEW",sortNewestFirst(bookRows));
 
-// .sort() → mutates the original array.
+// PURE: .sort() → mutates the original array.
 function sortNewestFirst(rows: BookRow[]): BookRow[] {
   return [...rows].sort((a, b) => b.added_at - a.added_at);
 }
@@ -104,3 +106,16 @@ console.log("BOOK-NEWEST",sortNewestFirst(bookRows));
 console.log(bookRows); // Original array remains unchanged
 
 // Log with: npx tsx catalogue.ts
+
+// Model layer
+function getAllBooks(): BookRow[] {
+  return db.prepare('SELECT * FROM books').all() as BookRow[];
+}
+
+// Controller layer
+function getBooks(req: Request, res: Response): void {
+  const rows = bookModel.getAllBooks();
+  const books = getAvailableBooks(rows); // // Filter and transform
+
+  res.json(books);
+}
