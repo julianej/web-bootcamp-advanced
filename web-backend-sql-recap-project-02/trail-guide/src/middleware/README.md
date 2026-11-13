@@ -17,10 +17,10 @@ Express applications often need to perform tasks for every incoming request, rat
 
 Examples include:
 
-- Logging requests: logger.ts
-- Checking authentication: requireApiKey.ts 
+- Logging requests: `logger.ts`
+- Checking authentication: `requireApiKey.ts`
 - Parsing incoming data
-- Handling errors: errorHandler.ts
+- Handling errors: `errorHandler.ts`
 
 **Express middleware** provides a central place to implement this shared logic instead of repeating the same code in multiple routes.
 
