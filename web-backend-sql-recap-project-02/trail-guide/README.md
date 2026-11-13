@@ -153,27 +153,6 @@ HTTP Request
 - Keep API authentication in middleware.
 - Store environment variables in `.env` and never commit this file to Git.
 
-## INSTALL
-# Project Setup
-
-```bash
-mkdir trail-guide && cd trail-guide
-npm init -y
-npm install
-
-mkdir -p db models controllers routes middleware public
-mkdir -p views/layouts views/site views/admin views/errors
-
-touch app.js server.js .env .gitignore
-touch db/database.js db/schema.sql db/seed.sql db/init.js
-touch models/regionModel.js models/trailModel.js
-touch controllers/siteController.js controllers/adminController.js controllers/apiController.js
-touch routes/siteRoutes.js routes/adminRoutes.js routes/apiRoutes.js
-touch middleware/requireApiKey.js middleware/sanitizeBody.js middleware/errorHandler.js middleware/logger.js
-touch views/layouts/base.njk
-
-npm install chokidar
-```
 
 ## SETUP & TEST DATABASE
 ```bash
