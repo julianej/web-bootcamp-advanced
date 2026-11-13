@@ -15,6 +15,7 @@ import nunjucks from 'nunjucks';
 
 // Middleware
 import { sanitizeBody } from './middleware/sanitizeBody.js';
+import { logger } from './middleware/logger.js';
 import { errorHandler } from './middleware/errorHandler.js';
 
 // Routers
@@ -55,6 +56,7 @@ app.use(express.json());
 
 // Custom middleware
 app.use(sanitizeBody);
+app.use(logger);
 
 // Serve static files
 app.use(express.static(path.join(__dirname, '../public')));

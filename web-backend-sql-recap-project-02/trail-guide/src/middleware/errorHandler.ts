@@ -1,11 +1,3 @@
-// Whenever somebody visits your website, the logger records:
-// - Timestamp: When the request happened.
-// - Method: What kind of request (GET, POST, etc.).
-// - URL: Which page or endpoint was requested.
-// - Status code: Whether the request succeeded (200), failed (404), etc.
-// - also called LOGGER
-// - DISPLAY LOGS cat logs/access.log
-
 
 import type { Request, Response, NextFunction } from 'express';
 
