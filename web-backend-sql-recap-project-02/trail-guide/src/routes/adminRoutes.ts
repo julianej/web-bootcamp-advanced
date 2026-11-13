@@ -8,16 +8,12 @@ const router = Router();
 // ADMIN DASHBOARD
 router.get('/', adminController.getAdminPage);
 
-// CREATE TRAIL
-router.get('/trails/new', adminController.getNewTrailPage);
+// CREATE TRAIL for HTTP route
+router.get('/trails/new', adminController.addNewTrail);
 router.post('/trails', adminController.addTrail);
 
 // UPDATE TRAIL
 router.get('/', adminController.getAdminPage);
-
-// CREATE
-router.get('/trails/new', adminController.getNewTrailPage);
-router.post('/trails', adminController.addTrail);
 
 // EDIT / UPDATE
 router.get('/trails/:id/edit', adminController.getEditTrailPage);

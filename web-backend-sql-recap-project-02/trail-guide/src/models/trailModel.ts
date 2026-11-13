@@ -86,9 +86,7 @@ export function searchTrails(filters: {
 // READ: GET TRAIL BY SLUG
 // ========================================
 
-export function getTrailBySlug(
-  slug: string
-): TrailWithRegion | undefined {
+export function getTrailBySlug(slug: string ): TrailWithRegion | undefined {
   return getDB()
     .prepare(`
       ${SELECT_TRAILS_WITH_REGION}
@@ -128,7 +126,9 @@ export function getByRegion(regionId: number): TrailWithRegion[] {
 // CREATE: INSERT NEW TRAIL
 // ========================================
 
-export function create(input: TrailInput): TrailWithRegion | undefined {
+export function create(
+  input: TrailInput
+):TrailWithRegion | undefined {
   const slug = createSlug(input.name);
 
   const result = getDB()

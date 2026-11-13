@@ -4,6 +4,7 @@ import type { Request, Response, NextFunction } from 'express';
 // ========================================
 // 500 - GLOBAL ERROR HANDLER Database 
 // ========================================
+// http://localhost:3000/admin/trails/new
 
 export function errorHandler(
   err: Error,
@@ -13,7 +14,7 @@ export function errorHandler(
 ): void {
   console.error('Application error:', err);
 
-  res.status(500).render('site/error', {
+  res.status(500).render('errors/500.njk', {
     title: 'Something went wrong',
     message: 'An unexpected error occurred. Please try again later.',
   });

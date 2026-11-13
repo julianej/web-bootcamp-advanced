@@ -7,8 +7,7 @@ import fs from 'node:fs';
 // DATABASE CONFIGURATION
 // ========================================
 
-const DB_FILE = path.join(process.cwd(), 'data', 'trailguide.db');
-
+const DB_FILE = path.join(process.cwd(), 'src', 'db', 'trailguide.db');
 let db: Database.Database | null = null;
 
 // ========================================

@@ -14,7 +14,9 @@
 
     <header class="section-heading">
       <h1>{{ title }}</h1>
-      <h2>- {{ trail.name}} -</h2>
+      {% if trail %}
+      <h2>{{ trail.name }}</h2>
+    {% endif %}
     </header>
 
     <form
