@@ -13,7 +13,7 @@ router.get('/trails/new', adminController.addNewTrail);
 router.post('/trails', adminController.addTrail);
 
 // UPDATE TRAIL
-router.get('/', adminController.getAdminPage);
+router.get('/admin', adminController.getAdminPage);
 
 // EDIT / UPDATE
 router.get('/trails/:id/edit', adminController.getEditTrailPage);

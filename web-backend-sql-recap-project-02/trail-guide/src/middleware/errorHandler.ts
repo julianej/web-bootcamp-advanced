@@ -4,7 +4,7 @@ import type { Request, Response, NextFunction } from 'express';
 // ========================================
 // 500 - GLOBAL ERROR HANDLER Database 
 // ========================================
-// http://localhost:3000/admin/trails/new
+// http://localhost:3000/admin/trails/new // HTTP
 
 export function errorHandler(
   err: Error,
