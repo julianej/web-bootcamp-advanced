@@ -153,7 +153,7 @@ node check.js
 
 <img width="2720" height="1664" alt="select_with_region_join_sketch_bw" src="https://github.com/user-attachments/assets/f85de965-4cee-4054-ad39-6dadb8a0337b" />
 
-## SETUP TYPESCRIPT
+## BUN Install / SETUP TYPESCRIPT
 ```bash
 npm install -D typescript tsx @types/node @types/express @types/nunjucks @types/better-sqlite3 @types/sanitize-html
 npm install -D typescript
