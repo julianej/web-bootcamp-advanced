@@ -19,7 +19,7 @@ trail-guide/
 │
 ├── package.json
 ├── tsconfig.json           # TypeScript config (rootDir: src, outDir: dist)
-├── .env                    # API_KEY, PORT (not committed to Git)
+├── .env                    # API_KEY, PORT (.gitignore)
 ├── .gitignore              # node_modules/, .env, *.db, dist/
 │
 ├── src/
@@ -143,15 +143,6 @@ HTTP Request
 - Each trail belongs to one region.
 - `trails.region_id` references `regions.id`.
 - Use SQL `INNER JOIN` to retrieve trail information together with its region and country.
-
-## Development Notes
-
-- Keep application configuration in `app.js`.
-- Keep server startup in `server.js`.
-- Keep SQL queries inside the model layer.
-- Reuse model functions across website, admin and API controllers.
-- Keep API authentication in middleware.
-- Store environment variables in `.env` and never commit this file to Git.
 
 
 ## SETUP & TEST DATABASE
