@@ -17,11 +17,13 @@ import nunjucks from 'nunjucks';
 import { sanitizeBody } from './middleware/sanitizeBody.js';
 import { logger } from './middleware/logger.js';
 import { errorHandler } from './middleware/errorHandler.js';
+import { notFoundHandler } from './middleware/notFoundHandler.js';
 
 // Routers
 import siteRoutes from './routes/siteRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
 import apiRoutes from './routes/apiRoutes.js';
+
 
 const app = express();
 
@@ -79,17 +81,13 @@ app.use('/admin', adminRoutes);
 app.use('/api', apiRoutes);
 
 // ========================================
-// 404 FALLBACK
+// 404 FALLBACK - NOT FOUND - unknown URL
 // ========================================
 
-app.use((_req, res) => {
-  res.status(404).render('errors/404');
-});
-
 // ========================================
-// GLOBAL ERROR HANDLER
+// 500 GLOBAL ERROR HANDLER - SOMETHING WENT WRONG
 // ========================================
-
+app.use(notFoundHandler);
 app.use(errorHandler);
 
 // ========================================

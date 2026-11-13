@@ -2,7 +2,7 @@
 import type { Request, Response, NextFunction } from 'express';
 
 // ========================================
-// GLOBAL ERROR HANDLER
+// 500 - GLOBAL ERROR HANDLER Database 
 // ========================================
 
 export function errorHandler(
@@ -17,4 +17,5 @@ export function errorHandler(
     title: 'Something went wrong',
     message: 'An unexpected error occurred. Please try again later.',
   });
+
 }

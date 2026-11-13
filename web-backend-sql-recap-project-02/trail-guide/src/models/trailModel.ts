@@ -33,9 +33,7 @@ const SELECT_TRAILS_WITH_REGION = `
 // }
 
 export function getAllTrails(): TrailWithRegion[] {
-  const db = getDB();
-
-  return db
+  return getDB()
     .prepare(`
       ${SELECT_TRAILS_WITH_REGION}
       ORDER BY trails.name ASC

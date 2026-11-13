@@ -1,3 +1,5 @@
+// database testing script
+
 import * as regions from './models/regionModel.js';
 import * as trails from './models/trailModel.js';
 

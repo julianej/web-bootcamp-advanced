@@ -1,5 +1,3 @@
-// server.js only calls listen. 
-// It’s optional, but it keeps the app easy to test.
 
 import 'dotenv/config';
 
@@ -9,37 +7,21 @@ import { initDB } from './db/init.js';
 
 const PORT = Number(process.env.PORT) || 3000;
 
-// ========================================
-// START SERVER
-// ========================================
-
-async function startServer() {
+async function startServer(): Promise<void> {
   try {
-    // 1. Connect to SQLite
     await connectDB();
 
-    // 2. Initialize schema, migrations and seed data
     initDB();
 
-    // 3. Start Express
     const server = app.listen(PORT, () => {
       console.log(`Trail Guide running at http://localhost:${PORT}`);
     });
 
-    // ========================================
-    // GRACEFUL SHUTDOWN
-    // ========================================
-
-    let isShuttingDown = false;
-
-    const shutdown = () => {
-      if (isShuttingDown) return;
-      isShuttingDown = true;
-
+    const shutdown = (): void => {
       console.log('\nShutting down server...');
 
-      server.close(() => {
-        closeDB();
+      server.close(async () => {
+        await closeDB();
         console.log('Database connection closed.');
         process.exit(0);
       });
@@ -50,7 +32,7 @@ async function startServer() {
 
   } catch (error) {
     console.error('Failed to start application:', error);
-    closeDB();
+    await closeDB();
     process.exit(1);
   }
 }

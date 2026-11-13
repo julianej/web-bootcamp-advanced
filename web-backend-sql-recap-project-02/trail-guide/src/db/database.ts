@@ -1,55 +1,61 @@
 
+import Database from 'better-sqlite3'; 
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import Database from 'better-sqlite3';
+import fs from 'node:fs';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+// ========================================
+// DATABASE CONFIGURATION
+// ========================================
 
+const DB_FILE = path.join(process.cwd(), 'data', 'trailguide.db');
 
-// CONNECT PATH
-// const db: Database.Database = new Database(path.join(__dirname, 'trailguide.db'));
 let db: Database.Database | null = null;
 
+// ========================================
+// CONNECT DATABASE
+// ========================================
+// SQLITE3 is a synchronouse library and doenst need <Promise>
 
-// WHERE 
-// console.log('SQLite database:', db.name);
+export function connectDB(): Database.Database {
 
-// COLUMNS
-// console.log(
-//   db.prepare('PRAGMA table_info(trails)').all()
-// );
+  // Ensure database directory exists
+  const dbDirectory = path.dirname(DB_FILE);
 
+  if (!fs.existsSync(dbDirectory)) {
+    fs.mkdirSync(dbDirectory, { recursive: true });
+  }
 
-// Connect to SQLite
-export async function connectDB(): Promise<void> {
-  if (db) return;
-
-  const dbPath = path.join(__dirname, 'trailguide.db');
-
-  db = new Database(dbPath);
+  // Connect to database
+  db = new Database(DB_FILE);
 
   // Enable foreign key constraints
   db.pragma('foreign_keys = ON');
 
-  console.log('SQLite connected:', dbPath);
+  console.log('Database connected:', DB_FILE);
+
+  return db;
 }
 
-// Get the database connection
+// ========================================
+// GET DATABASE
+// ========================================
+
 export function getDB(): Database.Database {
   if (!db) {
-    throw new Error('Database is not connected.');
+    throw new Error('Database is not connected');
   }
 
   return db;
 }
 
-// Close SQLite connection
+// ========================================
+// CLOSE DATABASE
+// ========================================
+
 export function closeDB(): void {
   if (db) {
     db.close();
     db = null;
-    console.log('SQLite connection closed.');
+    console.log('Database connection closed');
   }
 }
-
-
