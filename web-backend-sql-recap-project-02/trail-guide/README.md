@@ -19,7 +19,7 @@ trail-guide/
 │
 ├── package.json
 ├── tsconfig.json           # TypeScript config (rootDir: src, outDir: dist)
-├── .env                    # API_KEY, PORT (not committed to Git)
+├── .env                    # API_KEY, PORT (.gitignore)
 ├── .gitignore              # node_modules/, .env, *.db, dist/
 │
 ├── src/
@@ -144,15 +144,6 @@ HTTP Request
 - `trails.region_id` references `regions.id`.
 - Use SQL `INNER JOIN` to retrieve trail information together with its region and country.
 
-## Development Notes
-
-- Keep application configuration in `app.js`.
-- Keep server startup in `server.js`.
-- Keep SQL queries inside the model layer.
-- Reuse model functions across website, admin and API controllers.
-- Keep API authentication in middleware.
-- Store environment variables in `.env` and never commit this file to Git.
-
 
 ## SETUP & TEST DATABASE
 ```bash
@@ -162,7 +153,7 @@ node check.js
 
 <img width="2720" height="1664" alt="select_with_region_join_sketch_bw" src="https://github.com/user-attachments/assets/f85de965-4cee-4054-ad39-6dadb8a0337b" />
 
-## SETUP TYPESCRIPT
+## BUN Install / SETUP TYPESCRIPT
 ```bash
 npm install -D typescript tsx @types/node @types/express @types/nunjucks @types/better-sqlite3 @types/sanitize-html
 npm install -D typescript
