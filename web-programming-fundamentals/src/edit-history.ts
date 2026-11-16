@@ -1,5 +1,10 @@
+
+// Class – creates objects 
+// and defines behaviour
+
 export class EditHistory {
 
+// A class can define properties, methods, constructors and getters.
 // properties
 // constructor
 // methods

@@ -66,3 +66,14 @@ function eighth(arr: number[]): number[] {
   const mid = Math.floor(arr.length / 2);
   return [...eighth(arr.slice(0, mid)), ...eighth(arr.slice(mid))];
 }
+
+
+Snippet	Complexity	Category
+1	O(1)	CONSTANT
+2	O(n)	RISING
+3	O(n²)	LIFTING
+4	O(n)	RISING
+5	O(n × m)	Depends on n and m
+6	O(n + m)	Linear in combined input
+7	O(log n)	SLOW
+8	O(n log n)	FASTER
