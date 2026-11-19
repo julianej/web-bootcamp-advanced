@@ -48,12 +48,31 @@ let ThreadsService = class ThreadsService {
     //  findAll(): Thread[] {
     //     return this.threads;
     //   }
+    // Bonus: Filter by Author
     findAll(author) {
         if (author === undefined) {
             return this.threads;
         }
         return this.threads.filter((thread) => thread.author === author);
     }
+    // Bonus: Newest First
+    // findAll(author?: string): Thread[] {
+    //   const threads = author
+    //     ? this.threads.filter((thread) => thread.author === author)
+    //     : this.threads;
+    //   return threads.toSorted(
+    //     (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
+    //   );
+    // }
+    // Bonus: Newest First
+    // findAll(author?: string): Thread[] {
+    //   const threads = author
+    //     ? this.threads.filter((thread) => thread.author === author)
+    //     : this.threads;
+    //   return threads.toSorted(
+    //     (a, b) => b.createdAt.getTime() - a.createdAt.getTime(),
+    //   );
+    // }
     // Method 2
     findAllAuthors() {
         // Count the threads per author in a Map<string, number>: 

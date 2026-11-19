@@ -9,7 +9,9 @@ export class ThreadsController {
   ) {}
 
   @Get('threads')
-  findAll(@Query('author') author?: string): Thread[] {
-    return this.threadsService.findAll(author);
+    findAll(
+      @Query('author') author?: string,
+    ): Thread[] {
+      return this.threadsService.findAll(author);
   }
 }
