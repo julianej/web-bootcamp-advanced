@@ -11,6 +11,9 @@ let AuthorService = class AuthorService {
         { author: 'pixelpirate', threads: 2 },
         { author: 'nullpointer', threads: 1 },
     ];
+    //  constructor(
+    //   private readonly threadsService: ThreadsService,
+    // ) {}
     findAll() {
         return this.authors;
     }

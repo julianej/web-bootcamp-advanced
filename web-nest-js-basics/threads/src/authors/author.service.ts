@@ -10,6 +10,10 @@ export class AuthorService {
     { author: 'nullpointer', threads: 1 },
   ];
 
+//  constructor(
+//   private readonly threadsService: ThreadsService,
+// ) {}
+
   findAll(): Author[] {
     return this.authors;
   }
