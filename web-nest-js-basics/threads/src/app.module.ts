@@ -1,13 +1,22 @@
 import { Module } from '@nestjs/common';
 import { ThreadsController } from './threads/thread.controller.js';
 import { ThreadsService } from './threads/thread.service.js';
+import { ThreadsModule } from './threads/thread.module.js';
 
-import { AuthorController } from './authors/author.controller.js';
-import { AuthorService } from './authors/author.service.js';
+
+// You need to decide which controller owns that endpoint.
+// Option A — Keep the authors endpoint inside ThreadsController
 
 @Module({
-  imports: [],
-  controllers: [ThreadsController, AuthorController],
-  providers: [ThreadsService, AuthorService ],
+  imports: [ThreadsModule],
 })
 export class AppModule {}
+
+// Option B — Separate the authors endpoint
+
+// @Module({
+//   imports: [],
+//   controllers: [ThreadsController, AuthorController],
+//   providers: [ThreadsService, AuthorService],
+// })
+// export class AppModule {}

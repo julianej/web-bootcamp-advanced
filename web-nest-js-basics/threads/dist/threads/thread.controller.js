@@ -10,26 +10,50 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-import { Controller, Get, Query } from '@nestjs/common';
+import { Body, Controller, Get, Query, Param, Post } from '@nestjs/common';
 import { ThreadsService } from './thread.service.js';
+//creates the URL: /threads GET /threads/
 let ThreadsController = class ThreadsController {
     threadsService;
+    // this ERROR: Property 'threadsService' does not exist on type 'ThreadsController'.
+    // demands a constructur
     constructor(threadsService) {
         this.threadsService = threadsService;
     }
     findAll(author) {
         return this.threadsService.findAll(author);
     }
+    findOne(id) {
+        return this.threadsService.findOne(id);
+    }
+    // If the thread exists → returns Thread → HTTP 200
+    create(body) {
+        return this.threadsService.create(body);
+    }
 };
 __decorate([
-    Get('threads'),
+    Get(),
     __param(0, Query('author')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Array)
 ], ThreadsController.prototype, "findAll", null);
+__decorate([
+    Get(':id'),
+    __param(0, Param('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Object)
+], ThreadsController.prototype, "findOne", null);
+__decorate([
+    Post(),
+    __param(0, Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Object)
+], ThreadsController.prototype, "create", null);
 ThreadsController = __decorate([
-    Controller(),
+    Controller('threads'),
     __metadata("design:paramtypes", [ThreadsService])
 ], ThreadsController);
 export { ThreadsController };

@@ -5,18 +5,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { Module } from '@nestjs/common';
-import { ThreadsController } from './threads/thread.controller.js';
-import { ThreadsService } from './threads/thread.service.js';
-import { AuthorController } from './authors/author.controller.js';
-import { AuthorService } from './authors/author.service.js';
+import { ThreadsModule } from './threads/thread.module.js';
+// You need to decide which controller owns that endpoint.
+// Option A — Keep the authors endpoint inside ThreadsController
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     Module({
-        imports: [],
-        controllers: [ThreadsController, AuthorController],
-        providers: [ThreadsService, AuthorService],
+        imports: [ThreadsModule],
     })
 ], AppModule);
 export { AppModule };
+// Option B — Separate the authors endpoint
+// @Module({
+//   imports: [],
+//   controllers: [ThreadsController, AuthorController],
+//   providers: [ThreadsService, AuthorService],
+// })
+// export class AppModule {}
 //# sourceMappingURL=app.module.js.map

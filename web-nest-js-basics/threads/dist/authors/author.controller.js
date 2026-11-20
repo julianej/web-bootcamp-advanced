@@ -9,6 +9,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Controller, Get } from '@nestjs/common';
 import { ThreadsService } from '../threads/thread.service.js';
+//HTTP REQUEST RESPONSE cycle
+// You could also define a route prefix here, for example: 'threads'
 let AuthorController = class AuthorController {
     threadsService;
     constructor(threadsService) {
@@ -19,13 +21,13 @@ let AuthorController = class AuthorController {
     }
 };
 __decorate([
-    Get('threads/authors'),
+    Get(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], AuthorController.prototype, "findAllAuthors", null);
 AuthorController = __decorate([
-    Controller(),
+    Controller('authors'),
     __metadata("design:paramtypes", [ThreadsService])
 ], AuthorController);
 export { AuthorController };

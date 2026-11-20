@@ -14,7 +14,7 @@ let AuthorService = class AuthorService {
     //  constructor(
     //   private readonly threadsService: ThreadsService,
     // ) {}
-    findAll() {
+    findAllAuthors() {
         return this.authors;
     }
 };

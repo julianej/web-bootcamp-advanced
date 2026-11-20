@@ -14,7 +14,7 @@ export class AuthorService {
 //   private readonly threadsService: ThreadsService,
 // ) {}
 
-  findAll(): Author[] {
+  findAllAuthors(): Author[] {
     return this.authors;
   }
 }
