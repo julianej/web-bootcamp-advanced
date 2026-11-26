@@ -15,4 +15,3 @@ import { CommentsModule } from '../comments/comments.module.js';
   providers: [ThreadsService],
 })
 export class ThreadsModule {}
-

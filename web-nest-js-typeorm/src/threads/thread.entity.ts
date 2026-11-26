@@ -1,3 +1,6 @@
+// Thread is an entity in src/threads/thread.entity.ts 
+// with a UUID primary key and a createdAt that the database sets
+
 import {
   Entity,
   PrimaryGeneratedColumn,

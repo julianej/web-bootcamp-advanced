@@ -4,6 +4,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ThreadsModule } from './threads/thread.module.js';
 import { CommentsModule } from './comments/comments.module.js';
 
+
+// Make sure the data directory exists in your project root.
+// mkdir -p data
+
 @Module({
   imports: [
     TypeOrmModule.forRoot({

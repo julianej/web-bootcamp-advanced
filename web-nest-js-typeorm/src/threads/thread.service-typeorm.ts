@@ -33,6 +33,7 @@ const sampleThreads: ThreadPayload[] = [
 export class ThreadsService implements OnApplicationBootstrap {
 
   // You injected REPOSITORY through the constructor:
+  // OLD private readonly threadsRepository: ThreadsRepository
   constructor(
     @InjectRepository(Thread)
     private readonly threadsRepository: Repository<Thread>,
@@ -104,6 +105,18 @@ export class ThreadsService implements OnApplicationBootstrap {
       threads: Number(author.threads),
     }));
   }
+
+// DELETE /threads/:id
+// DELETE /threads/:id
+async remove(id: string): Promise<void> {
+  const result = await this.threadsRepository.delete(id);
+
+  if (result.affected === 0) {
+    throw new NotFoundException(`Thread with ID ${id} not found`);
+  }
+
+  await this.commentsService.deleteByThread(id);
+}
 
   // FOR TESTING SAMPLE DATA
   async onApplicationBootstrap(): Promise<void> {

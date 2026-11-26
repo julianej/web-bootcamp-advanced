@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Post,
+  Delete,
   Body,
   Param,
   Query,
@@ -53,8 +54,14 @@ export class ThreadsController {
   ): Promise<ThreadComment> {
     return this.threadsService.addComment(threadId, payload);
   }
+
+  @Delete(':id')
+  remove(@Param('id') id: string): Promise<void> {
+    return this.threadsService.remove(id);
+  }
 }
 
+/// ------ OLD ----- ////
 
 //creates the URL: /threads GET /threads/
 
