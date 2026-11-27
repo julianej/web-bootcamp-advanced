@@ -58,13 +58,22 @@ Task04
 ```bash
 Status Codes That Tell the Truth
 Developers who build clients for Cyber Chat read the status codes, not the bodies. 
-Deleting a thread answers with 200 and an empty body, and a mistyped ID in a URL answers with 404, as if the thread had been deleted. Both mislead their code.
+Deleting a thread answers with 200 and an empty body, and a mistyped ID in a URL answers with 404,
+as if the thread had been deleted. Both mislead their code.
+
+Done when
+DELETE /threads/<id> answers with 204 and an empty body,
+and GET /threads/abc answers with 400.
 ```
 
 Task05
 ```bash
 Bonus: Threads Since a Date
 Regular visitors only want to read what is new since their last visit.
+
+Done when
+GET /threads?since=2099-01-01 returns an empty array,
+and GET /threads?since=yesterday answers with 400.
 ```
 
 Test with Bruno:
