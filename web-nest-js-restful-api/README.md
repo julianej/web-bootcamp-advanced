@@ -29,6 +29,10 @@ Reject Invalid Threads and Comments
 Cyber Chat stores whatever a client sends. A thread without a title lands in the database, 
 and a client that sends the id of an existing thread overwrites that thread, author included. 
 Every request body gets rules, and requests that break them never reach the database.
+
+Done when
+POST /threads with { "title": "", "author": "ada", "body": "Hi" }
+answers with 400 and the message title should not be empty.
 ```
 
 Task02
@@ -38,6 +42,10 @@ Edit a Thread
 Typos happen. Authors want to fix the title or the text of a thread without deleting it,
 and a change follows the same rules as a new thread. The author of a thread never changes.
 If your Cyber Chat can edit threads already, rebuild the route with these rules.
+
+Done when
+After PATCH /threads/<id> with { "title": "Fixed" },
+GET /threads/<id> shows the new title and the old body.
 ```
 
 Task03
