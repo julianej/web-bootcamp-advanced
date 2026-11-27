@@ -29,4 +29,31 @@ export class CommentsRepository {
 
     return comment;
   }
+
+  update(id: string, changes: Partial<Comment>): Comment {
+    const comment = this.comments.get(id);
+
+    if (!comment) {
+      throw new Error(`Comment with ID ${id} not found`);
+    }
+
+    const updatedComment = {
+      ...comment,
+      ...changes,
+    };
+
+    this.comments.set(id, updatedComment);
+
+    return updatedComment;
+  }
+
+  // Your existing findById(), findByThread() and create() methods...
+
+  deleteByThread(threadId: string): void {
+    for (const [id, comment] of this.comments.entries()) {
+      if (comment.threadId === threadId) {
+        this.comments.delete(id);
+      }
+    }
+  }
 }

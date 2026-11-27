@@ -9,4 +9,5 @@ export interface Comment {
 
 // Pick is a TypeScript utility type 
 // that selects certain properties from an existing type.
+
 export type CommentPayload = Pick<Comment, 'author' | 'body'>;

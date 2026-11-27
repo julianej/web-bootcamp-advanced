@@ -1,12 +1,15 @@
-// Thread is an entity in src/threads/thread.entity.ts 
-// with a UUID primary key and a createdAt that the database sets
 
 import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
+  OneToMany,
 } from 'typeorm';
+
+import type { Relation } from 'typeorm';
+
+import { Comment } from '../comments/comments.entity.js';
 
 @Entity('threads')
 export class Thread {
@@ -24,6 +27,19 @@ export class Thread {
 
   @CreateDateColumn()
   createdAt: Date;
+
+  @OneToMany(
+    () => Comment,
+    (comment) => comment.thread,
+  )
+  comments: Relation<Comment[]>;
 }
 
-export type ThreadPayload = Pick<Thread, 'title' | 'author' | 'body'>;
+export type ThreadPayload = Pick<
+  Thread,
+  'title' | 'author' | 'body'
+>;
+
+export type ThreadChanges = Partial<
+  Pick<Thread, 'title' | 'body'>
+>;

@@ -8,8 +8,12 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { Thread, ThreadPayload } from './thread.entity.js';
+import type { ThreadChanges } from './thread.entity.js';
+
 import { CommentsService } from '../comments/comments.service.js';
 import type { Comment, CommentPayload } from '../comments/comments.type.js';
+
+
 
 export type ThreadWithComments = Thread & {
   comments: Comment[];
@@ -60,23 +64,32 @@ export class ThreadsService implements OnApplicationBootstrap {
       throw new NotFoundException(`Thread with ID ${id} not found`);
     }
 
-    return {
-      ...thread,
-      comments: this.commentsService.findByThread(id),
-    };
-  }
+    // PROPERTY: findBYThread
+  const comments = await this.commentsService.findByThread(id);
+
+  return {
+    ...thread,
+    comments,
+  };
+}
 
   // POST /threads/:id/comments
-  async addComment(
-    threadId: string,
-    payload: CommentPayload,
-  ): Promise<Comment> {
-    // First verify that the thread exists
-    await this.findOne(threadId);
+async addComment(
+  threadId: string,
+  payload: CommentPayload,
+): Promise<Comment> {
+  const thread = await this.threadsRepository.findOneBy({
+    id: threadId,
+  });
 
-    // Then create the comment
-    return this.commentsService.create(threadId, payload);
+  if (!thread) {
+    throw new NotFoundException(
+      `Thread with ID ${threadId} not found`,
+    );
   }
+
+  return this.commentsService.create(threadId, payload);
+}
 
 // POST /threads
 // create(data: ThreadPayload): Thread {
@@ -89,7 +102,30 @@ export class ThreadsService implements OnApplicationBootstrap {
     return this.threadsRepository.save(thread);
   }
 
-  // GET /authors
+// PATCH /threads/:id
+async update(
+  id: string,
+  changes: ThreadChanges,
+): Promise<Thread> {
+  const thread = await this.threadsRepository.findOneBy({ id });
+
+  if (!thread) {
+    throw new NotFoundException(`Thread with ID ${id} not found`);
+  }
+
+  // Only update title and body
+  if (changes.title !== undefined) {
+    thread.title = changes.title;
+  }
+
+  if (changes.body !== undefined) {
+    thread.body = changes.body;
+  }
+
+  return this.threadsRepository.save(thread);
+}
+
+// GET /authors
   async findAllAuthors(): Promise<{ author: string; threads: number }[]> {
     const authors = await this.threadsRepository
       .createQueryBuilder('thread')
@@ -106,7 +142,6 @@ export class ThreadsService implements OnApplicationBootstrap {
     }));
   }
 
-// DELETE /threads/:id
 // DELETE /threads/:id
 async remove(id: string): Promise<void> {
   const result = await this.threadsRepository.delete(id);
@@ -127,3 +162,7 @@ async remove(id: string): Promise<void> {
     await this.threadsRepository.save(threads);
   }
 }
+
+export type ThreadWithCommentCount = Thread & {
+  commentCount: number;
+};
