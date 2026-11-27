@@ -105,3 +105,18 @@ web-nest-js-typeorm/
 ├── package.json
 └── ...
 ```
+
+Add your API requests
+
+```bash
+Create these requests in Bruno. Use your existing API routes:
+Request	Method	Endpoint	Expected
+Get all threads	GET	/threads	200
+Get one thread	GET	/threads/{{threadId}}	200
+Create thread	POST	/threads	201
+Create comment	POST	/threads/{{threadId}}/comments	201
+Update thread	PATCH	/threads/{{threadId}}	200
+Delete thread	DELETE	/threads/{{threadId}}	200 or 204, depending on your implementation
+Get authors	GET	/authors	200
+Invalid thread	POST	/threads	400
+```
