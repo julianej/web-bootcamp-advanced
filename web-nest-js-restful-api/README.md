@@ -24,10 +24,12 @@ This project was created using `bun init` in bun v1.4.4.
 
 Task:
 
+```bash
 Reject Invalid Threads and Comments
 Cyber Chat stores whatever a client sends. A thread without a title lands in the database, 
 and a client that sends the id of an existing thread overwrites that thread, author included. 
 Every request body gets rules, and requests that break them never reach the database.
+```
 
 Test with Bruno:
 
