@@ -40,6 +40,26 @@ and a change follows the same rules as a new thread. The author of a thread neve
 If your Cyber Chat can edit threads already, rebuild the route with these rules.
 ```
 
+Task03
+
+```bash
+Answer with Public Fields Only
+Moderators are going to keep an internal note on threads, 
+for example why they watch a discussion. The note must never reach the API, 
+but right now every column of a thread goes straight into the JSON.
+The responses get a fixed shape that new columns cannot change.
+The new column of the Thread entity:
+
+@Column({ type: "text", nullable: true })
+moderationNote: string | null;
+```
+
+Task04
+```bash
+Bonus: Threads Since a Date
+Regular visitors only want to read what is new since their last visit.
+```
+
 Test with Bruno:
 
 ```bash
