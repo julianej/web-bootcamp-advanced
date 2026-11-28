@@ -35,6 +35,9 @@ POST /threads with { "title": "", "author": "ada", "body": "Hi" }
 answers with 400 and the message title should not be empty.
 ```
 
+<img width="2560" height="1002" alt="Bildschirmfoto 2026-11-28 um 11 14 45" src="https://github.com/user-attachments/assets/8984ab16-5102-4f6d-9b3f-06a8ab9de2b1" />
+
+
 Task02
 
 ```bash
