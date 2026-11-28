@@ -6,3 +6,10 @@ export type Thread = {
   createdAt: Date;
 };
 
+
+// This tells TypeScript:
+// - author must exist.
+// - body must exist.
+
+// with DTO not longer needed:
+// // export type ThreadPayload = Pick< Thread,'title' | 'author' | 'body'>;

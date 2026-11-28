@@ -8,14 +8,15 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { Thread } from './thread.entity.js';
-import type { ThreadChanges } from './thread.entity.js';
-import { CreateThreadDto } from './create-thread.dto.js';
 
 import { Comment } from '../comments/comments.entity.js';
 import { CreateCommentDto } from '../comments/create-comment.dto.js';
 
 import { CommentsService } from '../comments/comments.service.js';
 
+import { CreateThreadDto } from './create-thread.dto.js';
+import { UpdateThreadDto } from './update-thread.dto.js';
+// import type { ThreadChanges } from './thread.entity.js';
 // import { ThreadPayload } from './thread.entity.js';
 
 
@@ -46,16 +47,19 @@ export class ThreadsService implements OnApplicationBootstrap {
 
   // You injected REPOSITORY through the constructor:
   // OLD private readonly threadsRepository: ThreadsRepository
+  // NEW injected the TypeORM repository as this.threads.
+
   constructor(
     @InjectRepository(Thread)
-    private readonly threadsRepository: Repository<Thread>,
+    private readonly threads: Repository<Thread>,
+    // private readonly threadsRepository: Repository<Thread>,
     private readonly commentsService: CommentsService,
   ) {}
 
   // GET /threads
   // Every repository method returns a Promise.
   async findAll(author?: string): Promise<Thread[]> {
-  return this.threadsRepository.find({
+  return this.threads.find({
     where: author !== undefined ? { author } : {},
     order: {
       createdAt: 'DESC',
@@ -64,9 +68,10 @@ export class ThreadsService implements OnApplicationBootstrap {
 }
 
   // TypeORM database operations are asynchronous. That's why we now use:
+  // Finds the existing thread
   // GET /threads/:id
   async findOne(id: string): Promise<ThreadWithComments> {
-    const thread = await this.threadsRepository.findOneBy({ id });
+    const thread = await this.threads.findOneBy({ id });
 
     if (!thread) {
       throw new NotFoundException(`Thread with ID ${id} not found`);
@@ -86,7 +91,7 @@ async addComment(
   threadId: string,
   payload: CreateCommentDto,
 ): Promise<Comment> {
-  const thread = await this.threadsRepository.findOneBy({
+  const thread = await this.threads.findOneBy({
     id: threadId,
   });
 
@@ -105,36 +110,40 @@ async addComment(
 // }
 
 async create(payload: CreateThreadDto): Promise<Thread> {
-  const thread = this.threadsRepository.create(payload);
-  return this.threadsRepository.save(thread);
+  const thread = this.threads.create(payload);
+  return this.threads.save(thread);
 }
 
 // PATCH /threads/:id
+// NEW
 async update(
   id: string,
-  changes: ThreadChanges,
+  dto: UpdateThreadDto,
 ): Promise<Thread> {
-  const thread = await this.threadsRepository.findOneBy({ id });
+  const thread = await this.threads.findOneBy({ id });
 
   if (!thread) {
     throw new NotFoundException(`Thread with ID ${id} not found`);
   }
 
-  // Only update title and body
-  if (changes.title !== undefined) {
-    thread.title = changes.title;
-  }
+  this.threads.merge(thread, dto);
+  //  Only update title and body
+  // check for !== undefined
+  // if (changes.title !== undefined) {
+  //   thread.title = changes.title;
+  // }
 
-  if (changes.body !== undefined) {
-    thread.body = changes.body;
-  }
+  // if (changes.body !== undefined) {
+  //   thread.body = changes.body;
+  // }
 
-  return this.threadsRepository.save(thread);
+  // return this.threadsRepository.save(thread);
+  return this.threads.save(thread);
 }
 
 // GET /authors
   async findAllAuthors(): Promise<{ author: string; threads: number }[]> {
-    const authors = await this.threadsRepository
+    const authors = await this.threads
       .createQueryBuilder('thread')
       .select('thread.author', 'author')
       .addSelect('COUNT(*)', 'threads')
@@ -151,7 +160,7 @@ async update(
 
 // DELETE /threads/:id
 async remove(id: string): Promise<void> {
-  const result = await this.threadsRepository.delete(id);
+  const result = await this.threads.delete(id);
 
   if (result.affected === 0) {
     throw new NotFoundException(`Thread with ID ${id} not found`);
@@ -162,11 +171,11 @@ async remove(id: string): Promise<void> {
 
   // FOR TESTING SAMPLE DATA
   async onApplicationBootstrap(): Promise<void> {
-    if ((await this.threadsRepository.count()) > 0) return;
+    if ((await this.threads.count()) > 0) return;
 
-    const threads = this.threadsRepository.create(sampleThreads);
+    const threads = this.threads.create(sampleThreads);
 
-    await this.threadsRepository.save(threads);
+    await this.threads.save(threads);
   }
 }
 

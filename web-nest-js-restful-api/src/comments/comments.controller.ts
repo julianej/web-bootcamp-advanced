@@ -18,6 +18,7 @@ import { CreateCommentDto } from './create-comment.dto.js';
 //     private readonly commentsService: CommentsService,
 //   ) {}
 
+
 // POST /threads/:id/comments
 @Controller('threads/:id/comments')
 export class CommentsController {

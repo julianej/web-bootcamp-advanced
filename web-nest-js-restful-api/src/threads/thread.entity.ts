@@ -41,6 +41,7 @@ export class Thread {
 //   'title' | 'author' | 'body'
 // >;
 
-export type ThreadChanges = Partial<
-  Pick<Thread, 'title' | 'body'>
->;
+// DELETE when using UpdateThreadDto:
+// export type ThreadChanges = Partial<
+//   Pick<Thread, 'title' | 'body'>
+// >;

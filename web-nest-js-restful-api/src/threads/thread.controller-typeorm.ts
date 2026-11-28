@@ -18,10 +18,8 @@ import { ThreadsService } from './thread.service-typeorm.js';
 import type { ThreadWithComments } from './thread.service-typeorm.js';
 
 import { Thread } from './thread.entity.js';
-import type {
-  // ThreadPayload,
-  ThreadChanges,
-} from './thread.entity.js';
+import { UpdateThreadDto } from './update-thread.dto.js';
+// import type { ThreadPayload, ThreadChanges,} from './thread.entity.js';
 
 import type {
   // CommentPayload,
@@ -56,7 +54,9 @@ export class ThreadsController {
   // }
 
   @Post()
-  create(@Body() payload: CreateThreadDto) {
+  create(
+    @Body() payload: CreateThreadDto,
+  ): Promise<Thread> {
     return this.threadsService.create(payload);
   }
 
@@ -73,7 +73,8 @@ export class ThreadsController {
   @Patch(':id')
   update(
     @Param('id') id: string,
-    @Body() changes: ThreadChanges,
+    // @Body() changes: ThreadChanges,
+     @Body() changes: UpdateThreadDto,
   ): Promise<Thread> {
     return this.threadsService.update(id, changes);
   }

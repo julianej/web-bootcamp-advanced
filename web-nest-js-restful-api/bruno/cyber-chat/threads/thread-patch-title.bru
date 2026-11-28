@@ -1,0 +1,16 @@
+
+// IN BRUNO create:
+// PATCH http://localhost:3002/threads/1234-5678
+// "id": "861d5f8c-5d4d-462b-9cf1-877eeb6c2696",
+
+{
+  "title": "Fixed"
+}
+
+// TEST in TERMINAL PATCH
+// curl -X PATCH http://localhost:3002/threads/YOUR_THREAD_ID \
+//   -H "Content-Type: application/json" \
+//   -d '{"title":"Fixed"}'
+
+// GET
+// curl http://localhost:3000/threads/YOUR_THREAD_ID
