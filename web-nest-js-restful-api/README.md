@@ -51,6 +51,9 @@ After PATCH /threads/<id> with { "title": "Fixed" },
 GET /threads/<id> shows the new title and the old body.
 ```
 
+![Uploading Bildschirmfoto 2026-11-28 um 12.49.25.png…]()
+
+
 Task03
 
 ```bash
