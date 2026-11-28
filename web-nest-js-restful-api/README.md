@@ -51,7 +51,7 @@ After PATCH /threads/<id> with { "title": "Fixed" },
 GET /threads/<id> shows the new title and the old body.
 ```
 
-![Uploading Bildschirmfoto 2026-11-28 um 12.49.25.png…]()
+<img width="2548" height="964" alt="Bildschirmfoto 2026-11-28 um 13 05 01" src="https://github.com/user-attachments/assets/9c674c9f-6c19-439f-afc0-1eb9187d5ff0" />
 
 
 Task03
