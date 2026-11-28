@@ -327,3 +327,6 @@ git push -u origin feature/branch-name
 **Project:** Web Bootcamp Advanced  
 **Focus:** TypeScript · Backend Development · MVC · SQL · SQLite  
 **Runtime:** Node.js
+
+<img width="1664" height="1008" alt="Bildschirmfoto 2026-10-30 um 10 03 36" src="https://github.com/user-attachments/assets/2fdf2bcc-cae5-4de6-8350-a0b863b152a8" />
+
