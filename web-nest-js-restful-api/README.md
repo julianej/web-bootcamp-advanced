@@ -124,4 +124,7 @@ Get authors	GET	/authors	200
 Invalid thread	POST	/threads	400
 ```
 
+<img width="2554" height="1064" alt="Bildschirmfoto 2026-11-28 um 11 30 41" src="https://github.com/user-attachments/assets/10c845f9-e757-4d8e-bd1c-caa110cd88a5" />
+
+
 
